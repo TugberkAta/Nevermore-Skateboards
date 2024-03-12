@@ -4,10 +4,10 @@ import Image from "next/image";
 export default function Banner() {
   return (
     <>
-      <div className="flex w-full h-[38rem] relative">
+      <div className="flex w-full h-[34rem] relative">
         <Image
           fill
-          className="object-cover"
+          className="object-cover object-bottom"
           src="/banner.jpg"
           alt="Woman resting with rollerblade"
         />
