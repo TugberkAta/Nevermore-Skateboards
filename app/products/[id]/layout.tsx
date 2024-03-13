@@ -2,12 +2,7 @@
 import { useParams } from "next/navigation";
 import Select from "react-select";
 import { FaArrowsUpDown } from "react-icons/fa6";
-
-const options = [
-  { value: "default", label: "Default" },
-  { value: "highToLow", label: "High To Low" },
-  { value: "lowToHigh", label: "Low To High" },
-];
+import Options from "@/common/utils/productFilter";
 
 export default function ProductsLayout({
   children,
@@ -24,14 +19,22 @@ export default function ProductsLayout({
           <label htmlFor="sortGeneral" className="text-xl font-bold">
             Sort By
           </label>
-          <Select id="sortGeneral" className="w-40" options={options} />
+          <Select
+            id="sortGeneral"
+            className="w-40"
+            options={Options.GeneralOptions}
+          />
         </div>
         {params?.id === "Skateboards" && (
           <div>
             <label htmlFor="sortSize" className="text-xl font-bold">
               Size
             </label>
-            <Select id="sortSize" className="w-40 " options={options} />
+            <Select
+              id="sortSize"
+              className="w-40 "
+              options={Options.SkateSizeOptions}
+            />
           </div>
         )}
         <div>
@@ -39,16 +42,30 @@ export default function ProductsLayout({
             Price Range
           </label>
           <div className="flex flex-col items-center gap-1">
-            <Select id="sortPriceHigh " className="w-40 " options={options} />
+            <Select
+              id="sortPriceHigh "
+              className="w-40 "
+              options={Options.PriceRangeOptions}
+            />
+            Min
             <FaArrowsUpDown />
-            <Select id="sortPriceHigh " className="w-40 " options={options} />
+            Max
+            <Select
+              id="sortPriceHigh "
+              className="w-40 "
+              options={Options.PriceRangeOptions}
+            />
           </div>
         </div>
         <div>
           <label htmlFor="sortBrand" className="text-xl font-bold">
             Brand
           </label>
-          <Select id="sortBrand" className="w-40 " options={options} />
+          <Select
+            id="sortBrand"
+            className="w-40"
+            options={Options.GeneralOptions}
+          />
         </div>
       </div>
       <div>{children}</div>
