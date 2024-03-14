@@ -1,18 +1,19 @@
 "use client";
-import { useParams } from "next/navigation";
 import Select from "react-select";
 import { FaArrowsUpDown } from "react-icons/fa6";
 import Options from "@/common/utils/productFilter";
+import { usePathname } from "next/navigation";
 
 export default function ProductsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const params = useParams<{ id: string }>();
-
+  const pathname = usePathname();
+  const pathEnd = pathname.split("/products/")[1];
   return (
     <section className="w-screen">
+      <div>{children}</div>
       <div className="flex flex-col gap-4 ml-4 w-fit p-4">
         <div>
           <p className="font-bold text-3xl mb-8">FILTER</p>
@@ -25,7 +26,7 @@ export default function ProductsLayout({
             options={Options.GeneralOptions}
           />
         </div>
-        {params?.id === "Skateboards" && (
+        {pathEnd === "Skateboards" && (
           <div>
             <label htmlFor="sortSize" className="text-xl font-bold">
               Size
@@ -43,7 +44,7 @@ export default function ProductsLayout({
           </label>
           <div className="flex flex-col items-center gap-1">
             <Select
-              id="sortPriceHigh "
+              id="sortPriceLow"
               className="w-40 "
               options={Options.PriceRangeOptions}
             />
@@ -68,7 +69,6 @@ export default function ProductsLayout({
           />
         </div>
       </div>
-      <div>{children}</div>
     </section>
   );
 }
