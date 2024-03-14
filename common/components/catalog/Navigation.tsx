@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { inika } from "../styles/fonts";
+import { inika } from "../../styles/fonts";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useState } from "react";
@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 const tabs = [
   { id: undefined, text: "Homepage" },
   { id: "Skateboards", text: "Skateboards" },
-  { id: "RollerBlades", text: "Roller Blades" },
+  { id: "Rollerblades", text: "Roller Blades" },
   { id: "Snowboards", text: "Snowboards" },
   { id: "Shoes", text: "Shoes" },
 ];
@@ -20,7 +20,7 @@ const tabs = [
 export default function Navigation() {
   // Get pathnames for conditionally updating active tab
   const pathname = usePathname();
-  const pathEnd = pathname.split("/products/")[1];
+  const pathEnd = pathname.split("/catalog/")[1];
 
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
@@ -40,7 +40,7 @@ export default function Navigation() {
             {tabs.map((tab) => (
               <a
                 key={tab.id != undefined ? tab.id : "homepage"}
-                href={tab.id != undefined ? "/products/" + tab.id : `/`}
+                href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
                 onMouseEnter={() => setActiveTab(tab.id)}
                 className="relative"
               >
