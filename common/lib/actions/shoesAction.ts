@@ -21,9 +21,10 @@ const FormSchema = z.object({
     })
     .min(1, { message: "This field is required" }),
   size: z
-    .number()
-    .min(1, { message: "This field is required" })
-    .gt(0, { message: "Please enter an amount greater than $0." }),
+    .string({
+      invalid_type_error: "Please enter a title",
+    })
+    .min(1, { message: "This field is required" }),
   imgUrl: z
     .string({
       invalid_type_error: "Please enter an url",
@@ -42,10 +43,10 @@ export type State = {
   message?: string | null;
 };
 
-const CreateSkate = FormSchema.omit({});
+const CreateShoe = FormSchema.omit({});
 
-export async function createSkate(prevState: State, formData: FormData) {
-  const validatedFields = CreateSkate.safeParse({
+export async function createShoes(prevState: State, formData: FormData) {
+  const validatedFields = CreateShoe.safeParse({
     title: formData.get("title"),
     price: formData.get("price"),
     brand: formData.get("brand"),
@@ -66,17 +67,17 @@ export async function createSkate(prevState: State, formData: FormData) {
   const amountInCents = price * 100;
   try {
     await sql`
-              INSERT INTO skates ( title, price, brand, size, img_url)
+              INSERT INTO shoes ( title, price, brand, size, img_url)
               VALUES (${title}, ${amountInCents}, ${brand}, ${size}, ${imgUrl})
             `;
     console.log("finished");
   } catch (error) {
     console.log(error);
     return {
-      message: "Database Error: Failed to Create Skateboard.",
+      message: "Database Error: Failed to Create Shoes.",
     };
   }
 
-  revalidatePath("/products/Skateboards");
-  redirect("/products/Skateboards");
+  revalidatePath("/catalog/Shoes");
+  redirect("/catalog/Shoes");
 }
