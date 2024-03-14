@@ -6,7 +6,7 @@ import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -18,11 +18,12 @@ const tabs = [
 ];
 
 export default function Navigation() {
-  // Get params for conditionally updating active tab
-  const params = useParams<{ id: any }>();
+  // Get pathnames for conditionally updating active tab
+  const pathname = usePathname();
+  const pathEnd = pathname.split("/products/")[1];
 
   // State for updating the active tab
-  const [activeTab, setActiveTab] = useState(params.id);
+  const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
 
   return (
     <nav className={`w-screen h-14 flex items-center`}>
@@ -34,11 +35,11 @@ export default function Navigation() {
           </a>
           <div
             className="ml-20 font-semibold gap-5 text-sm flex text-black"
-            onMouseLeave={() => setActiveTab(params.id)}
+            onMouseLeave={() => setActiveTab(pathEnd)}
           >
             {tabs.map((tab) => (
               <a
-                key={tab.id}
+                key={tab.id != undefined ? tab.id : "homepage"}
                 href={tab.id != undefined ? "/products/" + tab.id : `/`}
                 onMouseEnter={() => setActiveTab(tab.id)}
                 className="relative"
