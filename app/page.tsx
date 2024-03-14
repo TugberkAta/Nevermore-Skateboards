@@ -1,6 +1,6 @@
 import Banner from "@/common/components/homepage/Banner";
 import Previews from "@/common/components/homepage/Previews";
-import Navigation from "@/common/components/Navigation";
+import Navigation from "@/common/components/catalog/Navigation";
 
 export default function Home() {
   return (
