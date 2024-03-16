@@ -45,7 +45,7 @@ export default async function FetchProductData({
                 alt={product.title || ""}
                 title={product.title || ""}
                 price={product.price || NaN}
-                address={""}
+                address={`/${product.id}`}
               />
             );
           })}

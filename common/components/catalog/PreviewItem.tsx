@@ -18,7 +18,7 @@ export function PreviewItem({
   address,
 }: PreviewItemProps) {
   return (
-    <a href="" className="flex flex-col items-center overflow-hidden ">
+    <a href={address} className="flex flex-col items-center overflow-hidden ">
       <div className="col-span-1 grid-rows-1 w-full  relative overflow-hidden mb-1">
         <div className="group flex justify-center w-full h-full">
           <Image
