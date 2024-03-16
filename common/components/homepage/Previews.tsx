@@ -10,6 +10,7 @@ export default function Previews() {
             title={"Roller Blades"}
             objectPosition={"object-bottom"}
             src={"/rollerblades.jpg"}
+            address={"/catalog/Rollerblades"}
           />
         </div>
         <div className="col-span-2 row-span-4 border relative overflow-hidden">
@@ -17,6 +18,7 @@ export default function Previews() {
             title={"Skates"}
             objectPosition={"object-bottom"}
             src={"/skates.jpg"}
+            address={"/catalog/Skateboards"}
           />
         </div>
         <div className="col-span-2 row-span-2 border relative overflow-hidden">
@@ -24,10 +26,15 @@ export default function Previews() {
             title={"Shoes"}
             objectPosition={"object-bottom"}
             src={"/vans.jpg"}
+            address={"/catalog/Shoes"}
           />
         </div>
         <div className="col-span-4 row-span-2 border relative overflow-hidden">
-          <PreviewObject title={"Snowboards"} src={"/snowboard.jpg"} />
+          <PreviewObject
+            title={"Snowboards"}
+            src={"/snowboard.jpg"}
+            address={"/catalog/Snowboards"}
+          />
         </div>
       </div>
     </>
@@ -38,11 +45,17 @@ type PreviewObjectProps = {
   title: string;
   objectPosition?: string;
   src: string;
+  address: string;
 };
 
-function PreviewObject({ title, objectPosition, src }: PreviewObjectProps) {
+export function PreviewObject({
+  title,
+  objectPosition,
+  src,
+  address,
+}: PreviewObjectProps) {
   return (
-    <a href="" className="group ">
+    <a href={address} className="group ">
       <Image
         fill
         className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
