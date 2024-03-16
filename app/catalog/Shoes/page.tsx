@@ -1,10 +1,9 @@
-import { fetchShoeData } from "@/common/lib/data";
+import FetchProductData from "@/common/components/catalog/FetchProductData";
 
-export default async function Home() {
-  const skateData = await fetchShoeData();
+export default function Home() {
   return (
     <>
-      <div className="w-screen"></div>
+      <FetchProductData productName={"Shoes"} />
     </>
   );
 }
