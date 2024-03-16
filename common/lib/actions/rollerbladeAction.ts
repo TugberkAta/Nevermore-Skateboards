@@ -70,7 +70,6 @@ export async function createRollerblades(prevState: State, formData: FormData) {
               INSERT INTO rollerblades ( title, price, brand, size, img_url)
               VALUES (${title}, ${amountInCents}, ${brand}, ${size}, ${imgUrl})
             `;
-    console.log("finished");
   } catch (error) {
     console.log(error);
     return {

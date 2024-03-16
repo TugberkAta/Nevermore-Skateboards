@@ -70,7 +70,6 @@ export async function createSnowboards(prevState: State, formData: FormData) {
               INSERT INTO snowboards ( title, price, brand, size, img_url)
               VALUES (${title}, ${amountInCents}, ${brand}, ${size}, ${imgUrl})
             `;
-    console.log("finished");
   } catch (error) {
     console.log(error);
     return {
