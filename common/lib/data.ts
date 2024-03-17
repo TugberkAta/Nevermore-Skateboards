@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 
 type Item = {
-  id: number;
+  uuid?: number;
   title?: string;
   price?: number;
   brand?: string;
