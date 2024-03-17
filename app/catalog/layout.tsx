@@ -1,5 +1,3 @@
-"use client";
-
 import Navigation from "@/common/components/catalog/Navigation";
 import FilterData from "@/common/components/catalog/FilterData";
 
