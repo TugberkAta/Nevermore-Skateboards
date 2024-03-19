@@ -1,5 +1,3 @@
-"use server";
-
 import { PreviewItem } from "@/common/components/catalog/PreviewItem";
 import {
   fetchRollerbladeData,
