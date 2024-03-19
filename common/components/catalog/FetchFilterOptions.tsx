@@ -1,4 +1,3 @@
-import { PreviewItem } from "@/common/components/catalog/PreviewItem";
 import { createOptions } from "@/common/utils/productFilter";
 import FilterData from "./FilterData";
 
