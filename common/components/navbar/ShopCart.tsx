@@ -7,9 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 
 export default function ShopCart() {
   const [activateShopCart, setActivateShopCart] = useState<boolean>(false);
-  const [shopCart, setShopCart] = useState<String[] | null>(
-    JSON.parse(localStorage.getItem("shopCart") || "null")
-  );
+  const [shopCart, setShopCart] = useState<String[] | null>(null);
 
   function handleClick() {
     setActivateShopCart(!activateShopCart);
