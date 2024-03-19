@@ -11,6 +11,10 @@ export interface Options {
   RollerbladeSizeOptions: Option[];
   SkateSizeOptions: Option[];
   SnowboardSizeOptions: Option[];
+  ShoeBrandOptions: Option[];
+  RollerbladeBrandOptions: Option[];
+  SkateBrandOptions: Option[];
+  SnowboardBrandOptions: Option[];
   PriceRangeOptions: Option[];
 }
 
@@ -55,6 +59,30 @@ export async function createOptions() {
       { value: "default", label: "Default" },
       ...snowboardData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
+      }),
+    ],
+    ShoeBrandOptions: [
+      { value: "default", label: "Default" },
+      ...shoesData.brandData.map((e) => {
+        return { value: e.brand, label: e.brand };
+      }),
+    ],
+    RollerbladeBrandOptions: [
+      { value: "default", label: "Default" },
+      ...rollerbladeData.brandData.map((e) => {
+        return { value: e.brand, label: e.brand };
+      }),
+    ],
+    SkateBrandOptions: [
+      { value: "default", label: "Default" },
+      ...skateData.brandData.map((e) => {
+        return { value: e.brand, label: e.brand };
+      }),
+    ],
+    SnowboardBrandOptions: [
+      { value: "default", label: "Default" },
+      ...snowboardData.brandData.map((e) => {
+        return { value: e.brand, label: e.brand };
       }),
     ],
     PriceRangeOptions: [

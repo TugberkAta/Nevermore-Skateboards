@@ -10,12 +10,16 @@ interface Option {
   label: string;
 }
 
-interface Options {
+export interface Options {
   GeneralOptions: Option[];
   ShoeSizeOptions: Option[];
   RollerbladeSizeOptions: Option[];
   SkateSizeOptions: Option[];
   SnowboardSizeOptions: Option[];
+  ShoeBrandOptions: Option[];
+  RollerbladeBrandOptions: Option[];
+  SkateBrandOptions: Option[];
+  SnowboardBrandOptions: Option[];
   PriceRangeOptions: Option[];
 }
 
@@ -57,6 +61,25 @@ export default function FilterData({
       break;
     case "Shoes":
       filterSizeOptions = filterOptions.ShoeSizeOptions;
+      break;
+    default:
+      return;
+  }
+
+  // Change filter brand options depending on the url's path
+  let filterBrandOptions;
+  switch (pathEnd) {
+    case "Skateboards":
+      filterBrandOptions = filterOptions.SkateBrandOptions;
+      break;
+    case "Rollerblades":
+      filterBrandOptions = filterOptions.RollerbladeBrandOptions;
+      break;
+    case "Snowboards":
+      filterBrandOptions = filterOptions.SnowboardBrandOptions;
+      break;
+    case "Shoes":
+      filterBrandOptions = filterOptions.ShoeBrandOptions;
       break;
     default:
       return;
@@ -120,19 +143,21 @@ export default function FilterData({
             />
           </div>
         </div>
-        <div>
-          <label htmlFor="sortBrand" className="text-xl font-bold">
-            Brand
-          </label>
-          <Select
-            id="sortBrand"
-            instanceId="sortBrand"
-            name="sortBrand"
-            className="w-40"
-            onChange={(e) => handleSortChange("sortBrand", e?.value)}
-            options={filterOptions.GeneralOptions}
-          />
-        </div>
+        {pathEnd && (
+          <div>
+            <label htmlFor="sortBrand" className="text-xl font-bold">
+              Brand
+            </label>
+            <Select
+              id="sortBrand"
+              instanceId="sortBrand"
+              name="sortBrand"
+              className="w-40"
+              onChange={(e) => handleSortChange("sortBrand", e?.value)}
+              options={filterBrandOptions}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
