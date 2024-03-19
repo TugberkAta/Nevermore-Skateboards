@@ -19,7 +19,14 @@ export async function fetchSkateData() {
 
     const sizeData = await sql`SELECT DISTINCT size FROM skates ORDER BY size`;
 
-    return { product: data.rows, sizeData: sizeData.rows };
+    const brandData =
+      await sql`SELECT DISTINCT brand FROM skates ORDER BY brand`;
+
+    return {
+      product: data.rows,
+      sizeData: sizeData.rows,
+      brandData: brandData.rows,
+    };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch skate data.");
@@ -36,7 +43,14 @@ export async function fetchRollerbladeData() {
     const sizeData =
       await sql`SELECT DISTINCT size FROM rollerblades ORDER BY size`;
 
-    return { product: data.rows, sizeData: sizeData.rows };
+    const brandData =
+      await sql`SELECT DISTINCT brand FROM rollerblades ORDER BY brand`;
+
+    return {
+      product: data.rows,
+      sizeData: sizeData.rows,
+      brandData: brandData.rows,
+    };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch rollerblade data.");
@@ -52,7 +66,14 @@ export async function fetchShoeData() {
 
     const sizeData = await sql`SELECT DISTINCT size FROM shoes ORDER BY size`;
 
-    return { product: data.rows, sizeData: sizeData.rows };
+    const brandData =
+      await sql`SELECT DISTINCT brand FROM shoes ORDER BY brand`;
+
+    return {
+      product: data.rows,
+      sizeData: sizeData.rows,
+      brandData: brandData.rows,
+    };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch shoe data.");
@@ -69,7 +90,14 @@ export async function fetchSnowboardData() {
     const sizeData =
       await sql`SELECT DISTINCT size FROM snowboards ORDER BY size`;
 
-    return { product: data.rows, sizeData: sizeData.rows };
+    const brandData =
+      await sql`SELECT DISTINCT brand FROM snowboards ORDER BY brand`;
+
+    return {
+      product: data.rows,
+      sizeData: sizeData.rows,
+      brandData: brandData.rows,
+    };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch snowboard data.");
