@@ -9,10 +9,7 @@ export default function ProductsLayout({
   return (
     <section className="w-screen  h-screen">
       <Navigation></Navigation>
-      <div className="flex h-5/6">
-        <FetchFilterOptions></FetchFilterOptions>
-        {children}
-      </div>
+      <div className="flex h-5/6">{children}</div>
     </section>
   );
 }
