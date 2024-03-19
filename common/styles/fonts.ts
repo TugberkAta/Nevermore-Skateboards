@@ -15,3 +15,10 @@ export const inika = Inika({ subsets: ["latin"], weight: "700" });
 export const inknut = Inknut_Antiqua({ subsets: ["latin"], weight: "700" });
 
 export const montserrat = Montserrat({ subsets: ["latin"], weight: "700" });
+
+export const montserratMedium = Montserrat({
+  subsets: ["latin"],
+  weight: "500",
+});
+
+export const montserratThin = Montserrat({ subsets: ["latin"], weight: "400" });
