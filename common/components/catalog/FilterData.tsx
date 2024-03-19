@@ -43,6 +43,25 @@ export default function FilterData({
     }));
   };
 
+  // Change filter size options depending on the url's path
+  let filterSizeOptions;
+  switch (pathEnd) {
+    case "Skateboards":
+      filterSizeOptions = filterOptions.SkateSizeOptions;
+      break;
+    case "Rollerblades":
+      filterSizeOptions = filterOptions.RollerbladeSizeOptions;
+      break;
+    case "Snowboards":
+      filterSizeOptions = filterOptions.SnowboardSizeOptions;
+      break;
+    case "Shoes":
+      filterSizeOptions = filterOptions.ShoeSizeOptions;
+      break;
+    default:
+      return;
+  }
+
   return (
     <div className="flex h-5/6">
       <div className="flex flex-col gap-4 ml-4 w-fit p-4">
@@ -60,7 +79,7 @@ export default function FilterData({
             options={filterOptions.GeneralOptions}
           />
         </div>
-        {pathEnd === "Skateboards" && (
+        {pathEnd && (
           <div>
             <label htmlFor="sortSize" className="text-xl font-bold">
               Size
@@ -71,52 +90,7 @@ export default function FilterData({
               name="sortSize"
               className="w-40"
               onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={filterOptions.SkateSizeOptions}
-            />
-          </div>
-        )}
-        {pathEnd === "Snowboards" && (
-          <div>
-            <label htmlFor="sortSize" className="text-xl font-bold">
-              Size
-            </label>
-            <Select
-              id="sortSize"
-              instanceId="sortSize"
-              name="sortSize"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={filterOptions.SnowboardSizeOptions}
-            />
-          </div>
-        )}
-        {pathEnd === "Rollerblades" && (
-          <div>
-            <label htmlFor="sortSize" className="text-xl font-bold">
-              Size
-            </label>
-            <Select
-              id="sortSize"
-              instanceId="sortSize"
-              name="sortSize"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={filterOptions.RollerbladeSizeOptions}
-            />
-          </div>
-        )}
-        {pathEnd === "Shoes" && (
-          <div>
-            <label htmlFor="sortSize" className="text-xl font-bold">
-              Size
-            </label>
-            <Select
-              id="sortSize"
-              instanceId="sortSize"
-              name="sortSize"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={filterOptions.ShoeSizeOptions}
+              options={filterSizeOptions}
             />
           </div>
         )}
