@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { inika } from "../../styles/fonts";
 import { IoMdSearch } from "react-icons/io";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import ShopCart from "./ShopCart";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -61,9 +61,7 @@ export default function Navigation() {
           <a href="">
             <IoMdSearch className="size-5"></IoMdSearch>
           </a>
-          <a href="">
-            <MdOutlineShoppingCart className="size-5" />
-          </a>
+          <ShopCart></ShopCart>
         </div>
       </div>
     </nav>
