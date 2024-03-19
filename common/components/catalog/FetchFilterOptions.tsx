@@ -1,7 +1,9 @@
 import { createOptions } from "@/common/utils/productFilter";
-import FilterData from "./FilterData";
+import FilterDataForm from "./FilterDataForm";
 
 export default async function FetchFilterData() {
   const filterOptions = await createOptions();
-  return <>{filterOptions && <FilterData filterOptions={filterOptions} />}</>;
+  return (
+    <>{filterOptions && <FilterDataForm filterOptions={filterOptions} />}</>
+  );
 }
