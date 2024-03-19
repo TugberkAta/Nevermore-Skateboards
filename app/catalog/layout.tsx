@@ -1,5 +1,5 @@
-import Navigation from "@/common/components/catalog/Navigation";
 import FilterData from "@/common/components/catalog/FilterData";
+import Navigation from "@/common/components/navbar/Navigation";
 
 export default function ProductsLayout({
   children,
