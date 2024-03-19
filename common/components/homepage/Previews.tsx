@@ -1,5 +1,6 @@
 import { montserrat } from "@/common/styles/fonts";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Previews() {
   return (
@@ -55,7 +56,7 @@ export function PreviewObject({
   address,
 }: PreviewObjectProps) {
   return (
-    <a href={address} className="group ">
+    <Link href={address} className="group ">
       <Image
         fill
         className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
@@ -68,6 +69,6 @@ export function PreviewObject({
       >
         {title}
       </h2>
-    </a>
+    </Link>
   );
 }

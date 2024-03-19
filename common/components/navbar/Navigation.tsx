@@ -7,6 +7,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ShopCart from "./ShopCart";
+import Link from "next/link";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -29,16 +30,16 @@ export default function Navigation() {
     <nav className={`w-screen h-14 flex items-center`}>
       <div className="ml-8 mr-8 flex items-center justify-between w-screen">
         <div className="flex items-center">
-          <a href="/" className="flex gap-4 h-full items-center ">
+          <Link href="/" className="flex gap-4 h-full items-center ">
             <Image width={34} height={34} src="/raven.svg" alt="Raven Icon" />
             <p className={`${inika.className}`}>Nevermore</p>
-          </a>
+          </Link>
           <div
             className="ml-20 font-semibold gap-5 text-sm flex text-black"
             onMouseLeave={() => setActiveTab(pathEnd)}
           >
             {tabs.map((tab) => (
-              <a
+              <Link
                 key={tab.id != undefined ? tab.id : "homepage"}
                 href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
                 onMouseEnter={() => setActiveTab(tab.id)}
@@ -53,14 +54,14 @@ export default function Navigation() {
                     transition={{ duration: 0.7, type: "spring" }}
                   ></motion.div>
                 )}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
         <div className="fill-black flex gap-4">
-          <a href="">
+          <Link href="">
             <IoMdSearch className="size-5"></IoMdSearch>
-          </a>
+          </Link>
           <ShopCart></ShopCart>
         </div>
       </div>
