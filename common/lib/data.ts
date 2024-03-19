@@ -17,7 +17,9 @@ export async function fetchSkateData() {
   try {
     const data = await sql<Item>`SELECT * FROM skates`;
 
-    return data.rows;
+    const sizeData = await sql`SELECT DISTINCT size FROM skates ORDER BY size`;
+
+    return { product: data.rows, sizeData: sizeData.rows };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch skate data.");
@@ -31,7 +33,10 @@ export async function fetchRollerbladeData() {
   try {
     const data = await sql<Item>`SELECT * FROM rollerblades`;
 
-    return data.rows;
+    const sizeData =
+      await sql`SELECT DISTINCT size FROM rollerblades ORDER BY size`;
+
+    return { product: data.rows, sizeData: sizeData.rows };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch rollerblade data.");
@@ -45,7 +50,9 @@ export async function fetchShoeData() {
   try {
     const data = await sql<Item>`SELECT * FROM shoes`;
 
-    return data.rows;
+    const sizeData = await sql`SELECT DISTINCT size FROM shoes ORDER BY size`;
+
+    return { product: data.rows, sizeData: sizeData.rows };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch shoe data.");
@@ -59,7 +66,10 @@ export async function fetchSnowboardData() {
   try {
     const data = await sql<Item>`SELECT * FROM snowboards`;
 
-    return data.rows;
+    const sizeData =
+      await sql`SELECT DISTINCT size FROM snowboards ORDER BY size`;
+
+    return { product: data.rows, sizeData: sizeData.rows };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch snowboard data.");
@@ -82,6 +92,6 @@ export async function fetchItemData(uuid: string) {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch snowboard data.");
+    throw new Error("Failed to fetch item data.");
   }
 }

@@ -2,13 +2,30 @@
 
 import Select from "react-select";
 import { FaArrowsUpDown } from "react-icons/fa6";
-import Options from "@/common/utils/productFilter";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function FilterData() {
+interface Option {
+  value: string | number;
+  label: string;
+}
+
+interface Options {
+  GeneralOptions: Option[];
+  ShoeSizeOptions: Option[];
+  RollerbladeSizeOptions: Option[];
+  SkateSizeOptions: Option[];
+  SnowboardSizeOptions: Option[];
+  PriceRangeOptions: Option[];
+}
+
+export default function FilterData({
+  filterOptions,
+}: {
+  filterOptions: Options;
+}) {
   const pathname = usePathname();
-  const pathEnd = pathname.split("/products/")[1];
+  const pathEnd = pathname.split("/catalog/")[1];
 
   const [sortParams, setSortParams] = useState({
     sortGeneral: null,
@@ -26,10 +43,6 @@ export default function FilterData() {
     }));
   };
 
-  useEffect(() => {
-    console.log(sortParams);
-  }, [sortParams]);
-
   return (
     <div className="flex h-5/6">
       <div className="flex flex-col gap-4 ml-4 w-fit p-4">
@@ -44,7 +57,7 @@ export default function FilterData() {
             name="sortGeneral"
             className="w-40"
             onChange={(e) => handleSortChange("sortGeneral", e?.value)}
-            options={Options.GeneralOptions}
+            options={filterOptions.GeneralOptions}
           />
         </div>
         {pathEnd === "Skateboards" && (
@@ -58,7 +71,52 @@ export default function FilterData() {
               name="sortSize"
               className="w-40"
               onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={Options.SkateSizeOptions}
+              options={filterOptions.SkateSizeOptions}
+            />
+          </div>
+        )}
+        {pathEnd === "Snowboards" && (
+          <div>
+            <label htmlFor="sortSize" className="text-xl font-bold">
+              Size
+            </label>
+            <Select
+              id="sortSize"
+              instanceId="sortSize"
+              name="sortSize"
+              className="w-40"
+              onChange={(e) => handleSortChange("sortSize", e?.value)}
+              options={filterOptions.SnowboardSizeOptions}
+            />
+          </div>
+        )}
+        {pathEnd === "Rollerblades" && (
+          <div>
+            <label htmlFor="sortSize" className="text-xl font-bold">
+              Size
+            </label>
+            <Select
+              id="sortSize"
+              instanceId="sortSize"
+              name="sortSize"
+              className="w-40"
+              onChange={(e) => handleSortChange("sortSize", e?.value)}
+              options={filterOptions.RollerbladeSizeOptions}
+            />
+          </div>
+        )}
+        {pathEnd === "Shoes" && (
+          <div>
+            <label htmlFor="sortSize" className="text-xl font-bold">
+              Size
+            </label>
+            <Select
+              id="sortSize"
+              instanceId="sortSize"
+              name="sortSize"
+              className="w-40"
+              onChange={(e) => handleSortChange("sortSize", e?.value)}
+              options={filterOptions.ShoeSizeOptions}
             />
           </div>
         )}
@@ -73,7 +131,7 @@ export default function FilterData() {
               name="sortPriceLow"
               className="w-40"
               onChange={(e) => handleSortChange("sortPriceLow", e?.value)}
-              options={Options.PriceRangeOptions}
+              options={filterOptions.PriceRangeOptions}
             />
             Min
             <FaArrowsUpDown />
@@ -84,7 +142,7 @@ export default function FilterData() {
               name="sortPriceHigh"
               className="w-40"
               onChange={(e) => handleSortChange("sortPriceHigh", e?.value)}
-              options={Options.PriceRangeOptions}
+              options={filterOptions.PriceRangeOptions}
             />
           </div>
         </div>
@@ -98,7 +156,7 @@ export default function FilterData() {
             name="sortBrand"
             className="w-40"
             onChange={(e) => handleSortChange("sortBrand", e?.value)}
-            options={Options.GeneralOptions}
+            options={filterOptions.GeneralOptions}
           />
         </div>
       </div>

@@ -35,7 +35,7 @@ export default async function FetchProductData({
     <>
       {productData && (
         <div className="ml-20 w-full mr-20 h-full grid grid-cols-4 mt-10 grid-rows-2 gap-8">
-          {productData?.map((product) => {
+          {productData.product.map((product) => {
             return (
               <PreviewItem
                 key={product.title}

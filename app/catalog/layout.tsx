@@ -1,4 +1,4 @@
-import FilterData from "@/common/components/catalog/FilterData";
+import FetchFilterData from "@/common/components/catalog/FetchFilterData";
 import Navigation from "@/common/components/navbar/Navigation";
 
 export default function ProductsLayout({
@@ -10,7 +10,7 @@ export default function ProductsLayout({
     <section className="w-screen  h-screen">
       <Navigation></Navigation>
       <div className="flex h-5/6">
-        <FilterData />
+        <FetchFilterData></FetchFilterData>
         {children}
       </div>
     </section>
