@@ -1,7 +1,7 @@
 "use server";
 
 interface Option {
-  value: string | number;
+  value: string | number | null;
   label: string;
 }
 
@@ -33,61 +33,60 @@ export async function createOptions() {
 
   const Options: Options = {
     GeneralOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       { value: "highToLow", label: "High To Low" },
       { value: "lowToHigh", label: "Low To High" },
     ],
     ShoeSizeOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...shoesData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
       }),
     ],
     RollerbladeSizeOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...rollerbladeData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
       }),
     ],
     SkateSizeOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...skateData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
       }),
     ],
     SnowboardSizeOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...snowboardData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
       }),
     ],
     ShoeBrandOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...shoesData.brandData.map((e) => {
         return { value: e.brand, label: e.brand };
       }),
     ],
     RollerbladeBrandOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...rollerbladeData.brandData.map((e) => {
         return { value: e.brand, label: e.brand };
       }),
     ],
     SkateBrandOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...skateData.brandData.map((e) => {
         return { value: e.brand, label: e.brand };
       }),
     ],
     SnowboardBrandOptions: [
-      { value: "default", label: "Default" },
+      { value: "", label: "Default" },
       ...snowboardData.brandData.map((e) => {
         return { value: e.brand, label: e.brand };
       }),
     ],
     PriceRangeOptions: [
-      { value: "default", label: "Default" },
-      { value: 0, label: "0" },
+      { value: "", label: "Default" },
       { value: 20, label: "20" },
       { value: 50, label: "50" },
       { value: 100, label: "100" },
