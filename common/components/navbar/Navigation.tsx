@@ -26,6 +26,13 @@ export default function Navigation() {
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
 
+  const [shopCartArray, setShopCartArray] = useState<string[] | null>(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("shopCart");
+      return storedCart ? JSON.parse(storedCart) : [];
+    } else null;
+  });
+
   return (
     <nav className={`w-screen h-14 flex items-center`}>
       <div className="ml-8 mr-8 flex items-center justify-between w-screen">
@@ -62,7 +69,15 @@ export default function Navigation() {
           <Link href="">
             <IoMdSearch className="size-5"></IoMdSearch>
           </Link>
-          <ShopCart></ShopCart>
+          <ShopCart
+            shopCartArray={shopCartArray}
+            setShopCartArray={setShopCartArray}
+          ></ShopCart>
+          <h1
+            className={`font-bold relative bottom-3 right-5 text-white bg-black rounded-full text-sm size-5 text-center`}
+          >
+            {0 + (shopCartArray?.length || 0)}
+          </h1>
         </div>
       </div>
     </nav>
