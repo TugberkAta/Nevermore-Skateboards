@@ -1,4 +1,3 @@
-import FetchFilterOptions from "@/common/components/catalog/FetchFilterOptions";
 import Navigation from "@/common/components/navbar/Navigation";
 
 export default function ProductsLayout({
