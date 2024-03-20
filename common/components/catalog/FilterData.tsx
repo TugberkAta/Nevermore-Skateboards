@@ -1,12 +1,12 @@
 "use client";
 
-import Select from "react-select";
-import { FaArrowsUpDown } from "react-icons/fa6";
-import { usePathname } from "next/navigation";
+import { PreviewItem } from "@/common/components/catalog/PreviewItem";
+import { Item } from "@/common/lib/data";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Option {
-  value: string | number;
+  value: string | number | null;
   label: string;
 }
 
@@ -23,142 +23,65 @@ export interface Options {
   PriceRangeOptions: Option[];
 }
 
-export default function FilterData({
-  filterOptions,
-}: {
-  filterOptions: Options;
-}) {
+type productDataProp = {
+  productData: Item[];
+};
+
+export default function FilterData({ productData }: productDataProp) {
   const pathname = usePathname();
-  const pathEnd = pathname.split("/catalog/")[1];
+  const searchParams = useSearchParams();
+  const [filteredProductData, setFilteredProductData] = useState<Item[]>([]);
 
-  const [sortParams, setSortParams] = useState({
-    sortGeneral: null,
-    sortSize: null,
-    sortPriceLow: null,
-    sortPriceHigh: null,
-    sortBrand: null,
-  });
+  useEffect(() => {
+    const sortBrand = searchParams.get("sortBrand");
+    const sortSize = searchParams.get("sortSize");
+    const sortGeneral = searchParams.get("sortGeneral");
+    const sortSizeHigh = searchParams.get("sortPriceHigh");
+    const sortSizeLow = searchParams.get("sortPriceLow");
 
-  // Function to update the sortParams state
-  const handleSortChange = (name: any, value: string | number | undefined) => {
-    setSortParams((prevParams) => ({
-      ...prevParams,
-      [name]: value,
-    }));
-  };
+    let filteredProductData = productData
+      .filter((product) => !sortBrand || sortBrand === product.brand)
+      .filter((product) => !sortSize || sortSize === product.size)
+      .filter(
+        (product) =>
+          !sortSizeHigh || parseInt(sortSizeHigh) > product.price / 100
+      )
+      .filter(
+        (product) => !sortSizeLow || parseInt(sortSizeLow) < product.price / 100
+      );
 
-  // Change filter size options depending on the url's path
-  let filterSizeOptions;
-  switch (pathEnd) {
-    case "Skateboards":
-      filterSizeOptions = filterOptions.SkateSizeOptions;
-      break;
-    case "Rollerblades":
-      filterSizeOptions = filterOptions.RollerbladeSizeOptions;
-      break;
-    case "Snowboards":
-      filterSizeOptions = filterOptions.SnowboardSizeOptions;
-      break;
-    case "Shoes":
-      filterSizeOptions = filterOptions.ShoeSizeOptions;
-      break;
-    default:
-      return;
-  }
+    if (sortGeneral === "lowToHigh") {
+      filteredProductData = filteredProductData.sort(
+        (a, b) => a.price - b.price
+      );
+    }
+    if (sortGeneral === "highToLow") {
+      filteredProductData = filteredProductData.sort(
+        (a, b) => b.price - a.price
+      );
+    }
 
-  // Change filter brand options depending on the url's path
-  let filterBrandOptions;
-  switch (pathEnd) {
-    case "Skateboards":
-      filterBrandOptions = filterOptions.SkateBrandOptions;
-      break;
-    case "Rollerblades":
-      filterBrandOptions = filterOptions.RollerbladeBrandOptions;
-      break;
-    case "Snowboards":
-      filterBrandOptions = filterOptions.SnowboardBrandOptions;
-      break;
-    case "Shoes":
-      filterBrandOptions = filterOptions.ShoeBrandOptions;
-      break;
-    default:
-      return;
-  }
+    setFilteredProductData(filteredProductData);
+  }, [pathname, searchParams]);
 
   return (
-    <div className="flex h-5/6">
-      <div className="flex flex-col gap-4 ml-4 w-fit p-4">
-        <div>
-          <p className="font-bold text-3xl mb-8">FILTER</p>
-          <label htmlFor="sortGeneral" className="text-xl font-bold">
-            Sort By
-          </label>
-          <Select
-            id="sortGeneral"
-            instanceId="sortBrand"
-            name="sortGeneral"
-            className="w-40"
-            onChange={(e) => handleSortChange("sortGeneral", e?.value)}
-            options={filterOptions.GeneralOptions}
-          />
+    <>
+      {productData && (
+        <div className="ml-20 w-full mr-20 h-full grid grid-cols-4 mt-10 grid-rows-2 gap-8">
+          {filteredProductData.map((product: Item) => {
+            return (
+              <PreviewItem
+                key={product.title}
+                src={product.img_url || ""}
+                alt={product.title || ""}
+                title={product.title || ""}
+                price={product.price || NaN}
+                address={`/product/${product.uuid}`}
+              />
+            );
+          })}
         </div>
-        {pathEnd && (
-          <div>
-            <label htmlFor="sortSize" className="text-xl font-bold">
-              Size
-            </label>
-            <Select
-              id="sortSize"
-              instanceId="sortSize"
-              name="sortSize"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortSize", e?.value)}
-              options={filterSizeOptions}
-            />
-          </div>
-        )}
-        <div>
-          <label htmlFor="sortPriceLow" className="text-xl font-bold">
-            Price Range
-          </label>
-          <div className="flex flex-col items-center gap-1">
-            <Select
-              id="sortPriceLow"
-              instanceId="sortPriceLow"
-              name="sortPriceLow"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortPriceLow", e?.value)}
-              options={filterOptions.PriceRangeOptions}
-            />
-            Min
-            <FaArrowsUpDown />
-            Max
-            <Select
-              id="sortPriceHigh"
-              instanceId="sortPriceHigh"
-              name="sortPriceHigh"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortPriceHigh", e?.value)}
-              options={filterOptions.PriceRangeOptions}
-            />
-          </div>
-        </div>
-        {pathEnd && (
-          <div>
-            <label htmlFor="sortBrand" className="text-xl font-bold">
-              Brand
-            </label>
-            <Select
-              id="sortBrand"
-              instanceId="sortBrand"
-              name="sortBrand"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortBrand", e?.value)}
-              options={filterBrandOptions}
-            />
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 }
