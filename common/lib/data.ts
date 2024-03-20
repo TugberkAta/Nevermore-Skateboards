@@ -6,7 +6,7 @@ export type Item = {
   title: string;
   price: number;
   brand: string;
-  size: number;
+  size: string;
   img_url: string;
 };
 
