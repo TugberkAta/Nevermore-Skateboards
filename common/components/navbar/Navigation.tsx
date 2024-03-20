@@ -6,7 +6,7 @@ import { IoMdSearch } from "react-icons/io";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import ShopCart from "./ShopCart";
+import ShopCart from "./Shopcart/ShopCart";
 import Link from "next/link";
 
 // Array of every tab to be shown in the nav bar
