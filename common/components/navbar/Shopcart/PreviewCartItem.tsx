@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
+import AddItemButton from "./AddItemButton";
 
 type PreviewCartItemProps = {
   alt: string;
@@ -87,9 +88,7 @@ export function PreviewCartItem({
         </p>
         <p className="text-sm mt-1">Size: {size}</p>
         <div className="flex items-center w-fit gap-4 mt-4 ml-2">
-          <button type="button" onClick={handleAddCount}>
-            <FaPlus></FaPlus>
-          </button>
+          <AddItemButton handleAddCount={handleAddCount}></AddItemButton>
           <p className="text-center w-8">{count + tempCount}</p>
           <button>
             <FaMinus></FaMinus>
@@ -99,7 +98,7 @@ export function PreviewCartItem({
       <div className="flex flex-col items-center justify-between gap-8">
         <div className="flex flex-col items-end text-center">
           <p className={`${montserrat.className}`}>
-            £{(price / 100) * count} STR
+            £{(price / 100) * (count + tempCount)} STR
           </p>
           <p className=" text-xs mt-1">£{price / 100} STR</p>
         </div>
