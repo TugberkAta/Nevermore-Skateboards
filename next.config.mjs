@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: "cdn.myikas.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "edge.disstg.commercecloud.salesforce.com",
+        port: "",
+      },
     ],
   },
 };
