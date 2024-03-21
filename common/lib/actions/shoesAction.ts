@@ -4,6 +4,7 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { capitalizeFirstLetter } from "@/common/utils/capitaliseFirstLetter";
 
 const FormSchema = z.object({
   title: z
@@ -65,10 +66,13 @@ export async function createShoes(prevState: State, formData: FormData) {
   const { title, price, brand, size, imgUrl } = validatedFields.data;
 
   const amountInCents = price * 100;
+
+  const sanitizedBrand = capitalizeFirstLetter(brand);
+
   try {
     await sql`
               INSERT INTO shoes ( title, price, brand, size, img_url)
-              VALUES (${title}, ${amountInCents}, ${brand}, ${size}, ${imgUrl})
+              VALUES (${title}, ${amountInCents}, ${sanitizedBrand}, ${size}, ${imgUrl})
             `;
   } catch (error) {
     console.log(error);
