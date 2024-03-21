@@ -69,7 +69,7 @@ export default function FilterData({ productData }: productDataProp) {
     <>
       {productData && (
         <motion.div layout>
-          <div className="ml-20 w-full mr-20 h-full grid grid-cols-4 mt-10 grid-rows-2 gap-8">
+          <div className="ml-20 w-5/6 mr-20 h-full grid grid-cols-3 mt-10 grid-rows-2 gap-x-8">
             <AnimatePresence>
               {filteredProductData.map((product: Item) => {
                 return (

@@ -30,7 +30,7 @@ export function PreviewItem({
         href={address}
         className="flex flex-col items-center overflow-hidden "
       >
-        <div className="col-span-1 grid-rows-1 w-full  relative overflow-hidden mb-1">
+        <div className="col-span-1 grid-rows-1 w-full relative overflow-hidden mb-1">
           <div className="group flex justify-center w-full h-full">
             <Image
               width={200}

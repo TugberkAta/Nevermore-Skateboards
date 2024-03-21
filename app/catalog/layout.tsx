@@ -8,7 +8,7 @@ export default function ProductsLayout({
   return (
     <section className="w-screen  h-screen">
       <Navigation></Navigation>
-      <div className="flex h-5/6">{children}</div>
+      <div className="flex">{children}</div>
     </section>
   );
 }
