@@ -2,6 +2,7 @@
 
 import { PreviewItem } from "@/common/components/catalog/PreviewItem";
 import { Item } from "@/common/lib/data";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -67,20 +68,24 @@ export default function FilterData({ productData }: productDataProp) {
   return (
     <>
       {productData && (
-        <div className="ml-20 w-full mr-20 h-full grid grid-cols-4 mt-10 grid-rows-2 gap-8">
-          {filteredProductData.map((product: Item) => {
-            return (
-              <PreviewItem
-                key={product.title}
-                src={product.img_url || ""}
-                alt={product.title || ""}
-                title={product.title || ""}
-                price={product.price || NaN}
-                address={`/product/${product.uuid}`}
-              />
-            );
-          })}
-        </div>
+        <motion.div layout>
+          <div className="ml-20 w-full mr-20 h-full grid grid-cols-4 mt-10 grid-rows-2 gap-8">
+            <AnimatePresence>
+              {filteredProductData.map((product: Item) => {
+                return (
+                  <PreviewItem
+                    key={product.title}
+                    src={product.img_url || ""}
+                    alt={product.title || ""}
+                    title={product.title || ""}
+                    price={product.price || NaN}
+                    address={`/product/${product.uuid}`}
+                  />
+                );
+              })}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       )}
     </>
   );
