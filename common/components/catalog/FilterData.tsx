@@ -69,7 +69,7 @@ export default function FilterData({ productData }: productDataProp) {
     <>
       {productData && (
         <motion.div layout>
-          <div className="ml-20 w-5/6 mr-20 h-full grid grid-cols-3 mt-10 grid-rows-2 gap-x-8">
+          <div className="ml-10 pt-10 mr-10 h-full grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-8">
             <AnimatePresence>
               {filteredProductData.map((product: Item) => {
                 return (
@@ -80,6 +80,7 @@ export default function FilterData({ productData }: productDataProp) {
                     title={product.title || ""}
                     price={product.price || NaN}
                     address={`/product/${product.uuid}`}
+                    brand={product.brand}
                   />
                 );
               })}
