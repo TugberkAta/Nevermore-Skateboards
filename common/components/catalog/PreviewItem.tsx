@@ -9,6 +9,7 @@ type PreviewItemProps = {
   title: string;
   price: number;
   address: string;
+  brand: string;
 };
 
 export function PreviewItem({
@@ -18,6 +19,7 @@ export function PreviewItem({
   title,
   price,
   address,
+  brand,
 }: PreviewItemProps) {
   return (
     <motion.div
@@ -43,8 +45,9 @@ export function PreviewItem({
           </div>
         </div>
         <div className="flex flex-col">
+          <p className="text-center text-sm font-semibold">{brand}</p>
           <p className="text-center text-sm">{title}</p>
-          <p className="text-center ml-4 mr-4 text-xs">£{price / 100}</p>
+          <p className="text-center text-xs">£{price / 100}</p>
         </div>
       </Link>
     </motion.div>
