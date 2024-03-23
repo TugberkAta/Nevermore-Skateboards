@@ -58,22 +58,20 @@ export default function ShopCart({
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (
-                      <>
-                        <PreviewCartItem
-                          key={ShoppingItem.title}
-                          src={ShoppingItem.img_url || ""}
-                          alt={ShoppingItem.title || ""}
-                          title={ShoppingItem.title || ""}
-                          price={ShoppingItem.price || NaN}
-                          size={ShoppingItem.size || ""}
-                          address={`/product/${ShoppingItem.uuid}`}
-                          brand={ShoppingItem.brand || ""}
-                          count={ShoppingItem.count || NaN}
-                          uuid={ShoppingItem.uuid || ""}
-                          shopCartArray={shopCartArray}
-                          setShopCartArray={setShopCartArray}
-                        />
-                      </>
+                      <PreviewCartItem
+                        key={ShoppingItem.title}
+                        src={ShoppingItem.img_url || ""}
+                        alt={ShoppingItem.title || ""}
+                        title={ShoppingItem.title || ""}
+                        price={ShoppingItem.price || NaN}
+                        size={ShoppingItem.size || ""}
+                        address={`/product/${ShoppingItem.uuid}`}
+                        brand={ShoppingItem.brand || ""}
+                        count={ShoppingItem.count || NaN}
+                        uuid={ShoppingItem.uuid || ""}
+                        shopCartArray={shopCartArray}
+                        setShopCartArray={setShopCartArray}
+                      />
                     );
                   })}
                 </div>
