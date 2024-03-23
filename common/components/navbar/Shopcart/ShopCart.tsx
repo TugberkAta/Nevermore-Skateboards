@@ -18,7 +18,7 @@ type ShoppingItemProps = {
 
 type shopCartProps = {
   shopCartArray: string[] | null;
-  setShopCartArray: Dispatch<SetStateAction<string[] | null>>;
+  setShopCartArray: Dispatch<SetStateAction<string[]>>;
 };
 
 export default function ShopCart({
@@ -29,14 +29,7 @@ export default function ShopCart({
 
   function handleClick() {
     setActivateShopCart(!activateShopCart);
-    setShopCartArray(JSON.parse(localStorage.getItem("shopCart") || "null"));
   }
-
-  if (typeof window !== "undefined") {
-    window.addEventListener("storage", () => {
-      setShopCartArray(JSON.parse(localStorage.getItem("shopCart") || "null"));
-    });
-  } else null;
 
   return (
     <div className="flex">
@@ -77,6 +70,8 @@ export default function ShopCart({
                           brand={ShoppingItem.brand || ""}
                           count={ShoppingItem.count || NaN}
                           uuid={ShoppingItem.uuid || ""}
+                          shopCartArray={shopCartArray}
+                          setShopCartArray={setShopCartArray}
                         />
                       </>
                     );
