@@ -13,8 +13,6 @@ export default function DecrementItemButton({
   shopCartArray,
   setShopCartArray,
   uuid,
-  setTempCount,
-  tempCount,
 }: RemoveItemButtonProps) {
   const handleDecrementCount = () => {
     const itemIndex = shopCartArray.findIndex((itemString) => {
@@ -23,20 +21,21 @@ export default function DecrementItemButton({
     });
 
     // update the items count
-    setShopCartArray((prevShopCart) =>
-      prevShopCart.map((itemString, index) => {
-        if (index === itemIndex) {
-          const item = JSON.parse(itemString);
-          if (item.count <= 1) {
-            return itemString;
-          }
-          item.count -= 1;
-          setTempCount(tempCount - 1);
-          return JSON.stringify(item);
+    const updatedArray = shopCartArray.map((itemString, index) => {
+      if (index === itemIndex) {
+        const item = JSON.parse(itemString);
+        if (item.count <= 1) {
+          return itemString;
         }
-        return itemString;
-      })
-    );
+        item.count -= 1;
+        return JSON.stringify(item);
+      }
+      return itemString;
+    });
+
+    setShopCartArray(updatedArray);
+
+    localStorage.setItem("shopCart", JSON.stringify(updatedArray));
   };
   return (
     <button type="button" onClick={handleDecrementCount}>

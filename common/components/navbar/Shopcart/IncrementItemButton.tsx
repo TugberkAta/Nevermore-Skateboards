@@ -13,8 +13,6 @@ export default function IncrementItemButton({
   shopCartArray,
   setShopCartArray,
   uuid,
-  setTempCount,
-  tempCount,
 }: IncrementItemButtonProps) {
   const handleIncrementCount = () => {
     const itemIndex = shopCartArray.findIndex((itemString) => {
@@ -23,17 +21,18 @@ export default function IncrementItemButton({
     });
 
     // update the items count
-    setShopCartArray((prevShopCart) =>
-      prevShopCart.map((itemString, index) => {
-        if (index === itemIndex) {
-          const item = JSON.parse(itemString);
-          item.count += 1;
-          setTempCount(tempCount + 1);
-          return JSON.stringify(item);
-        }
-        return itemString;
-      })
-    );
+    const updatedArray = shopCartArray.map((itemString, index) => {
+      if (index === itemIndex) {
+        const item = JSON.parse(itemString);
+        item.count += 1;
+        return JSON.stringify(item);
+      }
+      return itemString;
+    });
+
+    setShopCartArray(updatedArray);
+
+    localStorage.setItem("shopCart", JSON.stringify(updatedArray));
   };
   return (
     <button type="button" onClick={handleIncrementCount}>
