@@ -1,11 +1,11 @@
 import { montserrat } from "@/common/styles/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa6";
-import AddItemButton from "./AddItemButton";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import RemoveItemButton from "./RemoveItem";
+import DecrementItemButton from "./DecrementItemButton";
+import IncrementItemButton from "./IncrementItemButton";
 
 type PreviewCartItemProps = {
   alt: string;
@@ -18,6 +18,8 @@ type PreviewCartItemProps = {
   brand: string;
   count: number;
   uuid: string;
+  shopCartArray: string[];
+  setShopCartArray: Dispatch<SetStateAction<string[]>>;
 };
 
 export function PreviewCartItem({
@@ -31,39 +33,11 @@ export function PreviewCartItem({
   brand,
   count,
   uuid,
+  shopCartArray,
+  setShopCartArray,
 }: PreviewCartItemProps) {
   // Not proud of this
   const [tempCount, setTempCount] = useState(0);
-
-  const [shopCart, setShopCart] = useState<string[]>(() => {
-    const storedCart = localStorage.getItem("shopCart");
-    return storedCart ? JSON.parse(storedCart) : [];
-  });
-
-  useEffect(() => {
-    // Store the shopCart array as a string in localStorage
-    localStorage.setItem("shopCart", JSON.stringify(shopCart));
-  }, [shopCart]);
-
-  const handleAddCount = () => {
-    const itemIndex = shopCart.findIndex((itemString) => {
-      const item = JSON.parse(itemString);
-      return item.uuid === uuid;
-    });
-
-    // update the items count
-    setShopCart((prevShopCart) =>
-      prevShopCart.map((itemString, index) => {
-        if (index === itemIndex) {
-          const item = JSON.parse(itemString);
-          item.count += 1;
-          setTempCount(tempCount + 1);
-          return JSON.stringify(item);
-        }
-        return itemString;
-      })
-    );
-  };
 
   return (
     <motion.div
@@ -97,23 +71,35 @@ export function PreviewCartItem({
           </p>
           <p className="text-sm mt-1">Size: {size}</p>
           <div className="flex items-center w-fit gap-4 mt-4 ml-2">
-            <AddItemButton handleAddCount={handleAddCount}></AddItemButton>
-            <p className="text-center w-8">{count + tempCount}</p>
-            <button>
-              <FaMinus></FaMinus>
-            </button>
+            <IncrementItemButton
+              shopCartArray={shopCartArray}
+              setShopCartArray={setShopCartArray}
+              uuid={uuid}
+              setTempCount={setTempCount}
+              tempCount={tempCount}
+            ></IncrementItemButton>
+            <p className="text-center w-8">{count}</p>
+            <DecrementItemButton
+              shopCartArray={shopCartArray}
+              setShopCartArray={setShopCartArray}
+              uuid={uuid}
+              setTempCount={setTempCount}
+              tempCount={tempCount}
+            ></DecrementItemButton>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-8">
           <div className="flex flex-col items-end text-center">
             <p className={`${montserrat.className}`}>
-              £{(price / 100) * (count + tempCount)} STR
+              £{(price / 100) * count} STR
             </p>
             <p className=" text-xs mt-1">£{price / 100} STR</p>
           </div>
-          <button type="button" className="p-1 pr-3 pl-3 bg-black">
-            <p className="text-white">Remove</p>
-          </button>
+          <RemoveItemButton
+            shopCartArray={shopCartArray}
+            setShopCartArray={setShopCartArray}
+            uuid={uuid}
+          ></RemoveItemButton>
         </div>
       </div>
     </motion.div>
