@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { inika } from "../../styles/fonts";
 import { IoMdSearch } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ShopCart from "./Shopcart/ShopCart";
@@ -32,6 +32,21 @@ export default function Navigation() {
       return storedCart ? JSON.parse(storedCart) : [];
     } else null;
   });
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setShopCartArray(JSON.parse(localStorage.getItem("shopCart") || "[]"));
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", handleStorageChange);
+
+      // Cleanup function to remove the event listener
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }
+  }, []);
 
   return (
     <nav className={`w-screen h-14 flex items-center`}>
