@@ -12,19 +12,27 @@ export default function RemoveItemButton({
   setShopCartArray,
 }: RemoveItemButtonProps) {
   useEffect(() => {
-    // Store the shopCart array as a string in localStorage
-    localStorage.setItem("shopCart", JSON.stringify(shopCartArray));
     window.dispatchEvent(new Event("storage"));
   }, [shopCartArray]);
 
   const handleRemove = () => {
     const itemIndex = shopCartArray?.findIndex((itemString) => {
       const item = JSON.parse(itemString);
+      item.count = 1;
       return item.uuid === uuid;
     });
-    setShopCartArray(
-      shopCartArray.filter((item) => item != shopCartArray[itemIndex])
+
+    const updatedShopCartArray = shopCartArray.filter(
+      (item) => item != shopCartArray[itemIndex]
     );
+
+    setShopCartArray(updatedShopCartArray);
+
+    if (updatedShopCartArray.length === 0) {
+      localStorage.removeItem("shopCart");
+    } else {
+      localStorage.setItem("shopCart", JSON.stringify(updatedShopCartArray));
+    }
   };
 
   return (
