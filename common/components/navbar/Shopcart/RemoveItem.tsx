@@ -11,6 +11,12 @@ export default function RemoveItemButton({
   shopCartArray,
   setShopCartArray,
 }: RemoveItemButtonProps) {
+  useEffect(() => {
+    // Store the shopCart array as a string in localStorage
+    localStorage.setItem("shopCart", JSON.stringify(shopCartArray));
+    window.dispatchEvent(new Event("storage"));
+  }, [shopCartArray]);
+
   const handleRemove = () => {
     const itemIndex = shopCartArray?.findIndex((itemString) => {
       const item = JSON.parse(itemString);
