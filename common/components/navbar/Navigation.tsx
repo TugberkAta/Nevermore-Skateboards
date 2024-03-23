@@ -26,7 +26,7 @@ export default function Navigation() {
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
 
-  const [shopCartArray, setShopCartArray] = useState<string[] | null>(() => {
+  const [shopCartArray, setShopCartArray] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
       return storedCart ? JSON.parse(storedCart) : [];
