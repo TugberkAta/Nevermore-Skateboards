@@ -4,14 +4,12 @@ import FetchProductData from "@/common/components/catalog/FetchProductData";
 export default async function ProductPage({
   params,
 }: {
-  params: { category: string };
+  params: { Category: string };
 }) {
-  console.log(params.category);
-
   return (
     <>
       <FetchFilterOptions></FetchFilterOptions>
-      <FetchProductData productName={params.category} />
+      <FetchProductData productName={params.Category} />
     </>
   );
 }
