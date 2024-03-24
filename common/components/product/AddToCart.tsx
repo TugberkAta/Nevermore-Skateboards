@@ -1,9 +1,13 @@
 "use client";
 
+import { Item } from "@/common/lib/data";
 import { useEffect, useState } from "react";
-import { DetailsProps } from "./ProductDetails";
 
-export function AddToCart({ itemData }: DetailsProps) {
+export interface AddToCartProps {
+  itemData: Item;
+}
+
+export function AddToCart({ itemData }: AddToCartProps) {
   const [shopCart, setShopCart] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
