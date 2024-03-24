@@ -24,11 +24,15 @@ export interface Options {
   PriceRangeOptions: Option[];
 }
 
-type productDataProp = {
+type FilterDataProp = {
   productData: Item[];
+  productName: string;
 };
 
-export default function FilterData({ productData }: productDataProp) {
+export default function FilterData({
+  productData,
+  productName,
+}: FilterDataProp) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [filteredProductData, setFilteredProductData] = useState<Item[]>([]);
@@ -79,7 +83,7 @@ export default function FilterData({ productData }: productDataProp) {
                     alt={product.title || ""}
                     title={product.title || ""}
                     price={product.price || NaN}
-                    address={`/product/${product.uuid}`}
+                    address={`/product/${productName}/${product.uuid}`}
                     brand={product.brand}
                   />
                 );
