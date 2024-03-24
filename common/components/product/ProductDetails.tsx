@@ -1,14 +1,15 @@
-import Image from "next/image";
 import { Item } from "../../lib/data";
 import { ProductImage } from "./ProductImage";
 import { montserrat, montserratThin } from "@/common/styles/fonts";
 import { AddToCart } from "./AddToCart";
+import { QueryResultRow } from "@vercel/postgres";
 
 export interface DetailsProps {
   itemData: Item;
+  sizeData: QueryResultRow[] | undefined;
 }
 
-export default function ProductDetails({ itemData }: DetailsProps) {
+export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
       <div className="grid grid-cols-2 gap-20 ml-40 mr-40 mt-20">
@@ -17,7 +18,7 @@ export default function ProductDetails({ itemData }: DetailsProps) {
           src={itemData.img_url || ""}
         ></ProductImage>
         <div>
-          <ProductInformation itemData={itemData} />
+          <ProductInformation itemData={itemData} sizeData={sizeData} />
           <AddToCart itemData={itemData}></AddToCart>
         </div>
       </div>
@@ -25,7 +26,7 @@ export default function ProductDetails({ itemData }: DetailsProps) {
   );
 }
 
-export function ProductInformation({ itemData }: DetailsProps) {
+export function ProductInformation({ itemData, sizeData }: DetailsProps) {
   return (
     <div>
       <div className="border-b pb-4 mb-4">
@@ -39,8 +40,29 @@ export function ProductInformation({ itemData }: DetailsProps) {
           £{(itemData.price || 0) / 100} STR
         </div>
       </div>
-      <div className={`${montserrat.className} text-sm  mb-2`}>
-        <p>Size: {itemData.size}</p>
+      <div
+        className={`${montserrat.className} text-sm grid grid-flow-col justify-center w-full gap-3 mb-2`}
+      >
+        {sizeData?.map((type) => {
+          return (
+            <div key={type.size}>
+              <button
+                className={`border relative w-12 h-8 text-center ${
+                  type.size === itemData.size ? "border-black" : ""
+                }`}
+              >
+                {type.size === itemData.size ? (
+                  <p className="border-black">{type.size}</p>
+                ) : (
+                  <>
+                    <p>{type.size}</p>
+                    <div className="absolute w-full top-1/2 h-[2px] m-auto  bg-red-300 opacity-50"></div>
+                  </>
+                )}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
