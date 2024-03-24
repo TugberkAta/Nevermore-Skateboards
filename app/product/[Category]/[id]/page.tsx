@@ -11,7 +11,7 @@ import ProductDetails from "@/common/components/product/ProductDetails";
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string; type: string };
+  params: { id: string; Category: string };
 }) {
   let itemData: Item;
   try {
@@ -22,25 +22,25 @@ export default async function ProductPage({
     return;
   }
 
-  let typeData;
-  switch (params.type) {
+  let CategoryData;
+  switch (params.Category) {
     case "Skateboards":
-      typeData = await fetchSkateData();
+      CategoryData = await fetchSkateData();
       break;
     case "Rollerblades":
-      typeData = await fetchRollerbladeData();
+      CategoryData = await fetchRollerbladeData();
       break;
     case "Snowboards":
-      typeData = await fetchSnowboardData();
+      CategoryData = await fetchSnowboardData();
       break;
     case "Shoes":
-      typeData = await fetchShoeData();
+      CategoryData = await fetchShoeData();
       break;
     default:
-      () => Promise.reject("Invalid item type");
+      () => Promise.reject("Invalid item Category");
   }
 
-  console.log(typeData?.sizeData[0].size);
+  console.log(CategoryData?.sizeData[0].size);
 
   return (
     <>
@@ -48,7 +48,7 @@ export default async function ProductPage({
         <div className="w-screen">
           <ProductDetails
             itemData={itemData}
-            sizeData={typeData?.sizeData}
+            sizeData={CategoryData?.sizeData}
           ></ProductDetails>
         </div>
       )}
