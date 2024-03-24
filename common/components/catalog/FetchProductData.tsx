@@ -34,7 +34,10 @@ export default async function FetchProductData({
   return (
     <>
       {productData && (
-        <FilterData productData={productData.product}></FilterData>
+        <FilterData
+          productData={productData.product}
+          productName={productName}
+        ></FilterData>
       )}
     </>
   );
