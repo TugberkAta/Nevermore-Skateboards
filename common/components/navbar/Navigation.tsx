@@ -30,6 +30,10 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
 
+  useEffect(() => {
+    setActiveTab(pathEnd);
+  }, [pathEnd]);
+
   const [shopCartArray, setShopCartArray] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
