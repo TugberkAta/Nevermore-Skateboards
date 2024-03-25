@@ -89,9 +89,6 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
           </div>
         </div>
         <div className="fill-black flex gap-4">
-          <Link href="">
-            <IoMdSearch className="size-5"></IoMdSearch>
-          </Link>
           {stripeApiKey && (
             <ShopCart
               shopCartArray={shopCartArray}
