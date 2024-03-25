@@ -57,10 +57,10 @@ export function AddToCart({ itemData }: AddToCartProps) {
   };
 
   return (
-    <div className="w-full hover:scale-105 transition-all flex justify-center mt-8">
+    <div className="w-full hover:scale-105 active:scale-100 transition-all flex justify-center mt-8">
       <button
         type="button"
-        className="h-12 w-6/12  bg-black"
+        className="h-12 w-6/12 bg-black"
         onClick={handleAddToCart}
       >
         <p className="text-white">ADD TO CART</p>
