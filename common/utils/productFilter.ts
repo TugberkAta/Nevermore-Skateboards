@@ -7,16 +7,14 @@ interface Option {
 
 export interface Options {
   GeneralOptions: Option[];
-  ShoeSizeOptions: Option[];
-  RollerbladeSizeOptions: Option[];
-  SkateSizeOptions: Option[];
-  SnowboardSizeOptions: Option[];
-  ShoeBrandOptions: Option[];
-  RollerbladeBrandOptions: Option[];
-  SkateBrandOptions: Option[];
-  SnowboardBrandOptions: Option[];
+  ProductSizeOptions: Option[];
+  ProductBrandOptions: Option[];
   PriceRangeOptions: Option[];
 }
+
+type createOptionsProps = {
+  productName: string;
+};
 
 import {
   fetchRollerbladeData,
@@ -25,11 +23,25 @@ import {
   fetchSnowboardData,
 } from "../lib/data";
 
-export async function createOptions() {
-  const skateData = await fetchSkateData();
-  const rollerbladeData = await fetchRollerbladeData();
-  const snowboardData = await fetchSnowboardData();
-  const shoesData = await fetchShoeData();
+export async function createOptions(productName: string) {
+  let productData;
+  switch (productName) {
+    case "Skateboards":
+      productData = await fetchSkateData();
+      break;
+    case "Rollerblades":
+      productData = await fetchRollerbladeData();
+      break;
+    case "Snowboards":
+      productData = await fetchSnowboardData();
+      break;
+    case "Shoes":
+      productData = await fetchShoeData();
+      break;
+    default:
+      productData = await fetchSkateData();
+      break;
+  }
 
   const Options: Options = {
     GeneralOptions: [
@@ -37,51 +49,15 @@ export async function createOptions() {
       { value: "highToLow", label: "High To Low" },
       { value: "lowToHigh", label: "Low To High" },
     ],
-    ShoeSizeOptions: [
+    ProductSizeOptions: [
       { value: "", label: "Default" },
-      ...shoesData.sizeData.map((e) => {
+      ...productData.sizeData.map((e) => {
         return { value: e.size, label: e.size };
       }),
     ],
-    RollerbladeSizeOptions: [
+    ProductBrandOptions: [
       { value: "", label: "Default" },
-      ...rollerbladeData.sizeData.map((e) => {
-        return { value: e.size, label: e.size };
-      }),
-    ],
-    SkateSizeOptions: [
-      { value: "", label: "Default" },
-      ...skateData.sizeData.map((e) => {
-        return { value: e.size, label: e.size };
-      }),
-    ],
-    SnowboardSizeOptions: [
-      { value: "", label: "Default" },
-      ...snowboardData.sizeData.map((e) => {
-        return { value: e.size, label: e.size };
-      }),
-    ],
-    ShoeBrandOptions: [
-      { value: "", label: "Default" },
-      ...shoesData.brandData.map((e) => {
-        return { value: e.brand, label: e.brand };
-      }),
-    ],
-    RollerbladeBrandOptions: [
-      { value: "", label: "Default" },
-      ...rollerbladeData.brandData.map((e) => {
-        return { value: e.brand, label: e.brand };
-      }),
-    ],
-    SkateBrandOptions: [
-      { value: "", label: "Default" },
-      ...skateData.brandData.map((e) => {
-        return { value: e.brand, label: e.brand };
-      }),
-    ],
-    SnowboardBrandOptions: [
-      { value: "", label: "Default" },
-      ...snowboardData.brandData.map((e) => {
+      ...productData.brandData.map((e) => {
         return { value: e.brand, label: e.brand };
       }),
     ],
