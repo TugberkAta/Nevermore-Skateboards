@@ -140,12 +140,16 @@ export default function ShopCart({
                     );
                   })}
                 </div>
-                <button
-                  onClick={handleProcess}
-                  className=" bg-green-500 hover:bg-green-600 hover:scale-105 transition-all text-white font-bold py-2 px-4 rounded-full "
-                >
-                  Proceed
-                </button>
+                {shopCartArray?.length ?? 0 >= 1 ? (
+                  <button
+                    onClick={handleProcess}
+                    className=" bg-green-500 hover:bg-green-600 hover:scale-105 transition-all text-white font-bold py-2 px-4 rounded-full "
+                  >
+                    Proceed
+                  </button>
+                ) : (
+                  <></>
+                )}
               </motion.div>
             </div>
           </motion.div>
