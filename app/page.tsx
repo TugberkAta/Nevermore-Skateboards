@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <div className="w-screen">
-        <Navigation></Navigation>
+        <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
         <Banner></Banner>
         <div className=" ml-16 mr-16 mt-6 mb-6">
           <Previews></Previews>
