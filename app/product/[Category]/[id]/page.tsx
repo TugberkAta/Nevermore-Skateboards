@@ -40,8 +40,6 @@ export default async function ProductPage({
       () => Promise.reject("Invalid item Category");
   }
 
-  console.log(CategoryData?.sizeData[0].size);
-
   return (
     <>
       {itemData && (

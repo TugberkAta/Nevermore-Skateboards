@@ -18,7 +18,11 @@ const tabs = [
   { id: "Shoes", text: "Shoes" },
 ];
 
-export default function Navigation() {
+type NavigationProps = {
+  stripeApiKey: string | undefined;
+};
+
+export default function Navigation({ stripeApiKey }: NavigationProps) {
   // Get pathnames for conditionally updating active tab
   const pathname = usePathname();
   const pathEnd = pathname.split("/catalog/")[1];
@@ -49,7 +53,7 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className={`w-screen h-14 flex items-center`}>
+    <nav className={`w-screen h-14 flex items-center `}>
       <div className="ml-8 mr-8 flex items-center justify-between w-screen">
         <div className="flex items-center">
           <Link href="/" className="flex gap-4 h-full items-center ">
@@ -84,10 +88,13 @@ export default function Navigation() {
           <Link href="">
             <IoMdSearch className="size-5"></IoMdSearch>
           </Link>
-          <ShopCart
-            shopCartArray={shopCartArray}
-            setShopCartArray={setShopCartArray}
-          ></ShopCart>
+          {stripeApiKey && (
+            <ShopCart
+              shopCartArray={shopCartArray}
+              setShopCartArray={setShopCartArray}
+              stripeApiKey={stripeApiKey}
+            ></ShopCart>
+          )}
           <h1
             className={`font-bold relative bottom-3 right-5 text-white bg-black rounded-full text-sm size-5 text-center`}
           >
