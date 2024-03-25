@@ -8,7 +8,7 @@ type FetchFilterDataProps = {
 export default async function FetchFilterData({
   productName,
 }: FetchFilterDataProps) {
-  const filterOptions = await createOptions();
+  const filterOptions = await createOptions(productName);
   return (
     <>{filterOptions && <FilterDataForm filterOptions={filterOptions} />}</>
   );
