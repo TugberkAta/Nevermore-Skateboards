@@ -4,7 +4,8 @@ import { useState, Dispatch, SetStateAction } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { PreviewCartItem } from "./PreviewCartItem";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import Stripe from "stripe";
 
 type ShoppingItemProps = {
   uuid: string;
@@ -16,19 +17,79 @@ type ShoppingItemProps = {
   count: number;
 };
 
+interface LineItem {
+  price_data: {
+    currency: string;
+    product_data: {
+      name: string;
+      images: [string];
+    };
+    unit_amount: number;
+  };
+  quantity: number;
+}
+
 type shopCartProps = {
   shopCartArray: string[] | null;
   setShopCartArray: Dispatch<SetStateAction<string[]>>;
+  stripeApiKey: string | undefined;
 };
 
 export default function ShopCart({
   shopCartArray,
   setShopCartArray,
+  stripeApiKey,
 }: shopCartProps) {
   const [activateShopCart, setActivateShopCart] = useState<boolean>(false);
 
   function handleClick() {
     setActivateShopCart(!activateShopCart);
+  }
+
+  async function handleProcess() {
+    console.log(stripeApiKey);
+
+    if (!stripeApiKey) {
+      throw new Error(
+        "STRIPE_API_KEY is not defined in the environment variables"
+      );
+    }
+    const stripe = new Stripe(stripeApiKey);
+
+    let line_items: LineItem[] = [];
+    shopCartArray?.forEach((item) => {
+      try {
+        const ShoppingItem = JSON.parse(item);
+        line_items.push({
+          price_data: {
+            currency: "GBP",
+            product_data: {
+              name: ShoppingItem.title,
+              images: [ShoppingItem.img_url],
+            },
+            unit_amount: ShoppingItem.price,
+          },
+          quantity: ShoppingItem.count,
+        });
+      } catch (error) {
+        console.error("Error parsing item:", item, error);
+      }
+    });
+
+    try {
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: line_items,
+        mode: "payment",
+        success_url: "https://nevermore-skateboards.vercel.app",
+        cancel_url: "https://nevermore-skateboards.vercel.app",
+      });
+      if (typeof window !== "undefined" && typeof session.url === "string") {
+        window.location.href = session.url;
+      } else null;
+    } catch (error) {
+      console.error("Error creating Stripe Checkout Session:", error);
+    }
   }
 
   return (
@@ -53,7 +114,10 @@ export default function ShopCart({
                   <RxCross2 className="size-6" />
                 </button>
               </div>
-              <motion.div layout>
+              <motion.div
+                className="h-[90%]  flex flex-col justify-between items-center"
+                layout
+              >
                 <div className="grid grid-row-4 gap-4 w-full mt-10 mb-10">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
@@ -75,6 +139,12 @@ export default function ShopCart({
                     );
                   })}
                 </div>
+                <button
+                  onClick={handleProcess}
+                  className=" bg-green-500 hover:bg-green-600 hover:scale-105 transition-all text-white font-bold py-2 px-4 rounded-full "
+                >
+                  Proceed
+                </button>
               </motion.div>
             </div>
           </motion.div>
