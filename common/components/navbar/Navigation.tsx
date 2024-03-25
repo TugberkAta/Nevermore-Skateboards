@@ -25,7 +25,7 @@ type NavigationProps = {
 export default function Navigation({ stripeApiKey }: NavigationProps) {
   // Get pathnames for conditionally updating active tab
   const pathname = usePathname();
-  const pathEnd = pathname.split("/catalog/")[1];
+  const pathEnd = pathname.split("/")[2];
 
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
