@@ -12,14 +12,8 @@ interface Option {
 
 export interface Options {
   GeneralOptions: Option[];
-  ShoeSizeOptions: Option[];
-  RollerbladeSizeOptions: Option[];
-  SkateSizeOptions: Option[];
-  SnowboardSizeOptions: Option[];
-  ShoeBrandOptions: Option[];
-  RollerbladeBrandOptions: Option[];
-  SkateBrandOptions: Option[];
-  SnowboardBrandOptions: Option[];
+  ProductSizeOptions: Option[];
+  ProductBrandOptions: Option[];
   PriceRangeOptions: Option[];
 }
 
@@ -70,44 +64,6 @@ export default function FilterDataForm({
     replace(`${pathname}?${params.toString()}`);
   }, [sortParams]);
 
-  // Change filter size options depending on the url's path
-  let filterSizeOptions;
-  switch (pathEnd) {
-    case "Skateboards":
-      filterSizeOptions = filterOptions.SkateSizeOptions;
-      break;
-    case "Rollerblades":
-      filterSizeOptions = filterOptions.RollerbladeSizeOptions;
-      break;
-    case "Snowboards":
-      filterSizeOptions = filterOptions.SnowboardSizeOptions;
-      break;
-    case "Shoes":
-      filterSizeOptions = filterOptions.ShoeSizeOptions;
-      break;
-    default:
-      return;
-  }
-
-  // Change filter brand options depending on the url's path
-  let filterBrandOptions;
-  switch (pathEnd) {
-    case "Skateboards":
-      filterBrandOptions = filterOptions.SkateBrandOptions;
-      break;
-    case "Rollerblades":
-      filterBrandOptions = filterOptions.RollerbladeBrandOptions;
-      break;
-    case "Snowboards":
-      filterBrandOptions = filterOptions.SnowboardBrandOptions;
-      break;
-    case "Shoes":
-      filterBrandOptions = filterOptions.ShoeBrandOptions;
-      break;
-    default:
-      return;
-  }
-
   return (
     <div className="flex h-5/6">
       <div className="flex flex-col gap-4 ml-4 w-fit p-4">
@@ -136,7 +92,7 @@ export default function FilterDataForm({
               name="sortSize"
               className="w-40"
               onChange={(e) => handleSortChange("sortSize", e?.value || "")}
-              options={filterSizeOptions}
+              options={filterOptions.ProductSizeOptions}
             />
           </div>
         )}
@@ -179,7 +135,7 @@ export default function FilterDataForm({
               name="sortBrand"
               className="w-40"
               onChange={(e) => handleSortChange("sortBrand", e?.value || "")}
-              options={filterBrandOptions}
+              options={filterOptions.ProductBrandOptions}
             />
           </div>
         )}
