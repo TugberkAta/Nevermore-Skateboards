@@ -85,6 +85,7 @@ export default function ShopCart({
         cancel_url: "https://nevermore-skateboards.vercel.app",
       });
       if (typeof window !== "undefined" && typeof session.url === "string") {
+        localStorage.removeItem("shopCart");
         window.location.href = session.url;
       } else null;
     } catch (error) {
