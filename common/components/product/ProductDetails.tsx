@@ -48,15 +48,18 @@ export function ProductInformation({ itemData, sizeData }: DetailsProps) {
             <div key={type.size}>
               <button
                 className={`border relative w-12 h-8 text-center ${
-                  type.size === itemData.size ? "border-black" : ""
+                  type.size === itemData.size
+                    ? "border-black bg-black text-white"
+                    : ""
                 }`}
               >
                 {type.size === itemData.size ? (
-                  <p className="border-black">{type.size}</p>
+                  <p>{type.size}</p>
                 ) : (
                   <>
-                    <p>{type.size}</p>
-                    <div className="absolute w-full top-1/2 h-[2px] m-auto  bg-red-300 opacity-50"></div>
+                    <p className="text-gray-400 cursor-not-allowed">
+                      {type.size}
+                    </p>
                   </>
                 )}
               </button>
