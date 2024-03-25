@@ -1,7 +1,13 @@
 import { createOptions } from "@/common/utils/productFilter";
 import FilterDataForm from "./FilterDataForm";
 
-export default async function FetchFilterData() {
+type FetchFilterDataProps = {
+  productName: string;
+};
+
+export default async function FetchFilterData({
+  productName,
+}: FetchFilterDataProps) {
   const filterOptions = await createOptions();
   return (
     <>{filterOptions && <FilterDataForm filterOptions={filterOptions} />}</>
