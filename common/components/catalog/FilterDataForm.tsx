@@ -81,21 +81,19 @@ export default function FilterDataForm({
             options={filterOptions.GeneralOptions}
           />
         </div>
-        {pathEnd && (
-          <div>
-            <label htmlFor="sortSize" className="text-xl font-bold">
-              Size
-            </label>
-            <Select
-              id="sortSize"
-              instanceId="sortSize"
-              name="sortSize"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortSize", e?.value || "")}
-              options={filterOptions.ProductSizeOptions}
-            />
-          </div>
-        )}
+        <div>
+          <label htmlFor="sortSize" className="text-xl font-bold">
+            Size
+          </label>
+          <Select
+            id="sortSize"
+            instanceId="sortSize"
+            name="sortSize"
+            className="w-40"
+            onChange={(e) => handleSortChange("sortSize", e?.value || "")}
+            options={filterOptions.ProductSizeOptions}
+          />
+        </div>
         <div>
           <label htmlFor="sortPriceLow" className="text-xl font-bold">
             Price Range
@@ -124,21 +122,19 @@ export default function FilterDataForm({
             />
           </div>
         </div>
-        {pathEnd && (
-          <div>
-            <label htmlFor="sortBrand" className="text-xl font-bold">
-              Brand
-            </label>
-            <Select
-              id="sortBrand"
-              instanceId="sortBrand"
-              name="sortBrand"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortBrand", e?.value || "")}
-              options={filterOptions.ProductBrandOptions}
-            />
-          </div>
-        )}
+        <div>
+          <label htmlFor="sortBrand" className="text-xl font-bold">
+            Brand
+          </label>
+          <Select
+            id="sortBrand"
+            instanceId="sortBrand"
+            name="sortBrand"
+            className="w-40"
+            onChange={(e) => handleSortChange("sortBrand", e?.value || "")}
+            options={filterOptions.ProductBrandOptions}
+          />
+        </div>
       </div>
     </div>
   );
