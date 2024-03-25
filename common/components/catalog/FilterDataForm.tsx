@@ -74,7 +74,7 @@ export default function FilterDataForm({
           </label>
           <Select
             id="sortGeneral"
-            instanceId="sortBrand"
+            instanceId="sortGeneral"
             name="sortGeneral"
             className="w-40"
             onChange={(e) => handleSortChange("sortGeneral", e?.value || "")}
