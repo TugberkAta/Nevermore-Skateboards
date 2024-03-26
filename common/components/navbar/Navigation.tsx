@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import { inika } from "../../styles/fonts";
-import { IoMdSearch } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ShopCart from "./Shopcart/ShopCart";
 import Link from "next/link";
+import { NoSSR } from "@/common/utils/noSSR";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -96,11 +96,13 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
               stripeApiKey={stripeApiKey}
             ></ShopCart>
           )}
-          <h1
-            className={`font-bold relative bottom-3 right-5 text-white bg-black rounded-full text-sm size-5 text-center`}
-          >
-            {0 + (shopCartArray?.length || 0)}
-          </h1>
+          <NoSSR>
+            <h1
+              className={`font-bold relative bottom-3 right-5 text-white bg-black rounded-full text-sm size-5 text-center`}
+            >
+              {0 + (shopCartArray?.length || 0)}
+            </h1>
+          </NoSSR>
         </div>
       </div>
     </nav>
