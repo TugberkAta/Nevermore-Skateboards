@@ -33,6 +33,7 @@ export default function Previews() {
         <div className="col-span-4 row-span-2 border relative overflow-hidden">
           <PreviewObject
             title={"Snowboards"}
+            objectPosition={""}
             src={"/snowboard.jpg"}
             address={"/catalog/Snowboards"}
           />
@@ -57,12 +58,14 @@ export function PreviewObject({
 }: PreviewObjectProps) {
   return (
     <Link href={address} className="group ">
-      <Image
-        fill
-        className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
-        src={src}
-        alt={title}
-      />
+      <div className="relative w-full h-full">
+        <Image
+          fill
+          className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
+          src={src}
+          alt={title}
+        />
+      </div>
       <div className="w-full h-full bg-black opacity-15 hover:opacity-30 transition-opacity absolute z-10"></div>
       <h2
         className={`${montserrat.className} flex w-full justify-center text-3xl font-semibold text-white absolute bottom-7 z-10  group-hover:scale-110 ease-in-out duration-300 `}
