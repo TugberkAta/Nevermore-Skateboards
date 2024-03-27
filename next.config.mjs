@@ -22,6 +22,11 @@ const nextConfig = {
         hostname: "edge.disstg.commercecloud.salesforce.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "img.skatewarehouse.com",
+        port: "",
+      },
     ],
   },
 };
