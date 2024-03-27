@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ShopCart from "./Shopcart/ShopCart";
 import Link from "next/link";
-import { NoSSR } from "@/common/utils/noSSR";
+import { FaFilter } from "react-icons/fa6";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -23,17 +24,6 @@ type NavigationProps = {
 };
 
 export default function Navigation({ stripeApiKey }: NavigationProps) {
-  // Get pathnames for conditionally updating active tab
-  const pathname = usePathname();
-  const pathEnd = pathname.split("/")[2];
-
-  // State for updating the active tab
-  const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
-
-  useEffect(() => {
-    setActiveTab(pathEnd);
-  }, [pathEnd]);
-
   const [shopCartArray, setShopCartArray] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
@@ -59,36 +49,18 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   return (
     <nav className={`w-screen h-14 flex items-center `}>
       <div className="ml-8 mr-8 flex items-center justify-between w-screen">
+        {/* This div is for mobile layout of the logo*/}
+        <button className="lg:hidden">
+          <FaFilter className="size-5"></FaFilter>
+        </button>
         <div className="flex items-center">
           <Link href="/" className="flex gap-4 h-full items-center ">
             <Image width={34} height={34} src="/raven.svg" alt="Raven Icon" />
             <p className={`${inika.className}`}>Nevermore</p>
           </Link>
-          <div
-            className="ml-20 font-semibold gap-5 text-sm flex text-black"
-            onMouseLeave={() => setActiveTab(pathEnd)}
-          >
-            {tabs.map((tab) => (
-              <Link
-                key={tab.id != undefined ? tab.id : "homepage"}
-                href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
-                onMouseEnter={() => setActiveTab(tab.id)}
-                className="relative"
-              >
-                {tab.text}
-                {activeTab === tab.id && (
-                  /*This component uses layoutId to animate between positions*/
-                  <motion.div
-                    layoutId="underline"
-                    className="absolute bg-black w-full h-[0.10rem]"
-                    transition={{ duration: 0.7, type: "spring" }}
-                  ></motion.div>
-                )}
-              </Link>
-            ))}
-          </div>
+          <DesktopNavTabs />
         </div>
-        <div className="fill-black flex gap-4">
+        <div className="fill-black flex gap-6">
           {stripeApiKey && (
             <ShopCart
               shopCartArray={shopCartArray}
@@ -96,15 +68,50 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
               stripeApiKey={stripeApiKey}
             ></ShopCart>
           )}
-          <NoSSR>
-            <h1
-              className={`font-bold relative bottom-3 right-5 text-white bg-black rounded-full text-sm size-5 text-center`}
-            >
-              {0 + (shopCartArray?.length || 0)}
-            </h1>
-          </NoSSR>
+          <button className="block md:hidden">
+            <RxHamburgerMenu className="size-5"></RxHamburgerMenu>
+          </button>
         </div>
       </div>
     </nav>
+  );
+}
+
+export function DesktopNavTabs() {
+  // Get pathnames for conditionally updating active tab
+  const pathname = usePathname();
+  const pathEnd = pathname.split("/")[2];
+
+  // State for updating the active tab
+  const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
+
+  useEffect(() => {
+    setActiveTab(pathEnd);
+  }, [pathEnd]);
+
+  return (
+    <div
+      className="ml-20 font-semibold gap-5 text-sm lg:flex text-black hidden"
+      onMouseLeave={() => setActiveTab(pathEnd)}
+    >
+      {tabs.map((tab) => (
+        <Link
+          key={tab.id != undefined ? tab.id : "homepage"}
+          href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
+          onMouseEnter={() => setActiveTab(tab.id)}
+          className="relative"
+        >
+          {tab.text}
+          {activeTab === tab.id && (
+            /*This component uses layoutId to animate between positions*/
+            <motion.div
+              layoutId="underline"
+              className="absolute bg-black w-full h-[0.10rem]"
+              transition={{ duration: 0.7, type: "spring" }}
+            ></motion.div>
+          )}
+        </Link>
+      ))}
+    </div>
   );
 }
