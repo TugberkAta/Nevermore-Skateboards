@@ -1,3 +1,4 @@
+import { montserrat, montserratMedium } from "@/common/styles/fonts";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,24 +31,31 @@ export function PreviewItem({
     >
       <Link
         href={address}
-        className="flex flex-col items-center overflow-hidden "
+        className="flex flex-col items-center w-full pb-2 pr-2 h-full overflow-hidden "
       >
-        <div className="col-span-1 grid-rows-1 w-full relative overflow-hidden mb-1">
-          <div className="group flex justify-center w-full h-full">
-            <Image
-              width={200}
-              height={200}
-              className={`object-fit w-auto h-full ${objectPosition} transition-transform duration-300 ease-in-out scale-90 group-hover:scale-100`}
-              src={src}
-              alt={alt}
-            />
+        <div className="w-full h-[16.5rem] md:h-[18.5rem] relative overflow-hidden ">
+          <div className="group flex h-full justify-center w-full ">
+            <div className="h-5/6">
+              <Image
+                fill
+                className={`object-contain w-full h-auto ${objectPosition} transition-transform duration-300 ease-in-out scale-90 group-hover:scale-100`}
+                src={src}
+                alt={alt}
+              />
+            </div>
             <div className="w-full h-full bg-black opacity-5 transition-opacity top-0 absolute z-20"></div>
           </div>
         </div>
-        <div className="flex flex-col">
-          <p className="text-center text-sm font-semibold">{brand}</p>
-          <p className="text-center text-sm">{title}</p>
-          <p className="text-center text-xs">£{price / 100}</p>
+        <div className="flex w-full pb-4 pt-2 justify-between">
+          <div className="flex flex-col ">
+            <p className="text-base font-semibold">{brand}</p>
+            <p
+              className={`text-xs font-sans font-semibold h-4 overflow-hidden`}
+            >
+              {title}
+            </p>
+          </div>
+          <p className="text-xs">£{price / 100}</p>
         </div>
       </Link>
     </motion.div>
