@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { PreviewCartItem } from "./PreviewCartItem";
 import { motion } from "framer-motion";
 import Stripe from "stripe";
+import { NoSSR } from "@/common/utils/noSSR";
 
 type ShoppingItemProps = {
   uuid: string;
@@ -47,8 +48,6 @@ export default function ShopCart({
   }
 
   async function handleProcess() {
-    console.log(stripeApiKey);
-
     if (!stripeApiKey) {
       throw new Error(
         "STRIPE_API_KEY is not defined in the environment variables"
@@ -95,8 +94,15 @@ export default function ShopCart({
 
   return (
     <div className="flex">
-      <button onClick={handleClick}>
+      <button className="relative" onClick={handleClick}>
         <MdOutlineShoppingCart className="size-5" />
+        <NoSSR>
+          <h1
+            className={`font-bold absolute bottom-3 left-3 text-white bg-black rounded-full text-sm size-5 text-center`}
+          >
+            {0 + (shopCartArray?.length || 0)}
+          </h1>
+        </NoSSR>
       </button>
       {activateShopCart && (
         <>
