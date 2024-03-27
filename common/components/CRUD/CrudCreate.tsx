@@ -25,16 +25,16 @@ export default function CrudCreate({ itemCategory }: CrudCreateProps) {
   let create;
 
   switch (itemCategory) {
-    case "Skate":
+    case "Skates":
       create = createSkate;
       break;
-    case "Rollerblade":
+    case "Rollerblades":
       create = createRollerblades;
       break;
-    case "Snowboard":
+    case "Snowboards":
       create = createSnowboards;
       break;
-    case "Shoe":
+    case "Shoes":
       create = createShoes;
       break;
     default:
