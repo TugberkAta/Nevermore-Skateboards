@@ -4,6 +4,7 @@ import {
   Inika,
   Inknut_Antiqua,
   Montserrat,
+  Open_Sans,
 } from "next/font/google";
 
 export const inter = Inter({ subsets: ["latin"] });
@@ -22,3 +23,5 @@ export const montserratMedium = Montserrat({
 });
 
 export const montserratThin = Montserrat({ subsets: ["latin"], weight: "400" });
+
+export const openSans = Open_Sans({ subsets: ["latin"] });
