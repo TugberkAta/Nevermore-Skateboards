@@ -60,10 +60,10 @@ export function AddToCart({ itemData }: AddToCartProps) {
     <div className="w-full hover:scale-105 active:scale-100 transition-all flex justify-center mt-8">
       <button
         type="button"
-        className="h-12 w-6/12 bg-black"
+        className="h-14 w-9/12 rounded-3xl  bg-black"
         onClick={handleAddToCart}
       >
-        <p className="text-white">ADD TO CART</p>
+        <p className="text-white text-xs">ADD TO CART</p>
       </button>
     </div>
   );
