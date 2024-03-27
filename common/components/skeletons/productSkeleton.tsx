@@ -10,7 +10,7 @@ export default function ProductSkeleton() {
       >
         <div className="col-span-1 grid-rows-1 w-full relative overflow-hidden mb-1">
           <div className="group flex justify-center w-full h-full">
-            <div className="w-[250px] h-[250px]" />
+            <div className="w-[350px] h-[250px]" />
             <div className="w-full h-full bg-black opacity-10 transition-opacity top-0 absolute z-20"></div>
           </div>
         </div>
@@ -24,7 +24,7 @@ export default function ProductSkeleton() {
     );
   }
   return (
-    <div className="ml-10 pt-10 mr-10 h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-auto gap-x-8 gap-y-4">
+    <div className="ml-10 pt-10 mr-10 h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 auto-rows-auto gap-x-8 gap-y-4">
       {arrayOfSkeletonBox}
     </div>
   );
