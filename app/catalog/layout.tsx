@@ -8,7 +8,7 @@ export default function ProductsLayout({
   return (
     <section className="w-screen  h-screen">
       <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
-      <div className="flex">{children}</div>
+      <div className="flex mt-4">{children}</div>
     </section>
   );
 }
