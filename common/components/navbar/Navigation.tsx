@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { inika } from "../../styles/fonts";
-import { useEffect, useState } from "react";
+import { inika, montserrat, montserratMedium } from "../../styles/fonts";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import ShopCart from "./Shopcart/ShopCart";
@@ -24,6 +24,18 @@ type NavigationProps = {
 };
 
 export default function Navigation({ stripeApiKey }: NavigationProps) {
+  // Get pathnames for conditionally updating active tab
+  const pathname = usePathname();
+  const pathCategory = pathname.split("/")[1];
+  const pathEnd = pathname.split("/")[2];
+
+  // State for updating the active tab
+  const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
+
+  useEffect(() => {
+    setActiveTab(pathEnd);
+  }, [pathEnd]);
+
   const [shopCartArray, setShopCartArray] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
@@ -50,15 +62,19 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
     <nav className={`w-screen h-14 flex items-center `}>
       <div className="ml-8 mr-8 flex items-center justify-between w-screen">
         {/* This div is for mobile layout of the logo*/}
-        <button className="lg:hidden">
-          <FaFilter className="size-5"></FaFilter>
-        </button>
+        <div className="box lg:hidden">
+          <MobileFilterButton pathCategory={pathCategory}></MobileFilterButton>
+        </div>
         <div className="flex items-center">
           <Link href="/" className="flex gap-4 h-full items-center ">
             <Image width={34} height={34} src="/raven.svg" alt="Raven Icon" />
-            <p className={`${inika.className}`}>Nevermore</p>
+            <p className={`${montserratMedium.className} `}>Nevermore</p>
           </Link>
-          <DesktopNavTabs />
+          <DesktopNavTabs
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            pathEnd={pathEnd}
+          />
         </div>
         <div className="fill-black flex gap-6">
           {stripeApiKey && (
@@ -77,18 +93,42 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   );
 }
 
-export function DesktopNavTabs() {
-  // Get pathnames for conditionally updating active tab
-  const pathname = usePathname();
-  const pathEnd = pathname.split("/")[2];
+type MobileNavTabs = { pathCategory: string };
 
-  // State for updating the active tab
-  const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
+export function MobileFilterButton({ pathCategory }: MobileNavTabs) {
+  const [activeFilter, setActiveFilter] = useState(false);
 
   useEffect(() => {
-    setActiveTab(pathEnd);
-  }, [pathEnd]);
+    window.dispatchEvent(new Event("filterMobile"));
+  }, [activeFilter]);
 
+  return (
+    <>
+      {pathCategory === "catalog" ? (
+        <button
+          className="lg:hidden block"
+          onClick={() => setActiveFilter(!activeFilter)}
+        >
+          <FaFilter className="size-5"></FaFilter>
+        </button>
+      ) : (
+        <div className="size-5" />
+      )}
+    </>
+  );
+}
+
+type DesktopNavTabs = {
+  activeTab: string | undefined;
+  pathEnd: string;
+  setActiveTab: Dispatch<SetStateAction<string | undefined>>;
+};
+
+export function DesktopNavTabs({
+  activeTab,
+  setActiveTab,
+  pathEnd,
+}: DesktopNavTabs) {
   return (
     <div
       className="ml-20 font-semibold gap-5 text-sm lg:flex text-black hidden"
