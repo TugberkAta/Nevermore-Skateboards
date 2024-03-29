@@ -1,9 +1,11 @@
 "use client";
 
-import Select from "react-select";
-import { FaArrowsUpDown } from "react-icons/fa6";
+import { Select, SelectItem } from "@nextui-org/select";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Providers } from "@/app/providers";
+import { motion } from "framer-motion";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 interface Option {
   value: string | number | null;
@@ -23,7 +25,9 @@ export default function FilterDataForm({
   filterOptions: Options;
 }) {
   const pathname = usePathname();
-  const pathEnd = pathname.split("/catalog/")[1];
+
+  const [activeFilter, setActiveFilter] = useState(false);
+
   const { replace } = useRouter();
 
   const searchParams = useSearchParams();
@@ -64,78 +68,151 @@ export default function FilterDataForm({
     replace(`${pathname}?${params.toString()}`);
   }, [sortParams]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const toggleFilter = () => setActiveFilter((prev) => !prev);
+      window.addEventListener("filterMobile", toggleFilter);
+
+      // Cleanup function to remove the event listener
+      return () => {
+        window.removeEventListener("filterMobile", toggleFilter);
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeFilter) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [activeFilter]);
+
   return (
-    <div className="flex h-5/6">
-      <div className="flex flex-col gap-4 ml-4 w-fit p-4">
-        <div>
+    <>
+      <FilterViewWrapper
+        setActiveFilter={setActiveFilter}
+        activeFilter={activeFilter}
+      >
+        <SelectFilter
+          id={"sortGeneral"}
+          filterOption={filterOptions.GeneralOptions}
+          label={"Sort"}
+          handleSortChange={handleSortChange}
+        ></SelectFilter>
+        <SelectFilter
+          id={"sortSize"}
+          filterOption={filterOptions.ProductSizeOptions}
+          label={"Size"}
+          handleSortChange={handleSortChange}
+        ></SelectFilter>
+        <SelectFilter
+          id={"sortPriceLow"}
+          filterOption={filterOptions.PriceRangeOptions}
+          label={"Min price"}
+          handleSortChange={handleSortChange}
+        ></SelectFilter>
+        <SelectFilter
+          id={"sortPriceHigh"}
+          filterOption={filterOptions.PriceRangeOptions}
+          label={"Max price"}
+          handleSortChange={handleSortChange}
+        ></SelectFilter>
+        <SelectFilter
+          id={"sortBrand"}
+          filterOption={filterOptions.ProductBrandOptions}
+          label={"Brand"}
+          handleSortChange={handleSortChange}
+        ></SelectFilter>
+      </FilterViewWrapper>
+    </>
+  );
+}
+
+type SelectFilterProps = {
+  id: string;
+  filterOption: Option[];
+  label: string;
+  handleSortChange: (name: any, value: string | number | undefined) => void;
+};
+
+export function SelectFilter({
+  id,
+  label,
+  filterOption,
+  handleSortChange,
+}: SelectFilterProps) {
+  return (
+    <Providers>
+      <label htmlFor={id}>{label}</label>
+      <Select
+        aria-label={label}
+        defaultSelectedKeys={[""]}
+        id={id}
+        placeholder="Default"
+        className="max-w-xs"
+        onChange={(e) => handleSortChange(id, e?.target.value || "")}
+      >
+        {filterOption.map((option) => (
+          <SelectItem
+            className="bg-gray-50"
+            key={option.value || ""}
+            value={option.value || ""}
+          >
+            {option.label}
+          </SelectItem>
+        ))}
+      </Select>
+    </Providers>
+  );
+}
+
+type FilterViewWrapperProps = {
+  setActiveFilter: Dispatch<SetStateAction<boolean>>;
+  activeFilter: boolean;
+  children: React.ReactNode;
+};
+
+export function FilterViewWrapper({
+  children,
+  setActiveFilter,
+  activeFilter,
+}: FilterViewWrapperProps) {
+  return (
+    <>
+      {/* View for the bigger screen devices */}
+      <div className=" h-5/6 -mr-10 w-60 justify-center hidden lg:flex">
+        <div className=" gap-4 w-9/12 items-center ">
           <p className="font-bold text-3xl mb-8">FILTER</p>
-          <label htmlFor="sortGeneral" className="text-xl font-bold">
-            Sort By
-          </label>
-          <Select
-            id="sortGeneral"
-            instanceId="sortGeneral"
-            name="sortGeneral"
-            className="w-40"
-            onChange={(e) => handleSortChange("sortGeneral", e?.value || "")}
-            options={filterOptions.GeneralOptions}
-          />
-        </div>
-        <div>
-          <label htmlFor="sortSize" className="text-xl font-bold">
-            Size
-          </label>
-          <Select
-            id="sortSize"
-            instanceId="sortSize"
-            name="sortSize"
-            className="w-40"
-            onChange={(e) => handleSortChange("sortSize", e?.value || "")}
-            options={filterOptions.ProductSizeOptions}
-          />
-        </div>
-        <div>
-          <label htmlFor="sortPriceLow" className="text-xl font-bold">
-            Price Range
-          </label>
-          <div className="flex flex-col items-center gap-1">
-            <Select
-              id="sortPriceLow"
-              instanceId="sortPriceLow"
-              name="sortPriceLow"
-              className="w-40"
-              onChange={(e) => handleSortChange("sortPriceLow", e?.value || "")}
-              options={filterOptions.PriceRangeOptions}
-            />
-            Min
-            <FaArrowsUpDown />
-            Max
-            <Select
-              id="sortPriceHigh"
-              instanceId="sortPriceHigh"
-              name="sortPriceHigh"
-              className="w-40"
-              onChange={(e) =>
-                handleSortChange("sortPriceHigh", e?.value || "")
-              }
-              options={filterOptions.PriceRangeOptions}
-            />
+          <div className="flex w-full flex-col flex-wrap  md:flex-nowrap mb-6 md:mb-0 gap-4">
+            {children}
           </div>
         </div>
-        <div>
-          <label htmlFor="sortBrand" className="text-xl font-bold">
-            Brand
-          </label>
-          <Select
-            id="sortBrand"
-            instanceId="sortBrand"
-            name="sortBrand"
-            className="w-40"
-            onChange={(e) => handleSortChange("sortBrand", e?.value || "")}
-            options={filterOptions.ProductBrandOptions}
-          />
-        </div>
       </div>
-    </div>
+      {/* View for the smaller screen devices */}
+      {activeFilter && (
+        <div>
+          <motion.div
+            className="absolute z-40 bg-white top-0 pt-20 h-screen w-60 justify-center flex lg:hidden"
+            animate={{ translateX: 0, opacity: 1 }}
+            initial={{ translateX: 80, opacity: 0 }}
+            exit={{ opacity: 0 }}
+          >
+            <button onClick={() => setActiveFilter(!activeFilter)}>
+              <div className="top-7 left-5 absolute">
+                <FaArrowLeftLong></FaArrowLeftLong>
+              </div>
+            </button>
+            <div className=" gap-4 w-9/12 items-center ">
+              <p className="font-bold text-3xl mb-8">FILTER</p>
+              <div className="flex w-full flex-col flex-wrap  md:flex-nowrap mb-6 md:mb-0 gap-4">
+                {children}
+              </div>
+            </div>
+          </motion.div>
+          <div className="absolute z-30 w-full h-full bg-black opacity-40 top-0 right-0"></div>
+        </div>
+      )}
+    </>
   );
 }
