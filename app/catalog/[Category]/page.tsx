@@ -11,13 +11,9 @@ export default async function ProductPage({
 }) {
   return (
     <>
-      <div className="hidden lg:block">
-        <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
-          <FetchFilterOptions
-            productName={params.Category}
-          ></FetchFilterOptions>
-        </Suspense>
-      </div>
+      <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
+        <FetchFilterOptions productName={params.Category}></FetchFilterOptions>
+      </Suspense>
       <Suspense fallback={<ProductSkeleton></ProductSkeleton>}>
         <FetchProductData productName={params.Category} />
       </Suspense>
