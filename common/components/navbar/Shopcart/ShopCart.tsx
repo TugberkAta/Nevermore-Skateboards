@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import { PreviewCartItem } from "./PreviewCartItem";
@@ -91,6 +91,14 @@ export default function ShopCart({
       console.error("Error creating Stripe Checkout Session:", error);
     }
   }
+
+  useEffect(() => {
+    if (activateShopCart) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [activateShopCart]);
 
   return (
     <div className="flex">
