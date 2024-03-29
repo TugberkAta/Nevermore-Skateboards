@@ -31,7 +31,7 @@ export function PreviewItem({
     >
       <Link
         href={address}
-        className="flex flex-col items-center w-full pb-2 pr-2 h-full overflow-hidden "
+        className="flex flex-col items-center w-full justify-center pb-2 h-full overflow-hidden "
       >
         <div className="w-full h-[16.5rem] md:h-[18.5rem] relative overflow-hidden ">
           <div className="group flex h-full justify-center w-full ">
