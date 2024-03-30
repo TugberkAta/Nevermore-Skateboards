@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function Previews() {
   return (
     <>
-      <div className="grid grid-cols-4 grid-rows-6 w-full h-[60rem] gap-4">
-        <div className="col-span-2 row-span-2 border relative overflow-hidden">
+      <div className="grid grid-cols-1 grid-rows-4 lg:grid-cols-4 lg:grid-rows-6 w-full h-[60rem] gap-4">
+        <div className="lg:col-span-2 lg:row-span-2 border relative overflow-hidden">
           <PreviewObject
             title={"Roller Blades"}
             objectPosition={"object-bottom"}
@@ -14,7 +14,7 @@ export default function Previews() {
             address={"/catalog/Rollerblades"}
           />
         </div>
-        <div className="col-span-2 row-span-4 border relative overflow-hidden">
+        <div className="lg:col-span-2 lg:row-span-4 border relative overflow-hidden">
           <PreviewObject
             title={"Skates"}
             objectPosition={"object-bottom"}
@@ -22,7 +22,7 @@ export default function Previews() {
             address={"/catalog/Skateboards"}
           />
         </div>
-        <div className="col-span-2 row-span-2 border relative overflow-hidden">
+        <div className="lg:col-span-2 lg:row-span-2 border relative overflow-hidden">
           <PreviewObject
             title={"Shoes"}
             objectPosition={"object-bottom"}
@@ -30,7 +30,7 @@ export default function Previews() {
             address={"/catalog/Shoes"}
           />
         </div>
-        <div className="col-span-4 row-span-2 border relative overflow-hidden">
+        <div className="lg:col-span-4 lg:row-span-2 border relative overflow-hidden">
           <PreviewObject
             title={"Snowboards"}
             objectPosition={""}
