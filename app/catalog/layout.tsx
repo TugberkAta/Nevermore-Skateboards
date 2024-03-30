@@ -1,3 +1,4 @@
+import Credit from "@/common/components/footer/Credit";
 import Navigation from "@/common/components/navbar/Navigation";
 
 export default function ProductsLayout({
@@ -6,9 +7,11 @@ export default function ProductsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="w-screen  h-screen">
-      <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
-      <div className="flex mt-4">{children}</div>
-    </section>
+    <>
+      <section className="w-screen h-full">
+        <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
+        <div>{children}</div>
+      </section>
+    </>
   );
 }
