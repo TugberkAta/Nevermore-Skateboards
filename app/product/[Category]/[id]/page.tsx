@@ -8,7 +8,7 @@ import {
 import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
-import Link from "next/link";
+import Breadcrumbs from "@/common/components/breadcrumbs/Breadcrumbs";
 
 export default async function ProductPage({
   params,
@@ -60,29 +60,6 @@ export default async function ProductPage({
           <Credit></Credit>
         </>
       )}
-    </>
-  );
-}
-
-type BreadCrumbsProps = {
-  category: string;
-  itemTitle?: string;
-  id?: string;
-};
-
-export function Breadcrumbs({ category, itemTitle, id }: BreadCrumbsProps) {
-  console.log(itemTitle);
-  return (
-    <>
-      <div className="ml-20 mt-4 flex gap-1 text-sm italic text-gray-500 transition-all">
-        <Link className="hover:text-black" href={`/catalog/${category}`}>
-          {category}
-        </Link>
-        <p>/</p>
-        <Link className="hover:text-black" href={`/product/${category}/${id}`}>
-          {itemTitle}
-        </Link>
-      </div>
     </>
   );
 }
