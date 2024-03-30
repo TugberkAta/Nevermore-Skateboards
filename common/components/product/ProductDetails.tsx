@@ -14,7 +14,7 @@ export interface DetailsProps {
 export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
-      <div className="flex w-screen flex-col md:flex-row gap-20  mt-20">
+      <div className="flex w-screen flex-col md:flex-row gap-20 lg:pb-0 pb-40 mt-20">
         <div className="w-full md:w-1/2">
           <ProductImage
             alt={itemData.title || ""}
