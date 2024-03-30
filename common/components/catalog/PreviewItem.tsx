@@ -37,6 +37,7 @@ export function PreviewItem({
           <div className="group flex h-full w-full justify-center ">
             <div className="h-5/6">
               <Image
+                loading="lazy"
                 fill
                 className={`h-auto w-full object-contain ${objectPosition} scale-90 transition-transform duration-300 ease-in-out group-hover:scale-100`}
                 src={src}

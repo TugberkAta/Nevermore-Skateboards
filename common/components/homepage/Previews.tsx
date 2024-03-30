@@ -60,6 +60,7 @@ export function PreviewObject({
     <Link href={address} className="group ">
       <div className="relative h-full w-full">
         <Image
+          loading="lazy"
           fill
           className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
           src={src}
