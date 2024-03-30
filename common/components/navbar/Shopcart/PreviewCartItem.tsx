@@ -44,7 +44,7 @@ export function PreviewCartItem({
       exit={{ opacity: 0 }}
     >
       <div className="flex gap-4 w-11/12 items-center h-full  overflow-hidden">
-        <div className="flex flex-col items-center justify-center h-5/6 relative">
+        <div className="md:flex hidden flex-col items-center justify-center h-5/6 relative">
           <Link href={address} className="w-24">
             <Image
               fill
