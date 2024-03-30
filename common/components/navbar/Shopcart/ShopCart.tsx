@@ -47,6 +47,15 @@ export default function ShopCart({
     setActivateShopCart(!activateShopCart);
   }
 
+  // To disable scrolling when the panel is opened
+  useEffect(() => {
+    if (activateShopCart) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [activateShopCart]);
+
   async function handleProcess() {
     if (!stripeApiKey) {
       throw new Error(

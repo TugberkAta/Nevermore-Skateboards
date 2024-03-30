@@ -36,6 +36,15 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   // State for updating the active tab
   const [activeHamburger, setActiveHamburger] = useState<boolean>(false);
 
+  // To disable scrolling when the panel is opened
+  useEffect(() => {
+    if (activeHamburger) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [activeHamburger]);
+
   useEffect(() => {
     setActiveTab(pathEnd);
   }, [pathEnd]);
