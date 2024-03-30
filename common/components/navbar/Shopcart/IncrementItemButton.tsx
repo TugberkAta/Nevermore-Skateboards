@@ -5,8 +5,6 @@ type IncrementItemButtonProps = {
   shopCartArray: string[];
   setShopCartArray: Dispatch<SetStateAction<string[]>>;
   uuid: string;
-  setTempCount: Dispatch<SetStateAction<number>>;
-  tempCount: number;
 };
 
 export default function IncrementItemButton({
