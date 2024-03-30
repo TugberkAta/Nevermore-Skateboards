@@ -8,6 +8,7 @@ import {
 import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
+import Link from "next/link";
 
 export default async function ProductPage({
   params,
@@ -45,6 +46,11 @@ export default async function ProductPage({
     <>
       {itemData && (
         <>
+          <Breadcrumbs
+            category={params.Category}
+            itemTitle={itemData.title}
+            id={params.id}
+          ></Breadcrumbs>
           <div className="w-screen min-h-[75vh]">
             <ProductDetails
               itemData={itemData}
@@ -54,6 +60,29 @@ export default async function ProductPage({
           <Credit></Credit>
         </>
       )}
+    </>
+  );
+}
+
+type BreadCrumbsProps = {
+  category: string;
+  itemTitle?: string;
+  id?: string;
+};
+
+export function Breadcrumbs({ category, itemTitle, id }: BreadCrumbsProps) {
+  console.log(itemTitle);
+  return (
+    <>
+      <div className="flex gap-1 italic text-sm transition-all text-gray-500 ml-20 mt-4">
+        <Link className="hover:text-black" href={`/catalog/${category}`}>
+          {category}
+        </Link>
+        <p>/</p>
+        <Link className="hover:text-black" href={`/product/${category}/${id}`}>
+          {itemTitle}
+        </Link>
+      </div>
     </>
   );
 }
