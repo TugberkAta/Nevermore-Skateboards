@@ -101,14 +101,6 @@ export default function ShopCart({
     }
   }
 
-  useEffect(() => {
-    if (activateShopCart) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  }, [activateShopCart]);
-
   return (
     <div className="flex">
       <button className="relative" onClick={handleClick}>
