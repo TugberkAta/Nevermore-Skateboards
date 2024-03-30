@@ -195,7 +195,7 @@ export function FilterViewWrapper({
           <motion.div
             className="absolute z-40 bg-white top-0 pt-20 h-screen w-60 justify-center flex lg:hidden"
             animate={{ translateX: 0, opacity: 1 }}
-            initial={{ translateX: 80, opacity: 0 }}
+            initial={{ translateX: -80, opacity: 0 }}
             exit={{ opacity: 0 }}
           >
             <button onClick={() => setActiveFilter(!activeFilter)}>
