@@ -3,7 +3,17 @@ import FetchProductData from "@/common/components/catalog/FetchProductData";
 import Credit from "@/common/components/footer/Credit";
 import FilterSkeleton from "@/common/components/skeletons/filterSkeleton";
 import ProductSkeleton from "@/common/components/skeletons/productSkeleton";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title:
+    "Catalog - Skateboards, Rollerblades, Snowboards, Shoes | Nevermore Skateboards",
+  keywords:
+    "skateboards, rollerblades, snowboards, skate shoes, extreme sports gear, skateboarding equipment, outdoor sports, Nevermore Skateboards",
+  description:
+    "Dive into the world of extreme sports with Nevermore Skateboards. Explore our premium catalog of skateboards, rollerblades, snowboards, and specially designed skate shoes. Gear up for your next adventure with top-quality equipment tailored for enthusiasts and professionals alike.",
+};
 
 export default async function ProductPage({
   params,

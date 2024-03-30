@@ -9,6 +9,16 @@ import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
 import Breadcrumbs from "@/common/components/breadcrumbs/Breadcrumbs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title:
+    "Product Description - High-Quality Skateboarding Gear | Nevermore Skateboards",
+  keywords:
+    "Product Description, Skateboarding, High-Quality Skateboard, Nevermore Gear, Skate Accessories, Buy Skateboard, Skateboard Shop, Skate Lifestyle",
+  description:
+    "Discover the Product at Nevermore Skateboards, crafted for durability and performance. Elevate your skateboarding experience with our top-tier gear. Add to your cart now and join the Nevermore lifestyle.",
+};
 
 export default async function ProductPage({
   params,
