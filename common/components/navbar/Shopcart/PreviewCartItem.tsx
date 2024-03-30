@@ -46,8 +46,8 @@ export function PreviewCartItem({
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
     >
-      <div className="grid grid-cols-4 items-start overflow-hidden">
-        <div className="flex flex-col items-center justify-center w-full h-full col-span-1 relative">
+      <div className="flex gap-4 w-11/12 items-center h-full  overflow-hidden">
+        <div className="lg:flex hidden flex-col w-[13rem] items-center justify-center h-auto relative">
           <Link
             href={address}
             className="group flex justify-center w-full h-full"
@@ -62,10 +62,10 @@ export function PreviewCartItem({
             <div className="w-full h-full bg-black opacity-5 transition-opacity top-0 absolute z-20"></div>
           </Link>
         </div>
-        <div className="col-span-2 ml-6 h-5/6 ">
-          <p className="text-sm mb-1">{brand}</p>
+        <div className="flex w-auto flex-col">
+          <p className="text-sm mb-1 w-2/4">{brand}</p>
           <p
-            className={`${montserrat.className} leading-5 h-4 overflow-hidden`}
+            className={`${montserrat.className} leading-5 font-extrabold  max-h-10 text-sm overflow-scroll`}
           >
             {title}
           </p>
@@ -88,8 +88,8 @@ export function PreviewCartItem({
             ></DecrementItemButton>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-8">
-          <div className="flex flex-col items-end text-center">
+        <div className="flex  flex-col  w-40 items-center justify-between gap-8">
+          <div className="flex flex-col items-end text-nowrap text-center">
             <p className={`${montserrat.className}`}>
               £{(price / 100) * count} STR
             </p>

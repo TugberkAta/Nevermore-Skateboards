@@ -115,12 +115,12 @@ export default function ShopCart({
       {activateShopCart && (
         <>
           <motion.div
-            className="absolute z-40 w-5/12 min-w-[30rem] h-full pr-10 bg-white top-0 right-0"
-            animate={{ translateX: 40, opacity: 1 }}
+            className="absolute z-40 w-full lg:w-5/12 h-full flex justify-center bg-white top-0 right-0"
+            animate={{ translateX: 0, opacity: 1 }}
             initial={{ translateX: 120, opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <div className="pt-10 pl-10 pr-10 h-full overflow-scroll">
+            <div className="w-10/12 mt-10 overflow-scroll">
               <div className="flex justify-between">
                 <h1 className={`font-bold text-xl`}>
                   Cart ( {0 + (shopCartArray?.length || 0)} )
@@ -130,10 +130,10 @@ export default function ShopCart({
                 </button>
               </div>
               <motion.div
-                className="h-[90%]  flex flex-col justify-between items-center"
+                className="h-[90%] flex flex-col justify-between items-center"
                 layout
               >
-                <div className="grid grid-row-4 gap-4 w-full mt-10 mb-10">
+                <div className="flex flex-col gap-4 w-full mt-10 mb-10">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (
