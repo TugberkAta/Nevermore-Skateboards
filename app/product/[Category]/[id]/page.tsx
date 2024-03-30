@@ -7,6 +7,7 @@ import {
 } from "@/common/lib/data";
 import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
+import Credit from "@/common/components/footer/Credit";
 
 export default async function ProductPage({
   params,
@@ -43,12 +44,15 @@ export default async function ProductPage({
   return (
     <>
       {itemData && (
-        <div className="w-screen">
-          <ProductDetails
-            itemData={itemData}
-            sizeData={CategoryData?.sizeData}
-          ></ProductDetails>
-        </div>
+        <>
+          <div className="w-screen min-h-[75vh]">
+            <ProductDetails
+              itemData={itemData}
+              sizeData={CategoryData?.sizeData}
+            ></ProductDetails>
+          </div>
+          <Credit></Credit>
+        </>
       )}
     </>
   );
