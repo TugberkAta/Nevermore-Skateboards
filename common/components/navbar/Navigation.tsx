@@ -9,6 +9,7 @@ import ShopCart from "./Shopcart/ShopCart";
 import Link from "next/link";
 import { FaFilter } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 
 // Array of every tab to be shown in the nav bar
 const tabs = [
@@ -31,6 +32,9 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
 
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
+
+  // State for updating the active tab
+  const [activeHamburger, setActiveHamburger] = useState<boolean>(false);
 
   useEffect(() => {
     setActiveTab(pathEnd);
@@ -84,9 +88,18 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
               stripeApiKey={stripeApiKey}
             ></ShopCart>
           )}
-          <button className="block md:hidden">
+          <button
+            className="block md:hidden"
+            onClick={() => setActiveHamburger(!activeHamburger)}
+          >
             <RxHamburgerMenu className="size-5"></RxHamburgerMenu>
           </button>
+          {activeHamburger && (
+            <MobileNavTabs
+              setActiveHamburger={setActiveHamburger}
+              activeHamburger={activeHamburger}
+            ></MobileNavTabs>
+          )}
         </div>
       </div>
     </nav>
@@ -152,6 +165,45 @@ export function DesktopNavTabs({
           )}
         </Link>
       ))}
+    </div>
+  );
+}
+
+type MobileNavTabsProps = {
+  setActiveHamburger: Dispatch<SetStateAction<boolean>>;
+  activeHamburger: boolean;
+};
+
+export function MobileNavTabs({
+  setActiveHamburger,
+  activeHamburger,
+}: MobileNavTabsProps) {
+  return (
+    <div>
+      <motion.div
+        className={`absolute ${montserrat.className} flex-col z-40 text-2xl bg-white top-0 right-0 gap-4 pl-8 pt-20 h-screen w-60 flex lg:hidden`}
+        animate={{ translateX: 0, opacity: 1 }}
+        initial={{ translateX: 80, opacity: 0 }}
+        exit={{ opacity: 0 }}
+      >
+        <button
+          className="top-7 right-5 absolute"
+          onClick={() => setActiveHamburger(!activeHamburger)}
+        >
+          <RxCross2></RxCross2>
+        </button>
+        {tabs.map((tab) => (
+          <Link
+            key={tab.id != undefined ? tab.id : "homepage"}
+            href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
+            className="relative"
+            onClick={() => setActiveHamburger(!activeHamburger)}
+          >
+            {tab.text}
+          </Link>
+        ))}
+      </motion.div>
+      <div className="absolute z-30 w-full h-full bg-black opacity-40 top-0 right-0"></div>
     </div>
   );
 }
