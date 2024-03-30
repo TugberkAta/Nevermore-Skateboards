@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function Previews() {
   return (
     <>
-      <div className="grid grid-cols-1 grid-rows-4 lg:grid-cols-4 lg:grid-rows-6 w-full h-[60rem] gap-4">
-        <div className="lg:col-span-2 lg:row-span-2 border relative overflow-hidden">
+      <div className="grid h-[60rem] w-full grid-cols-1 grid-rows-4 gap-4 lg:grid-cols-4 lg:grid-rows-6">
+        <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-2">
           <PreviewObject
             title={"Roller Blades"}
             objectPosition={"object-bottom"}
@@ -14,7 +14,7 @@ export default function Previews() {
             address={"/catalog/Rollerblades"}
           />
         </div>
-        <div className="lg:col-span-2 lg:row-span-4 border relative overflow-hidden">
+        <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-4">
           <PreviewObject
             title={"Skates"}
             objectPosition={"object-bottom"}
@@ -22,7 +22,7 @@ export default function Previews() {
             address={"/catalog/Skateboards"}
           />
         </div>
-        <div className="lg:col-span-2 lg:row-span-2 border relative overflow-hidden">
+        <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-2">
           <PreviewObject
             title={"Shoes"}
             objectPosition={"object-bottom"}
@@ -30,7 +30,7 @@ export default function Previews() {
             address={"/catalog/Shoes"}
           />
         </div>
-        <div className="lg:col-span-4 lg:row-span-2 border relative overflow-hidden">
+        <div className="relative overflow-hidden border lg:col-span-4 lg:row-span-2">
           <PreviewObject
             title={"Snowboards"}
             objectPosition={""}
@@ -58,7 +58,7 @@ export function PreviewObject({
 }: PreviewObjectProps) {
   return (
     <Link href={address} className="group ">
-      <div className="relative w-full h-full">
+      <div className="relative h-full w-full">
         <Image
           fill
           className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
@@ -66,9 +66,9 @@ export function PreviewObject({
           alt={title}
         />
       </div>
-      <div className="w-full h-full bg-black opacity-15 hover:opacity-30 transition-opacity absolute z-10"></div>
+      <div className="absolute z-10 h-full w-full bg-black opacity-15 transition-opacity hover:opacity-30"></div>
       <h2
-        className={`${montserrat.className} flex w-full justify-center text-3xl font-semibold text-white absolute bottom-7 z-10  group-hover:scale-110 ease-in-out duration-300 `}
+        className={`${montserrat.className} absolute bottom-7 z-10 flex w-full justify-center text-3xl font-semibold text-white  duration-300 ease-in-out group-hover:scale-110 `}
       >
         {title}
       </h2>

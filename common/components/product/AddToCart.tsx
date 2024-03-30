@@ -47,7 +47,7 @@ export function AddToCart({ itemData }: AddToCartProps) {
             return JSON.stringify(item);
           }
           return itemString;
-        })
+        }),
       );
     } else {
       // If the item doesn't exist, add it to the cart
@@ -57,13 +57,13 @@ export function AddToCart({ itemData }: AddToCartProps) {
   };
 
   return (
-    <div className="w-full hover:scale-105 active:scale-100 transition-all flex justify-center mt-8">
+    <div className="mt-8 flex w-full justify-center transition-all hover:scale-105 active:scale-100">
       <button
         type="button"
         className="h-14 w-9/12 rounded-3xl  bg-black"
         onClick={handleAddToCart}
       >
-        <p className="text-white text-xs">ADD TO CART</p>
+        <p className="text-xs text-white">ADD TO CART</p>
       </button>
     </div>
   );

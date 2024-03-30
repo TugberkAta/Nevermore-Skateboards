@@ -49,20 +49,21 @@ export default function FilterData({
       .filter((product) => !sortSize || sortSize === product.size)
       .filter(
         (product) =>
-          !sortSizeHigh || parseInt(sortSizeHigh) > product.price / 100
+          !sortSizeHigh || parseInt(sortSizeHigh) > product.price / 100,
       )
       .filter(
-        (product) => !sortSizeLow || parseInt(sortSizeLow) < product.price / 100
+        (product) =>
+          !sortSizeLow || parseInt(sortSizeLow) < product.price / 100,
       );
 
     if (sortGeneral === "lowToHigh") {
       filteredProductData = filteredProductData.sort(
-        (a, b) => a.price - b.price
+        (a, b) => a.price - b.price,
       );
     }
     if (sortGeneral === "highToLow") {
       filteredProductData = filteredProductData.sort(
-        (a, b) => b.price - a.price
+        (a, b) => b.price - a.price,
       );
     }
 
@@ -72,8 +73,8 @@ export default function FilterData({
   return (
     <>
       {productData && (
-        <motion.div className="w-full flex justify-center" layout>
-          <div className=" h-full grid grid-cols-2 w-11/12 md:grid-cols-2 justify-center lg:grid-cols-3  2xl:grid-cols-5 gap-x-8">
+        <motion.div className="flex w-full justify-center" layout>
+          <div className=" grid h-full w-11/12 grid-cols-2 justify-center gap-x-8 md:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-5">
             <AnimatePresence>
               {filteredProductData.map((product: Item) => {
                 return (

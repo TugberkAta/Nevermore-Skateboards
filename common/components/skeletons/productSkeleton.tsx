@@ -8,23 +8,23 @@ export default function ProductSkeleton() {
         key={index}
         className="flex animate-pulse flex-col items-center overflow-hidden "
       >
-        <div className="col-span-1 grid-rows-1 w-full relative overflow-hidden mb-1">
-          <div className="group flex justify-center w-full h-full">
-            <div className="w-[350px] h-[250px]" />
-            <div className="w-full h-full bg-black opacity-10 transition-opacity top-0 absolute z-20"></div>
+        <div className="relative col-span-1 mb-1 w-full grid-rows-1 overflow-hidden">
+          <div className="group flex h-full w-full justify-center">
+            <div className="h-[250px] w-[350px]" />
+            <div className="absolute top-0 z-20 h-full w-full bg-black opacity-10 transition-opacity"></div>
           </div>
         </div>
-        <div className="flex flex-col relative w-full">
-          <p className="text-center text-sm font-semibold h-4"> </p>
-          <p className="text-center text-sm h-4"></p>
-          <p className="text-center text-xs h-4"></p>
-          <div className="w-full h-full bg-black opacity-10 transition-opacity top-0 absolute z-20"></div>
+        <div className="relative flex w-full flex-col">
+          <p className="h-4 text-center text-sm font-semibold"> </p>
+          <p className="h-4 text-center text-sm"></p>
+          <p className="h-4 text-center text-xs"></p>
+          <div className="absolute top-0 z-20 h-full w-full bg-black opacity-10 transition-opacity"></div>
         </div>
-      </div>
+      </div>,
     );
   }
   return (
-    <div className="ml-10 pt-10 mr-10 h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 auto-rows-auto gap-x-8 gap-y-4">
+    <div className="ml-10 mr-10 grid h-full auto-rows-auto grid-cols-2 gap-x-8 gap-y-4 pt-10 md:grid-cols-3 lg:grid-cols-3">
       {arrayOfSkeletonBox}
     </div>
   );

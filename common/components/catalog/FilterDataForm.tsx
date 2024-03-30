@@ -181,10 +181,10 @@ export function FilterViewWrapper({
   return (
     <>
       {/* View for the bigger screen devices */}
-      <div className=" h-5/6 -mr-10 w-60 justify-center hidden lg:flex">
-        <div className=" gap-4 w-9/12 items-center ">
-          <p className="font-bold text-3xl mb-8">FILTER</p>
-          <div className="flex w-full flex-col flex-wrap  md:flex-nowrap mb-6 md:mb-0 gap-4">
+      <div className=" -mr-10 hidden h-5/6 w-60 justify-center lg:flex">
+        <div className=" w-9/12 items-center gap-4 ">
+          <p className="mb-8 text-3xl font-bold">FILTER</p>
+          <div className="mb-6 flex w-full flex-col  flex-wrap gap-4 md:mb-0 md:flex-nowrap">
             {children}
           </div>
         </div>
@@ -193,24 +193,24 @@ export function FilterViewWrapper({
       {activeFilter && (
         <div>
           <motion.div
-            className="absolute z-40 bg-white top-0 pt-20 h-screen w-60 justify-center flex lg:hidden"
+            className="absolute top-0 z-40 flex h-screen w-60 justify-center bg-white pt-20 lg:hidden"
             animate={{ translateX: 0, opacity: 1 }}
             initial={{ translateX: -80, opacity: 0 }}
             exit={{ opacity: 0 }}
           >
             <button onClick={() => setActiveFilter(!activeFilter)}>
-              <div className="top-7 left-5 absolute">
+              <div className="absolute left-5 top-7">
                 <FaArrowLeftLong></FaArrowLeftLong>
               </div>
             </button>
-            <div className=" gap-4 w-9/12 items-center ">
-              <p className="font-bold text-3xl mb-8">FILTER</p>
-              <div className="flex w-full flex-col flex-wrap  md:flex-nowrap mb-6 md:mb-0 gap-4">
+            <div className=" w-9/12 items-center gap-4 ">
+              <p className="mb-8 text-3xl font-bold">FILTER</p>
+              <div className="mb-6 flex w-full flex-col  flex-wrap gap-4 md:mb-0 md:flex-nowrap">
                 {children}
               </div>
             </div>
           </motion.div>
-          <div className="absolute z-30 w-full h-full bg-black opacity-40 top-0 right-0"></div>
+          <div className="absolute right-0 top-0 z-30 h-full w-full bg-black opacity-40"></div>
         </div>
       )}
     </>

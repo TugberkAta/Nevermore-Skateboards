@@ -1,6 +1,6 @@
 export default function Credit() {
   return (
-    <div className="w-full flex justify-center lg:justify-end lg:pr-10 text-center text-sm pb-4 pt-6 text-gray-400">
+    <div className="flex w-full justify-center pb-4 pt-6 text-center text-sm text-gray-400 lg:justify-end lg:pr-10">
       © 2024 Made by Tuğberk Ata
     </div>
   );

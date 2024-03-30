@@ -44,8 +44,8 @@ export default function CrudCreate({ itemCategory }: CrudCreateProps) {
   const [state, formAction] = useFormState(create, initialState);
   return (
     <>
-      <div className="w-screen flex justify-center">
-        <div className="flex w-fit flex-col items-center justify-center gap-6 shadow-md px-24 py-6 rounded-md border-t-4 rounded-t-none border-black  bg-slate-100 mt-16 mb-16">
+      <div className="flex w-screen justify-center">
+        <div className="mb-16 mt-16 flex w-fit flex-col items-center justify-center gap-6 rounded-md rounded-t-none border-t-4 border-black bg-slate-100  px-24 py-6 shadow-md">
           <p className="text-xl font-bold"> {itemCategory} Creation</p>
           <form
             className="flex flex-col items-center gap-4"
@@ -82,7 +82,7 @@ export default function CrudCreate({ itemCategory }: CrudCreateProps) {
               label="Image Url"
             ></DefaultInput>
             <button
-              className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+              className="rounded bg-black px-4 py-2 font-bold text-white hover:bg-gray-800"
               type="submit"
             >
               Submit

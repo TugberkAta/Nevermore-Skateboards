@@ -31,26 +31,26 @@ export function PreviewItem({
     >
       <Link
         href={address}
-        className="flex flex-col items-center w-full justify-center pb-2 h-full overflow-hidden "
+        className="flex h-full w-full flex-col items-center justify-center overflow-hidden pb-2 "
       >
-        <div className="w-full h-[16.5rem] md:h-[18.5rem] relative overflow-hidden ">
-          <div className="group flex h-full justify-center w-full ">
+        <div className="relative h-[16.5rem] w-full overflow-hidden md:h-[18.5rem] ">
+          <div className="group flex h-full w-full justify-center ">
             <div className="h-5/6">
               <Image
                 fill
-                className={`object-contain w-full h-auto ${objectPosition} transition-transform duration-300 ease-in-out scale-90 group-hover:scale-100`}
+                className={`h-auto w-full object-contain ${objectPosition} scale-90 transition-transform duration-300 ease-in-out group-hover:scale-100`}
                 src={src}
                 alt={alt}
               />
             </div>
-            <div className="w-full h-full bg-black opacity-5 transition-opacity top-0 absolute z-20"></div>
+            <div className="absolute top-0 z-20 h-full w-full bg-black opacity-5 transition-opacity"></div>
           </div>
         </div>
-        <div className="flex w-full pb-4 pt-2 justify-between">
+        <div className="flex w-full justify-between pb-4 pt-2">
           <div className="flex flex-col ">
             <p className="text-base font-semibold">{brand}</p>
             <p
-              className={`text-xs font-sans font-semibold h-4 overflow-hidden`}
+              className={`h-4 overflow-hidden font-sans text-xs font-semibold`}
             >
               {title}
             </p>

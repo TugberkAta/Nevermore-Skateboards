@@ -6,7 +6,7 @@ export default function ProductsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="w-screen h-screen">
+    <section className="h-screen w-screen">
       <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
       {children}
     </section>

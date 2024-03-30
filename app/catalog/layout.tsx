@@ -8,7 +8,7 @@ export default function ProductsLayout({
 }) {
   return (
     <>
-      <section className="w-screen h-full">
+      <section className="h-full w-screen">
         <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
         <div>{children}</div>
       </section>

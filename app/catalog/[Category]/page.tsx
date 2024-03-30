@@ -12,7 +12,7 @@ export default async function ProductPage({
 }) {
   return (
     <>
-      <div className="flex flex-col  min-h-[90vh] justify-between mt-4">
+      <div className="mt-4 flex  min-h-[90vh] flex-col justify-between">
         <div className="flex">
           <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
             <FetchFilterOptions

@@ -9,7 +9,7 @@ export default function Home() {
       <div className="w-screen">
         <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
         <Banner></Banner>
-        <div className="lg:ml-16 lg:mr-16 mr-3 ml-3 mt-6">
+        <div className="ml-3 mr-3 mt-6 lg:ml-16 lg:mr-16">
           <Previews></Previews>
         </div>
         <Credit></Credit>

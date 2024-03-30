@@ -51,7 +51,7 @@ export default async function ProductPage({
             itemTitle={itemData.title}
             id={params.id}
           ></Breadcrumbs>
-          <div className="w-screen min-h-[75vh]">
+          <div className="min-h-[75vh] w-screen">
             <ProductDetails
               itemData={itemData}
               sizeData={CategoryData?.sizeData}
@@ -74,7 +74,7 @@ export function Breadcrumbs({ category, itemTitle, id }: BreadCrumbsProps) {
   console.log(itemTitle);
   return (
     <>
-      <div className="flex gap-1 italic text-sm transition-all text-gray-500 ml-20 mt-4">
+      <div className="ml-20 mt-4 flex gap-1 text-sm italic text-gray-500 transition-all">
         <Link className="hover:text-black" href={`/catalog/${category}`}>
           {category}
         </Link>
