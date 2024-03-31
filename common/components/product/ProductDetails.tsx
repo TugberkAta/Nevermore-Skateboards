@@ -14,11 +14,11 @@ export interface DetailsProps {
 export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
-      <div className="mt-10 flex w-screen flex-col gap-20 pb-40 md:flex-row lg:pb-0">
-        <div className="w-full md:w-1/2">
+      <div className="w-scree mt-10 flex flex-col gap-10 pb-40 md:flex-row lg:gap-20 lg:pb-0">
+        <div className="min-h-80 w-full md:w-1/2">
           <ProductImage
             alt={itemData.title || ""}
-            src={itemData.img_url || ""}
+            img_url_arr={itemData.img_url_arr || ""}
           ></ProductImage>
         </div>
         <div className="flex w-full justify-center md:w-1/2">
