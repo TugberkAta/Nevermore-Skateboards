@@ -27,6 +27,11 @@ const nextConfig = {
         hostname: "img.skatewarehouse.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "images.novelship.com",
+        port: "",
+      },
     ],
   },
 };
