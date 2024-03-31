@@ -59,7 +59,7 @@ export default function ShopCart({
   async function handleProcess() {
     if (!stripeApiKey) {
       throw new Error(
-        "STRIPE_API_KEY is not defined in the environment variables"
+        "STRIPE_API_KEY is not defined in the environment variables",
       );
     }
     const stripe = new Stripe(stripeApiKey);
@@ -107,7 +107,7 @@ export default function ShopCart({
         <MdOutlineShoppingCart className="size-5" />
         <NoSSR>
           <h1
-            className={`font-bold absolute bottom-3 left-3 text-white bg-black rounded-full text-sm size-5 text-center`}
+            className={`absolute bottom-3 left-3 size-5 rounded-full bg-black text-center text-sm font-bold text-white`}
           >
             {0 + (shopCartArray?.length || 0)}
           </h1>
@@ -116,14 +116,14 @@ export default function ShopCart({
       {activateShopCart && (
         <>
           <motion.div
-            className="absolute z-40 w-full lg:w-5/12 h-full flex justify-center bg-white top-0 right-0"
+            className="absolute right-0 top-0 z-40 flex h-full w-full justify-center bg-white lg:w-5/12"
             animate={{ translateX: 0, opacity: 1 }}
             initial={{ translateX: 120, opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <div className="w-10/12 mt-10 overflow-scroll">
+            <div className="mt-10 w-10/12 overflow-scroll">
               <div className="flex justify-between">
-                <h1 className={`font-bold text-xl`}>
+                <h1 className={`text-xl font-bold`}>
                   Cart ( {0 + (shopCartArray?.length || 0)} )
                 </h1>
                 <button onClick={handleClick}>
@@ -131,10 +131,10 @@ export default function ShopCart({
                 </button>
               </div>
               <motion.div
-                className="h-[90%] flex flex-col justify-between items-center"
+                className="flex h-[90%] flex-col items-center justify-between"
                 layout
               >
-                <div className="flex flex-col gap-4 w-full mt-10 mb-10">
+                <div className="mb-10 mt-10 flex w-full flex-col gap-4">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (
@@ -158,7 +158,7 @@ export default function ShopCart({
                 {shopCartArray?.length ?? 0 >= 1 ? (
                   <button
                     onClick={handleProcess}
-                    className=" bg-green-500 hover:bg-green-600 hover:scale-105 transition-all text-white font-bold py-2 px-4 rounded-full "
+                    className=" rounded-full bg-green-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-green-600 "
                   >
                     Proceed
                   </button>
@@ -168,7 +168,7 @@ export default function ShopCart({
               </motion.div>
             </div>
           </motion.div>
-          <div className="absolute z-30 w-full h-full bg-black opacity-40 top-0 right-0"></div>
+          <div className="absolute right-0 top-0 z-30 h-full w-full bg-black opacity-40"></div>
         </>
       )}
     </div>

@@ -19,7 +19,7 @@ export default function RemoveItemButton({
     });
 
     const updatedShopCartArray = shopCartArray.filter(
-      (item) => item != shopCartArray[itemIndex]
+      (item) => item != shopCartArray[itemIndex],
     );
 
     setShopCartArray(updatedShopCartArray);
@@ -35,7 +35,7 @@ export default function RemoveItemButton({
     <>
       <button
         type="button"
-        className="p-1 pr-3 pl-3 bg-black hover:bg-gray-700 transition-all "
+        className="bg-black p-1 pl-3 pr-3 transition-all hover:bg-gray-700 "
         onClick={handleRemove}
       >
         <p className="text-white">Remove</p>
