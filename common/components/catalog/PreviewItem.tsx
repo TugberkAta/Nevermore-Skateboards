@@ -5,7 +5,6 @@ import Link from "next/link";
 
 type PreviewItemProps = {
   alt: string;
-  objectPosition?: string;
   src: string;
   title: string;
   price: number;
@@ -15,7 +14,6 @@ type PreviewItemProps = {
 
 export function PreviewItem({
   alt,
-  objectPosition,
   src,
   title,
   price,
@@ -39,12 +37,12 @@ export function PreviewItem({
               <Image
                 loading="lazy"
                 fill
-                className={`h-auto w-full object-contain ${objectPosition} scale-90 transition-transform duration-300 ease-in-out group-hover:scale-100`}
+                className={`h-auto w-full scale-90 object-contain transition-transform duration-300 ease-in-out group-hover:scale-100`}
                 src={src}
                 alt={alt}
               />
             </div>
-            <div className="absolute top-0 z-20 h-full w-full bg-black opacity-5 transition-opacity"></div>
+            <div className="absolute top-0 z-20 h-full w-full bg-orange-950 opacity-5 transition-opacity"></div>
           </div>
         </div>
         <div className="flex w-full justify-between pb-4 pt-2">
