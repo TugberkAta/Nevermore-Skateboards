@@ -134,7 +134,7 @@ export default function ShopCart({
                 className="flex h-[90%] flex-col items-center justify-between"
                 layout
               >
-                <div className="mb-10 mt-10 flex w-full flex-col gap-4">
+                <div className="mb-10 mt-10 flex w-full flex-col gap-4 overflow-scroll">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (
