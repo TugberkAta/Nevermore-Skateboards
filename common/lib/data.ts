@@ -6,9 +6,9 @@ export type Item = {
   title: string;
   price: number;
   brand: string;
-  size: string;
   img_url: string;
   img_url_arr: string[];
+  size_array: string[];
 };
 
 export async function fetchSkateData() {
