@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 
 export interface AddToCartProps {
   itemData: Item;
+  selectedSize: string;
 }
 
-export function AddToCart({ itemData }: AddToCartProps) {
+export function AddToCart({ itemData, selectedSize }: AddToCartProps) {
   const [shopCart, setShopCart] = useState<string[]>(() => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("shopCart");
@@ -26,7 +27,7 @@ export function AddToCart({ itemData }: AddToCartProps) {
       uuid: itemData.uuid,
       img_url: itemData.img_url,
       price: itemData.price,
-      size: itemData.size,
+      size: selectedSize,
       title: itemData.title,
       brand: itemData.brand,
       count: 1,
