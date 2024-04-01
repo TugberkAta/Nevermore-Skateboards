@@ -18,14 +18,11 @@ export async function fetchSkateData() {
   try {
     const data = await sql<Item>`SELECT * FROM skates`;
 
-    const sizeData = await sql`SELECT DISTINCT size FROM skates ORDER BY size`;
-
     const brandData =
       await sql`SELECT DISTINCT brand FROM skates ORDER BY brand`;
 
     return {
       product: data.rows,
-      sizeData: sizeData.rows,
       brandData: brandData.rows,
     };
   } catch (error) {
@@ -41,15 +38,11 @@ export async function fetchRollerbladeData() {
   try {
     const data = await sql<Item>`SELECT * FROM rollerblades`;
 
-    const sizeData =
-      await sql`SELECT DISTINCT size FROM rollerblades ORDER BY size`;
-
     const brandData =
       await sql`SELECT DISTINCT brand FROM rollerblades ORDER BY brand`;
 
     return {
       product: data.rows,
-      sizeData: sizeData.rows,
       brandData: brandData.rows,
     };
   } catch (error) {
@@ -65,14 +58,11 @@ export async function fetchShoeData() {
   try {
     const data = await sql<Item>`SELECT * FROM shoes`;
 
-    const sizeData = await sql`SELECT DISTINCT size FROM shoes ORDER BY size`;
-
     const brandData =
       await sql`SELECT DISTINCT brand FROM shoes ORDER BY brand`;
 
     return {
       product: data.rows,
-      sizeData: sizeData.rows,
       brandData: brandData.rows,
     };
   } catch (error) {
@@ -88,15 +78,11 @@ export async function fetchSnowboardData() {
   try {
     const data = await sql<Item>`SELECT * FROM snowboards`;
 
-    const sizeData =
-      await sql`SELECT DISTINCT size FROM snowboards ORDER BY size`;
-
     const brandData =
       await sql`SELECT DISTINCT brand FROM snowboards ORDER BY brand`;
 
     return {
       product: data.rows,
-      sizeData: sizeData.rows,
       brandData: brandData.rows,
     };
   } catch (error) {
