@@ -46,7 +46,10 @@ export default function FilterData({
 
     let filteredProductData = productData
       .filter((product) => !sortBrand || sortBrand === product.brand)
-      .filter((product) => !sortSize || sortSize === product.size)
+      .filter(
+        (product) =>
+          !sortSize || product.size_array.some((size) => sortSize === size),
+      )
       .filter(
         (product) =>
           !sortSizeHigh || parseInt(sortSizeHigh) > product.price / 100,
