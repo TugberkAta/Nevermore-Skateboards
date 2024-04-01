@@ -1,15 +1,10 @@
-import {
-  fetchItemData,
-  fetchRollerbladeData,
-  fetchShoeData,
-  fetchSkateData,
-  fetchSnowboardData,
-} from "@/common/lib/data";
+import { fetchItemData } from "@/common/lib/data";
 import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
 import Breadcrumbs from "@/common/components/breadcrumbs/Breadcrumbs";
 import { Metadata } from "next";
+import CategorySizeData from "@/common/utils/categorySizeData";
 
 export const metadata: Metadata = {
   title:
@@ -34,40 +29,61 @@ export default async function ProductPage({
     return;
   }
 
-  let CategoryData;
+  // // Catching category data might be useful in the future to show recommended products
+  // let CategoryData;
+  // switch (params.Category) {
+  //   case "Skateboards":
+  //     CategoryData = await fetchSkateData();
+  //     break;
+  //   case "Rollerblades":
+  //     CategoryData = await fetchRollerbladeData();
+  //     break;
+  //   case "Snowboards":
+  //     CategoryData = await fetchSnowboardData();
+  //     break;
+  //   case "Shoes":
+  //     CategoryData = await fetchShoeData();
+  //     break;
+  //   default:
+  //     () => Promise.reject("Invalid item Category");
+  // }
+
+  let sizeData;
   switch (params.Category) {
     case "Skateboards":
-      CategoryData = await fetchSkateData();
+      sizeData = CategorySizeData.Skateboards;
       break;
     case "Rollerblades":
-      CategoryData = await fetchRollerbladeData();
+      sizeData = CategorySizeData.Rollerblade;
       break;
     case "Snowboards":
-      CategoryData = await fetchSnowboardData();
+      sizeData = CategorySizeData.Snowboards;
       break;
     case "Shoes":
-      CategoryData = await fetchShoeData();
+      sizeData = CategorySizeData.Shoes;
       break;
     default:
-      () => Promise.reject("Invalid item Category");
+      return;
   }
 
   return (
     <>
       {itemData && (
         <>
-          <Breadcrumbs
-            category={params.Category}
-            itemTitle={itemData.title}
-            id={params.id}
-          ></Breadcrumbs>
-          <div className="min-h-[75vh] w-screen">
-            <ProductDetails
-              itemData={itemData}
-              sizeData={CategoryData?.sizeData}
-            ></ProductDetails>
+          <div className="flex h-[93vh] flex-col justify-between">
+            <div>
+              <Breadcrumbs
+                category={params.Category}
+                itemTitle={itemData.title}
+                id={params.id}
+              ></Breadcrumbs>
+              <ProductDetails
+                itemData={itemData}
+                sizeData={sizeData}
+              ></ProductDetails>
+            </div>
+            <Credit></Credit>
           </div>
-          <Credit></Credit>
         </>
       )}
     </>
