@@ -22,6 +22,7 @@ import {
   fetchSkateData,
   fetchSnowboardData,
 } from "../lib/data";
+import CategorySizeData from "./categorySizeData";
 
 export async function createOptions(productName: string) {
   let productData;
@@ -43,6 +44,24 @@ export async function createOptions(productName: string) {
       break;
   }
 
+  let sizeData;
+  switch (productName) {
+    case "Skateboards":
+      sizeData = CategorySizeData.Skateboards;
+      break;
+    case "Rollerblades":
+      sizeData = CategorySizeData.Rollerblade;
+      break;
+    case "Snowboards":
+      sizeData = CategorySizeData.Snowboards;
+      break;
+    case "Shoes":
+      sizeData = CategorySizeData.Shoes;
+      break;
+    default:
+      return;
+  }
+
   const Options: Options = {
     GeneralOptions: [
       { value: "", label: "Default" },
@@ -51,8 +70,8 @@ export async function createOptions(productName: string) {
     ],
     ProductSizeOptions: [
       { value: "", label: "Default" },
-      ...productData.sizeData.map((e) => {
-        return { value: e.size, label: e.size };
+      ...sizeData.map((e) => {
+        return { value: e, label: e };
       }),
     ],
     ProductBrandOptions: [
