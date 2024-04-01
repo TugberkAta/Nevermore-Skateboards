@@ -14,25 +14,27 @@ export interface DetailsProps {
 export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
-      <div className="w-scree mt-10 flex flex-col gap-10 pb-40 md:flex-row lg:gap-20 lg:pb-0">
-        <div className="min-h-80 w-full md:w-1/2">
-          <ProductImage
-            alt={itemData.title || ""}
-            img_url_arr={itemData.img_url_arr || ""}
-          ></ProductImage>
-        </div>
-        <div className="flex w-full justify-center md:w-1/2">
-          <div className="w-10/12">
-            <ProductInformation itemData={itemData} sizeData={sizeData} />
-            <AddToCart itemData={itemData}></AddToCart>
-            <div className="mt-8 flex flex-col gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-6">
-                <HiOutlineTruck className="size-6 stroke-gray-500" />
-                <p>Free Expedited Shipping</p>
-              </div>
-              <div className="flex items-center gap-6 ">
-                <PiPackageLight className="size-6 fill-gray-500" />
-                <p>60 Day Returns</p>
+      <div className="flex w-full justify-center">
+        <div className="justify-center-center mt-10 flex w-screen flex-col pb-40 md:flex-row lg:gap-20 lg:pb-0 2xl:w-[90rem]">
+          <div className="min-h-80 w-full md:w-1/2">
+            <ProductImage
+              alt={itemData.title || ""}
+              img_url_arr={itemData.img_url_arr || ""}
+            ></ProductImage>
+          </div>
+          <div className="flex w-full justify-center md:w-1/2">
+            <div className="w-10/12">
+              <ProductInformation itemData={itemData} sizeData={sizeData} />
+              <AddToCart itemData={itemData}></AddToCart>
+              <div className="mt-8 flex flex-col gap-4 text-sm text-gray-500">
+                <div className="flex items-center gap-6">
+                  <HiOutlineTruck className="size-6 stroke-gray-500" />
+                  <p>Free Expedited Shipping</p>
+                </div>
+                <div className="flex items-center gap-6 ">
+                  <PiPackageLight className="size-6 fill-gray-500" />
+                  <p>60 Day Returns</p>
+                </div>
               </div>
             </div>
           </div>
