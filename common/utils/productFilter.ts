@@ -1,5 +1,7 @@
 "use server";
 
+import { CategoryBrandData, CategorySizeData } from "./categorySpecificData";
+
 interface Option {
   value: string | number | null;
   label: string;
@@ -16,34 +18,7 @@ type createOptionsProps = {
   productName: string;
 };
 
-import {
-  fetchRollerbladeData,
-  fetchShoeData,
-  fetchSkateData,
-  fetchSnowboardData,
-} from "../lib/data";
-import CategorySizeData from "./categorySizeData";
-
 export async function createOptions(productName: string) {
-  let productData;
-  switch (productName) {
-    case "Skateboards":
-      productData = await fetchSkateData();
-      break;
-    case "Rollerblades":
-      productData = await fetchRollerbladeData();
-      break;
-    case "Snowboards":
-      productData = await fetchSnowboardData();
-      break;
-    case "Shoes":
-      productData = await fetchShoeData();
-      break;
-    default:
-      productData = await fetchSkateData();
-      break;
-  }
-
   let sizeData;
   switch (productName) {
     case "Skateboards":
@@ -57,6 +32,24 @@ export async function createOptions(productName: string) {
       break;
     case "Shoes":
       sizeData = CategorySizeData.Shoes;
+      break;
+    default:
+      return;
+  }
+
+  let brandData;
+  switch (productName) {
+    case "Skateboards":
+      brandData = CategoryBrandData.Skateboards;
+      break;
+    case "Rollerblades":
+      brandData = CategoryBrandData.Rollerblade;
+      break;
+    case "Snowboards":
+      brandData = CategoryBrandData.Snowboards;
+      break;
+    case "Shoes":
+      brandData = CategoryBrandData.Shoes;
       break;
     default:
       return;
@@ -76,8 +69,8 @@ export async function createOptions(productName: string) {
     ],
     ProductBrandOptions: [
       { value: "", label: "Default" },
-      ...productData.brandData.map((e) => {
-        return { value: e.brand, label: e.brand };
+      ...brandData.map((e) => {
+        return { value: e, label: e };
       }),
     ],
     PriceRangeOptions: [
