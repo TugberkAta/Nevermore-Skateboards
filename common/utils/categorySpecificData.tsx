@@ -1,4 +1,4 @@
-const CategorySizeData = {
+export const CategorySizeData = {
   Rollerblade: [
     "37",
     "37.5",
@@ -29,8 +29,13 @@ const CategorySizeData = {
     "44",
     "45",
   ],
-  Skateboards: ["8.0", "8.5", "9.0", "9.5"],
+  Skateboards: ["7.25", "8.0", "8.5", "9.0", "9.5"],
   Snowboards: ["137", "140", "143", "147", "150"],
 };
 
-export default CategorySizeData;
+export const CategoryBrandData = {
+  Rollerblade: ["Impala Skate"],
+  Shoes: ["Converse", "Adidas", "Vans", "Nike"],
+  Skateboards: ["Almost", "Creature"],
+  Snowboards: ["Salomon", "Rossignol", "Arbor", "Chamonix"],
+};
