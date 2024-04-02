@@ -17,13 +17,8 @@ export async function fetchSkateData() {
 
   try {
     const data = await sql<Item>`SELECT * FROM skates`;
-
-    const brandData =
-      await sql`SELECT DISTINCT brand FROM skates ORDER BY brand`;
-
     return {
       product: data.rows,
-      brandData: brandData.rows,
     };
   } catch (error) {
     console.error("Database Error:", error);
@@ -37,13 +32,8 @@ export async function fetchRollerbladeData() {
 
   try {
     const data = await sql<Item>`SELECT * FROM rollerblades`;
-
-    const brandData =
-      await sql`SELECT DISTINCT brand FROM rollerblades ORDER BY brand`;
-
     return {
       product: data.rows,
-      brandData: brandData.rows,
     };
   } catch (error) {
     console.error("Database Error:", error);
@@ -57,13 +47,8 @@ export async function fetchShoeData() {
 
   try {
     const data = await sql<Item>`SELECT * FROM shoes`;
-
-    const brandData =
-      await sql`SELECT DISTINCT brand FROM shoes ORDER BY brand`;
-
     return {
       product: data.rows,
-      brandData: brandData.rows,
     };
   } catch (error) {
     console.error("Database Error:", error);
@@ -77,13 +62,8 @@ export async function fetchSnowboardData() {
 
   try {
     const data = await sql<Item>`SELECT * FROM snowboards`;
-
-    const brandData =
-      await sql`SELECT DISTINCT brand FROM snowboards ORDER BY brand`;
-
     return {
       product: data.rows,
-      brandData: brandData.rows,
     };
   } catch (error) {
     console.error("Database Error:", error);
