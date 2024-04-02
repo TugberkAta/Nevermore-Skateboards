@@ -9,7 +9,6 @@ import IncrementItemButton from "./IncrementItemButton";
 
 type PreviewCartItemProps = {
   alt: string;
-  objectPosition?: string;
   src: string;
   title: string;
   price: number;
@@ -24,7 +23,6 @@ type PreviewCartItemProps = {
 
 export function PreviewCartItem({
   alt,
-  objectPosition,
   src,
   title,
   price,
