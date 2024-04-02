@@ -38,31 +38,16 @@ export default function ProductInformation({
             className={`${montserrat.className} mb-2 flex w-full flex-wrap justify-center gap-3 text-sm`}
           >
             {sizeData?.map((size) => {
+              const available = itemData.size_array.includes(size);
               return (
-                <div key={size}>
-                  {itemData.size_array.map((item_size) => {
-                    return (
-                      <>
-                        {size === item_size ? (
-                          <button
-                            key={item_size}
-                            onClick={() => setSelectedSize(item_size)}
-                            className={`relative h-8 w-12 rounded-3xl border-2 border-black text-center text-black ${selectedSize === item_size ? "bg-black text-white" : ""} transition-all`}
-                          >
-                            <p>{size}</p>
-                          </button>
-                        ) : (
-                          <button
-                            key={item_size}
-                            className={`relative h-8 w-12 cursor-not-allowed rounded-3xl border text-center text-gray-500`}
-                          >
-                            <p>{size}</p>
-                          </button>
-                        )}
-                      </>
-                    );
-                  })}
-                </div>
+                <button
+                  key={size}
+                  onClick={() => available && setSelectedSize(size)}
+                  disabled={!available}
+                  className={`relative h-8 w-12 rounded-3xl border-2 text-center ${available ? "border-black text-black" : "cursor-not-allowed border-gray-500 text-gray-500"} ${selectedSize === size ? "bg-black text-white" : ""} transition-all`}
+                >
+                  <p>{size}</p>
+                </button>
               );
             })}
           </div>
