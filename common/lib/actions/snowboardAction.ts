@@ -4,7 +4,6 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { capitalizeFirstLetter } from "@/common/utils/capitaliseFirstLetter";
 
 const FormSchema = z.object({
   title: z
@@ -21,16 +20,8 @@ const FormSchema = z.object({
       invalid_type_error: "Please enter a brand",
     })
     .min(1, { message: "This field is required" }),
-  size: z
-    .string({
-      invalid_type_error: "Please enter a title",
-    })
-    .min(1, { message: "This field is required" }),
-  imgUrl: z
-    .string({
-      invalid_type_error: "Please enter an url",
-    })
-    .min(1, { message: "This field is required" }),
+  sizes: z.array(z.string().min(1)).nonempty(),
+  imgUrl: z.array(z.string().min(1)).nonempty(),
 });
 
 export type State = {
@@ -44,15 +35,23 @@ export type State = {
   message?: string | null;
 };
 
-const CreateSnowboard = FormSchema.omit({});
+const CreateSnowboards = FormSchema.omit({});
 
 export async function createSnowboards(prevState: State, formData: FormData) {
-  const validatedFields = CreateSnowboard.safeParse({
-    title: formData.get("title"),
-    price: formData.get("price"),
-    brand: formData.get("brand"),
-    size: formData.get("size"),
-    imgUrl: formData.get("imgUrl"),
+  // Filter out the empty string values
+  const filteredFormData = new FormData();
+  formData.forEach((value, key) => {
+    if (value !== "") {
+      filteredFormData.append(key, value);
+    }
+  });
+
+  const validatedFields = CreateSnowboards.safeParse({
+    title: filteredFormData.get("title"),
+    price: filteredFormData.get("price"),
+    brand: filteredFormData.get("brand"),
+    sizes: filteredFormData.getAll("size"),
+    imgUrl: filteredFormData.getAll("imgUrl"),
   });
 
   if (!validatedFields.success) {
@@ -63,21 +62,23 @@ export async function createSnowboards(prevState: State, formData: FormData) {
   }
 
   // Prepare data for insertion into the database
-  const { title, price, brand, size, imgUrl } = validatedFields.data;
+  const { title, price, brand, sizes, imgUrl } = validatedFields.data;
 
   const amountInCents = price * 100;
 
-  const sanitizedBrand = capitalizeFirstLetter(brand);
+  const sizeArrayString = `{${sizes.join(",")}}`;
+
+  const imageUrlArrayString = `{${imgUrl.join(",")}}`;
 
   try {
     await sql`
-              INSERT INTO snowboards ( title, price, brand, size, img_url)
-              VALUES (${title}, ${amountInCents}, ${sanitizedBrand}, ${size}, ${imgUrl})
+              INSERT INTO snowboards ( title, price, brand, size_array, img_url, img_url_arr)
+              VALUES (${title}, ${amountInCents}, ${brand}, ${sizeArrayString}, ${imgUrl[0]}, ${imageUrlArrayString})
             `;
   } catch (error) {
     console.log(error);
     return {
-      message: "Database Error: Failed to Create Snowboards.",
+      message: "Database Error: Failed to Create Snowboard.",
     };
   }
 
