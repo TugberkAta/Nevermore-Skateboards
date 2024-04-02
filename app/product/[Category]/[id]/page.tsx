@@ -4,7 +4,7 @@ import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
 import Breadcrumbs from "@/common/components/breadcrumbs/Breadcrumbs";
 import { Metadata } from "next";
-import CategorySizeData from "@/common/utils/categorySizeData";
+import { CategorySizeData } from "@/common/utils/categorySpecificData";
 
 export const metadata: Metadata = {
   title:
