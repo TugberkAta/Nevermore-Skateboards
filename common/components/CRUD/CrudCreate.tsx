@@ -88,10 +88,6 @@ export default function CrudCreate({ itemCategory }: CrudCreateProps) {
 
   const [sizeValues, setSizeValues] = useState(new Set([]));
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <>
       <div className="flex w-screen justify-center">
@@ -145,6 +141,10 @@ export default function CrudCreate({ itemCategory }: CrudCreateProps) {
               placeholder={"Enter Image #3"}
               label="Image Url #3"
             ></DefaultInput>
+            <div className="absolute -z-10 flex flex-col opacity-0">
+              <label htmlFor={"honeyPot"}>{}</label>
+              <input type="input" id={"honeyPot"} name={"honeyPot"} />
+            </div>
             <button
               className="rounded bg-black px-4 py-2 font-bold text-white hover:bg-gray-800"
               type="submit"
