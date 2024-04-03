@@ -15,9 +15,9 @@ export default function ProductInformation({
   return (
     <div>
       <div className="mb-4 pb-4">
-        <h3 className={`${montserratThin.className} text-sm`}>
+        <p className={`${montserratThin.className} text-sm`}>
           {itemData.brand}
-        </h3>
+        </p>
         <h1 className={`${montserrat.className} text-2xl`}>{itemData.title}</h1>
         <div className={`${montserratThin.className} mb-3 mt-3 text-gray-500`}>
           £{(itemData.price || 0) / 100} STR

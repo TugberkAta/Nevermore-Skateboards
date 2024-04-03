@@ -72,14 +72,14 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   }, []);
 
   return (
-    <nav className={`w-screen h-14 flex items-center `}>
-      <div className="ml-8 mr-8 flex items-center justify-between w-screen">
+    <nav className={`flex h-14 w-screen items-center `}>
+      <div className="ml-8 mr-8 flex w-screen items-center justify-between">
         {/* This div is for mobile layout of the logo*/}
         <div className="box lg:hidden">
           <MobileFilterButton pathCategory={pathCategory}></MobileFilterButton>
         </div>
         <div className="flex items-center">
-          <Link href="/" className="flex gap-4 h-full items-center ">
+          <Link href="/" className="flex h-full items-center gap-4 ">
             <Image width={34} height={34} src="/raven.svg" alt="Raven Icon" />
             <p className={`${montserratMedium.className} `}>Nevermore</p>
           </Link>
@@ -89,7 +89,7 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
             pathEnd={pathEnd}
           />
         </div>
-        <div className="fill-black flex gap-6">
+        <div className="flex gap-6 fill-black">
           {stripeApiKey && (
             <ShopCart
               shopCartArray={shopCartArray}
@@ -99,6 +99,8 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
           )}
           <button
             className="block md:hidden"
+            role="button"
+            aria-label="hamburger-menu-button"
             onClick={() => setActiveHamburger(!activeHamburger)}
           >
             <RxHamburgerMenu className="size-5"></RxHamburgerMenu>
@@ -128,7 +130,9 @@ export function MobileFilterButton({ pathCategory }: MobileNavTabs) {
     <>
       {pathCategory === "catalog" ? (
         <button
-          className="lg:hidden block"
+          role="button"
+          aria-label="filter-panel-button"
+          className="block lg:hidden"
           onClick={() => setActiveFilter(!activeFilter)}
         >
           <FaFilter className="size-5"></FaFilter>
@@ -153,7 +157,7 @@ export function DesktopNavTabs({
 }: DesktopNavTabs) {
   return (
     <div
-      className="ml-20 font-semibold gap-5 text-sm lg:flex text-black hidden"
+      className="ml-20 hidden gap-5 text-sm font-semibold text-black lg:flex"
       onMouseLeave={() => setActiveTab(pathEnd)}
     >
       {tabs.map((tab) => (
@@ -168,7 +172,7 @@ export function DesktopNavTabs({
             /*This component uses layoutId to animate between positions*/
             <motion.div
               layoutId="underline"
-              className="absolute bg-black w-full h-[0.10rem]"
+              className="absolute h-[0.10rem] w-full bg-black"
               transition={{ duration: 0.7, type: "spring" }}
             ></motion.div>
           )}
@@ -190,13 +194,13 @@ export function MobileNavTabs({
   return (
     <div>
       <motion.div
-        className={`absolute ${montserrat.className} flex-col z-40 text-2xl bg-white top-0 right-0 gap-4 pl-8 pt-20 h-screen w-60 flex lg:hidden`}
+        className={`absolute ${montserrat.className} right-0 top-0 z-40 flex h-screen w-60 flex-col gap-4 bg-white pl-8 pt-20 text-2xl lg:hidden`}
         animate={{ translateX: 0, opacity: 1 }}
         initial={{ translateX: 80, opacity: 0 }}
         exit={{ opacity: 0 }}
       >
         <button
-          className="top-7 right-5 absolute"
+          className="absolute right-5 top-7"
           onClick={() => setActiveHamburger(!activeHamburger)}
         >
           <RxCross2></RxCross2>
@@ -212,7 +216,7 @@ export function MobileNavTabs({
           </Link>
         ))}
       </motion.div>
-      <div className="absolute z-30 w-full h-full bg-black opacity-40 top-0 right-0"></div>
+      <div className="absolute right-0 top-0 z-30 h-full w-full bg-black opacity-40"></div>
     </div>
   );
 }

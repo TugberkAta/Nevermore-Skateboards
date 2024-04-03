@@ -64,7 +64,7 @@ export function PreviewObject({
           fill
           className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
           src={src}
-          alt={title}
+          alt={title + " banner"}
         />
       </div>
       <div className="absolute z-10 h-full w-full bg-black opacity-15 transition-opacity hover:opacity-30"></div>
