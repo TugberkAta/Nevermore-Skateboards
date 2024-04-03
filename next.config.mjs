@@ -32,6 +32,11 @@ const nextConfig = {
         hostname: "images.novelship.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "www.kickpush.com.au",
+        port: "",
+      },
     ],
   },
 };
