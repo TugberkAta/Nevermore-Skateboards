@@ -6,7 +6,7 @@ export default function ProductsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="w-screen">
+    <section className="h-full w-screen bg-gray-700">
       <div>{children}</div>
     </section>
   );
