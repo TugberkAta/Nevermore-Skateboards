@@ -22,6 +22,7 @@ const FormSchema = z.object({
     .min(1, { message: "This field is required" }),
   sizes: z.array(z.string().min(1)).nonempty(),
   imgUrl: z.array(z.string().min(1)).nonempty(),
+  honeyPot: z.null(),
 });
 
 export type State = {
@@ -29,8 +30,9 @@ export type State = {
     title?: string[];
     price?: string[];
     brand?: string[];
-    size?: string[];
+    sizes?: string[];
     imgUrl?: string[];
+    honeyPot?: string[];
   };
   message?: string | null;
 };
@@ -46,10 +48,12 @@ export async function createShoes(prevState: State, formData: FormData) {
     }
   });
 
+  // Get the form data after validation
   const validatedFields = CreateShoes.safeParse({
     title: filteredFormData.get("title"),
     price: filteredFormData.get("price"),
     brand: filteredFormData.get("brand"),
+    honeyPot: filteredFormData.get("honeyPot"),
     sizes: filteredFormData.getAll("size"),
     imgUrl: filteredFormData.getAll("imgUrl"),
   });
