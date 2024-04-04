@@ -1,4 +1,4 @@
-import { montserrat } from "@/common/styles/fonts";
+import { montserrat, montserratMedium } from "@/common/styles/fonts";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,6 +9,7 @@ export default function Previews() {
         <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-2">
           <PreviewObject
             title={"Roller Blades"}
+            subtitle={"Carve Your Path: Explore Our Curated Skate Collection"}
             objectPosition={"object-bottom"}
             src={"/rollerblades.jpg"}
             address={"/catalog/Rollerblades"}
@@ -17,6 +18,7 @@ export default function Previews() {
         <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-4">
           <PreviewObject
             title={"Skates"}
+            subtitle="Cruise in Comfort: Find Your Flow with Supportive Rollerblades"
             objectPosition={"object-bottom"}
             src={"/skates.jpg"}
             address={"/catalog/Skateboards"}
@@ -25,6 +27,7 @@ export default function Previews() {
         <div className="relative overflow-hidden border lg:col-span-2 lg:row-span-2">
           <PreviewObject
             title={"Shoes"}
+            subtitle="Comfort Meets Style: Find the Perfect Pair for Every Step"
             objectPosition={"object-bottom"}
             src={"/vans.jpg"}
             address={"/catalog/Shoes"}
@@ -33,6 +36,7 @@ export default function Previews() {
         <div className="relative overflow-hidden border lg:col-span-4 lg:row-span-2">
           <PreviewObject
             title={"Snowboards"}
+            subtitle="Shred the Slopes: Experience the Thrill of Winter"
             objectPosition={""}
             src={"/snowboard.jpg"}
             address={"/catalog/Snowboards"}
@@ -48,6 +52,7 @@ type PreviewObjectProps = {
   objectPosition?: string;
   src: string;
   address: string;
+  subtitle: string;
 };
 
 export function PreviewObject({
@@ -55,6 +60,7 @@ export function PreviewObject({
   objectPosition,
   src,
   address,
+  subtitle,
 }: PreviewObjectProps) {
   return (
     <Link href={address} className="group ">
@@ -62,17 +68,18 @@ export function PreviewObject({
         <Image
           loading="lazy"
           fill
-          className={`object-cover ${objectPosition} transition-transform duration-300 ease-in-out group-hover:scale-110`}
+          className={`object-cover ${objectPosition}  duration-500 ease-in-out group-hover:scale-110`}
           src={src}
           alt={title + " banner"}
         />
       </div>
-      <div className="absolute z-10 h-full w-full bg-black opacity-15 transition-opacity hover:opacity-30"></div>
-      <h2
-        className={`${montserrat.className} absolute bottom-7 z-10 flex w-full justify-center text-3xl font-semibold text-white  duration-300 ease-in-out group-hover:scale-110 `}
+      <div className="absolute top-0 z-10 h-full w-full bg-black opacity-25 transition-opacity"></div>
+      <div
+        className={`flex flex-col text-center ${montserratMedium.className} absolute top-1/2 z-10 flex w-full justify-center font-semibold text-white  duration-500 ease-in-out group-hover:scale-110 `}
       >
-        {title}
-      </h2>
+        <h2 className="text-3xl">{title}</h2>
+        <h3 className="text-xs">{subtitle}</h3>
+      </div>
     </Link>
   );
 }
