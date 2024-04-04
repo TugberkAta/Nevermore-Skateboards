@@ -71,10 +71,36 @@ export async function fetchSnowboardData() {
   }
 }
 
+export async function fetchLatestItems() {
+  // Add noStore() here to prevent the response from being cached.
+  noStore();
+
+  // Unionize the tables and fetch the item that matches the uuid from the tables
+  try {
+    const data = await sql<Item>`SELECT * FROM (
+      SELECT * FROM snowboards
+      UNION
+      SELECT * FROM skates
+      UNION
+      SELECT * FROM rollerblades
+      UNION
+      SELECT * FROM shoes
+    ) AS combined
+    ORDER BY date_added DESC
+    LIMIT 5
+    `;
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch latest item data.");
+  }
+}
+
 export async function fetchItemData(uuid: string) {
   // Add noStore() here to prevent the response from being cached.
   noStore();
 
+  // Unionize the tables and fetch the item that matches the uuid from the tables
   try {
     const data = await sql<Item>`SELECT * FROM snowboards WHERE uuid = ${uuid}
     UNION
