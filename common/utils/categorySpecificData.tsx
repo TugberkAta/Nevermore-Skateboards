@@ -36,6 +36,6 @@ export const CategorySizeData = {
 export const CategoryBrandData = {
   Rollerblade: ["Impala Skate", "Rio"],
   Shoes: ["Converse", "Adidas", "Vans", "Nike"],
-  Skateboards: ["Almost", "Creature", "Impala Skate", "Globe"],
+  Skateboards: ["Almost", "Creature", "Impala Skate", "Globe", "Arbor"],
   Snowboards: ["Salomon", "Rossignol", "Arbor", "Chamonix"],
 };
