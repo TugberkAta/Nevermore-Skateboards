@@ -150,7 +150,7 @@ export default function ShopCart({
                 className="flex h-[90%] flex-col items-center justify-between"
                 layout
               >
-                <div className="mb-10 mt-10 flex w-full flex-col gap-4 overflow-scroll">
+                <div className="mb-6 mt-10 flex w-full flex-col gap-4 overflow-scroll">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (
@@ -172,18 +172,18 @@ export default function ShopCart({
                   })}
                 </div>
                 {shopCartArray?.length ?? 0 >= 1 ? (
-                  <div className="relative flex w-10/12  items-center justify-center">
-                    <button
-                      onClick={handleProcess}
-                      className=" rounded-full bg-green-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-green-600 "
-                    >
-                      Proceed
-                    </button>
-                    <p
-                      className={`${montserrat.className} absolute left-0 text-xs`}
-                    >
-                      Sub Total: £{calculateTotal()} STR
-                    </p>
+                  <div className="flex w-10/12 items-center justify-center">
+                    <div className="flex flex-col items-center gap-2">
+                      <p className={`${montserrat.className} text-xs`}>
+                        Sub Total: £{calculateTotal()} STR
+                      </p>
+                      <button
+                        onClick={handleProcess}
+                        className="w-fit rounded-full bg-green-500 px-10 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-green-600 "
+                      >
+                        Proceed
+                      </button>
+                    </div>
                   </div>
                 ) : (
                   <></>
