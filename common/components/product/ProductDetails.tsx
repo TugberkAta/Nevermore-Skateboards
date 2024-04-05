@@ -13,15 +13,15 @@ export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="justify-center-center mt-10 flex w-11/12 flex-col gap-20 pb-40 md:flex-row lg:pb-0 2xl:w-[90rem]">
-          <div className="min-h-80 w-full md:w-1/2">
+        <div className="mt-10 flex w-11/12 flex-col justify-center gap-20 pb-40 md:flex-row lg:pb-0">
+          <div className="min-h-80 w-full md:w-1/2 min-[2100px]:h-[70rem]">
             <ProductImage
               alt={itemData.title || ""}
               img_url_arr={itemData.img_url_arr || ""}
             ></ProductImage>
           </div>
-          <div className="flex w-full justify-center md:w-1/2">
-            <div className="w-10/12">
+          <div className="flex w-full items-center justify-center md:w-1/2">
+            <div className="w-11/12 md:w-10/12">
               <ProductInformation itemData={itemData} sizeData={sizeData} />
               <div className="mt-8 flex flex-col gap-4 text-sm text-gray-500">
                 <div className="flex items-center gap-6">
