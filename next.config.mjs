@@ -37,6 +37,11 @@ const nextConfig = {
         hostname: "www.kickpush.com.au",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "www.skatewarehouse.co.uk",
+        port: "",
+      },
     ],
   },
 };
