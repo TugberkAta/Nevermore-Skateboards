@@ -34,7 +34,7 @@ export const CategorySizeData = {
 };
 
 export const CategoryBrandData = {
-  Rollerblade: ["Impala Skate"],
+  Rollerblade: ["Impala Skate", "Rio"],
   Shoes: ["Converse", "Adidas", "Vans", "Nike"],
   Skateboards: ["Almost", "Creature", "Impala Skate", "Globe"],
   Snowboards: ["Salomon", "Rossignol", "Arbor", "Chamonix"],
