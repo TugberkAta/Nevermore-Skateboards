@@ -6,6 +6,11 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Providers } from "@/app/providers";
 import { motion } from "framer-motion";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import {
+  montserrat,
+  montserratMedium,
+  montserratThin,
+} from "@/common/styles/fonts";
 
 interface Option {
   value: string | number | null;
@@ -144,25 +149,27 @@ export function SelectFilter({
 }: SelectFilterProps) {
   return (
     <Providers>
-      <label htmlFor={id}>{label}</label>
-      <Select
-        aria-label={label}
-        defaultSelectedKeys={[""]}
-        id={id}
-        placeholder="Default"
-        className="max-w-xs"
-        onChange={(e) => handleSortChange(id, e?.target.value || "")}
-      >
-        {filterOption.map((option) => (
-          <SelectItem
-            className="bg-gray-50"
-            key={option.value || ""}
-            value={option.value || ""}
-          >
-            {option.label}
-          </SelectItem>
-        ))}
-      </Select>
+      <div className={`${montserratMedium.className}`}>
+        <label htmlFor={id}>{label}</label>
+        <Select
+          aria-label={label}
+          defaultSelectedKeys={[""]}
+          id={id}
+          placeholder="Default"
+          className="max-w-xs"
+          onChange={(e) => handleSortChange(id, e?.target.value || "")}
+        >
+          {filterOption.map((option) => (
+            <SelectItem
+              className="bg-gray-50"
+              key={option.value || ""}
+              value={option.value || ""}
+            >
+              {option.label}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
     </Providers>
   );
 }
@@ -183,7 +190,7 @@ export function FilterViewWrapper({
       {/* View for the bigger screen devices */}
       <div className=" -mr-10 hidden h-5/6 w-60 justify-center lg:flex">
         <div className=" w-9/12 items-center gap-4 ">
-          <p className="mb-8 text-3xl font-bold">FILTER</p>
+          <p className={`mb-4 text-3xl ${montserrat.className}`}>FILTER</p>
           <div className="mb-6 flex w-full flex-col  flex-wrap gap-4 md:mb-0 md:flex-nowrap">
             {children}
           </div>
@@ -204,7 +211,7 @@ export function FilterViewWrapper({
               </div>
             </button>
             <div className=" w-9/12 items-center gap-4 ">
-              <p className="mb-8 text-3xl font-bold">FILTER</p>
+              <p className={`mb-8 text-3xl ${montserrat.className}`}>FILTER</p>
               <div className="mb-6 flex w-full flex-col  flex-wrap gap-4 md:mb-0 md:flex-nowrap">
                 {children}
               </div>
