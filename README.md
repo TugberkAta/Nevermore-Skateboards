@@ -7,11 +7,8 @@
 <h2>Catalog Page</h2>
 <img src="https://i.imgur.com/gpFSLox.png" alt="Catalog Page">
 
-<h2>Filtering Items Animation Made With Framer Motion</h2>
+<h2>Filtering Animation Made With Framer Motion</h2>
 <img src="public/filter.gif" alt="Filtering Items ">
-
-<h2>Filtering Panel Made For Smaller Screen Sizes</h2>
-<img src="https://i.imgur.com/Y1E5qKa.png" alt="Filtering Panel Made For Smaller Screen Sizes">
 
 <h2>Shopping Cart</h2>
 <img src="https://i.imgur.com/3lwZj07.png" alt="Shopping Cart">
