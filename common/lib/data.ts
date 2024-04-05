@@ -11,6 +11,10 @@ export type Item = {
   size_array: string[];
 };
 
+export interface ItemsWithCategory extends Item {
+  category: string;
+}
+
 export async function fetchSkateData() {
   // Add noStore() here to prevent the response from being cached.
   noStore();
@@ -77,14 +81,14 @@ export async function fetchLatestItems() {
 
   // Unionize the tables and fetch the item that matches the uuid from the tables
   try {
-    const data = await sql<Item>`SELECT * FROM (
-      SELECT * FROM snowboards
+    const data = await sql<ItemsWithCategory>`SELECT * FROM (
+      SELECT *, 'Snowboards' AS category FROM snowboards
       UNION
-      SELECT * FROM skates
+      SELECT *, 'Skateboards' AS category FROM skates
       UNION
-      SELECT * FROM rollerblades
+      SELECT *, 'Rollerblades' AS category FROM rollerblades
       UNION
-      SELECT * FROM shoes
+      SELECT *, 'Shoes' AS category FROM shoes
     ) AS combined
     ORDER BY date_added DESC
     LIMIT 5
