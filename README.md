@@ -7,6 +7,9 @@
 <h2>Filtering Animation Made With Framer Motion</h2>
 <img src="public/filter.gif" alt="Filtering Items ">
 
+<h2>Product Information Page</h2>
+<img src="https://i.imgur.com/sxpT5nC.png" alt="Product Page">
+
 <h2>Shopping Cart</h2>
 <img src="https://i.imgur.com/3lwZj07.png" alt="Shopping Cart">
 
