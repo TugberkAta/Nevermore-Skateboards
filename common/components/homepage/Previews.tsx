@@ -75,7 +75,7 @@ export function PreviewObject({
       </div>
       <div className="absolute top-0 z-10 h-full w-full bg-black opacity-25 transition-opacity"></div>
       <div
-        className={`flex flex-col text-center ${montserratMedium.className} absolute top-1/2 z-10 flex w-full justify-center font-semibold text-white  duration-500 ease-in-out group-hover:scale-110 `}
+        className={`flex flex-col text-center ${montserratMedium.className} absolute top-0 z-10 flex h-full w-full justify-center font-semibold text-white  duration-500 ease-in-out group-hover:scale-110 `}
       >
         <h2 className="text-3xl">{title}</h2>
         <h3 className="text-xs">{subtitle}</h3>
