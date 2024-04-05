@@ -24,7 +24,7 @@ export function AddToCart({ itemData, selectedSize }: AddToCartProps) {
 
   const handleAddToCart = () => {
     const newItem = {
-      uuid: itemData.uuid,
+      uuid: itemData.uuid + selectedSize,
       img_url: itemData.img_url,
       price: itemData.price,
       size: selectedSize,
