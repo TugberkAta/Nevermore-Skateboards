@@ -2,14 +2,18 @@
 
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { Item } from "@/common/lib/data";
+import { Item, ItemsWithCategory } from "@/common/lib/data";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import Link from "next/link";
 import { montserratMedium } from "@/common/styles/fonts";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
 
-export function Carousel({ latestItems }: { latestItems: Item[] }) {
+export function Carousel({
+  latestItems,
+}: {
+  latestItems: ItemsWithCategory[];
+}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
 
   const scrollPrev = useCallback(() => {
@@ -30,7 +34,11 @@ export function Carousel({ latestItems }: { latestItems: Item[] }) {
           <div className="flex">
             {latestItems.map((item) => {
               return (
-                <div className="relative flex h-5/6 flex-[0_0_35%] flex-col items-center justify-center p-4">
+                <Link
+                  key={item.title + "carousel"}
+                  className="relative flex h-5/6 flex-[0_0_35%] flex-col items-center justify-center p-4"
+                  href={`/product/${item.category}/${item.uuid}`}
+                >
                   <p className="absolute left-0 top-0 z-20 rounded-sm bg-black px-2 text-white">
                     New Arrival
                   </p>
@@ -46,7 +54,7 @@ export function Carousel({ latestItems }: { latestItems: Item[] }) {
                     </div>
                     <p className="text-xs">£{item.price / 100}</p>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
