@@ -43,7 +43,12 @@ export function Carousel({
                     New Arrival
                   </p>
                   <div className="relative min-h-80 w-full">
-                    <Image fill src={item.img_url} alt={item.title}></Image>
+                    <Image
+                      className="className=w-full scale-90 object-contain"
+                      fill
+                      src={item.img_url}
+                      alt={item.title}
+                    ></Image>
                   </div>
                   <div className="flex w-full justify-between pb-4 pt-2">
                     <div className="flex flex-col ">
