@@ -13,7 +13,7 @@ export default function ProductDetails({ itemData, sizeData }: DetailsProps) {
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="justify-center-center mt-10 flex w-screen flex-col pb-40 md:flex-row lg:gap-20 lg:pb-0 2xl:w-[90rem]">
+        <div className="justify-center-center mt-10 flex w-11/12 flex-col gap-20 pb-40 md:flex-row lg:pb-0 2xl:w-[90rem]">
           <div className="min-h-80 w-full md:w-1/2">
             <ProductImage
               alt={itemData.title || ""}
