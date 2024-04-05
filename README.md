@@ -4,9 +4,6 @@
 <h2>Desktop Front Page</h2>
 <img src="https://i.imgur.com/YZwFub1.jpeg" alt="Desktop Front Page">
 
-<h2>Catalog Page</h2>
-<img src="https://i.imgur.com/gpFSLox.png" alt="Catalog Page">
-
 <h2>Filtering Animation Made With Framer Motion</h2>
 <img src="public/filter.gif" alt="Filtering Items ">
 
