@@ -40,8 +40,9 @@ export function PreviewCartItem({
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       exit={{ opacity: 0 }}
+      className="flex w-full items-center justify-center"
     >
-      <div className="flex h-full w-11/12 items-center gap-4  overflow-hidden">
+      <div className="flex h-full w-11/12 items-center gap-4 overflow-hidden">
         <div className="relative hidden h-5/6 flex-col items-center justify-center md:flex">
           <Link href={address} className="w-24">
             <Image
