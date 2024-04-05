@@ -7,6 +7,7 @@ import { PreviewCartItem } from "./PreviewCartItem";
 import { motion } from "framer-motion";
 import Stripe from "stripe";
 import { NoSSR } from "@/common/utils/noSSR";
+import { montserrat } from "@/common/styles/fonts";
 
 type ShoppingItemProps = {
   uuid: string;
@@ -24,6 +25,9 @@ interface LineItem {
     product_data: {
       name: string;
       images: [string];
+      metadata: {
+        size: string;
+      };
     };
     unit_amount: number;
   };
@@ -67,13 +71,16 @@ export default function ShopCart({
     let line_items: LineItem[] = [];
     shopCartArray?.forEach((item) => {
       try {
-        const ShoppingItem = JSON.parse(item);
+        const ShoppingItem: ShoppingItemProps = JSON.parse(item);
         line_items.push({
           price_data: {
             currency: "GBP",
             product_data: {
-              name: ShoppingItem.title,
+              name: `${ShoppingItem.title} - Size: ${ShoppingItem.size}`,
               images: [ShoppingItem.img_url],
+              metadata: {
+                size: ShoppingItem.size,
+              },
             },
             unit_amount: ShoppingItem.price,
           },
@@ -99,6 +106,15 @@ export default function ShopCart({
     } catch (error) {
       console.error("Error creating Stripe Checkout Session:", error);
     }
+  }
+
+  function calculateTotal() {
+    let totalAmount = 0;
+    shopCartArray?.forEach((item) => {
+      const ShoppingItem: ShoppingItemProps = JSON.parse(item);
+      totalAmount += (ShoppingItem.count * ShoppingItem.price) / 100;
+    });
+    return totalAmount;
   }
 
   return (
@@ -156,12 +172,19 @@ export default function ShopCart({
                   })}
                 </div>
                 {shopCartArray?.length ?? 0 >= 1 ? (
-                  <button
-                    onClick={handleProcess}
-                    className=" rounded-full bg-green-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-green-600 "
-                  >
-                    Proceed
-                  </button>
+                  <div className="relative flex w-10/12  items-center justify-center">
+                    <button
+                      onClick={handleProcess}
+                      className=" rounded-full bg-green-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-green-600 "
+                    >
+                      Proceed
+                    </button>
+                    <p
+                      className={`${montserrat.className} absolute left-0 text-xs`}
+                    >
+                      Sub Total: £{calculateTotal()} STR
+                    </p>
+                  </div>
                 ) : (
                   <></>
                 )}
