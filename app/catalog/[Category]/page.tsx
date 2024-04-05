@@ -22,18 +22,20 @@ export default async function ProductPage({
 }) {
   return (
     <>
-      <div className="mt-4 flex  min-h-[90vh] flex-col justify-between">
-        <div className="flex">
-          <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
-            <FetchFilterOptions
-              productName={params.Category}
-            ></FetchFilterOptions>
-          </Suspense>
-          <Suspense fallback={<ProductSkeleton></ProductSkeleton>}>
-            <FetchProductData productName={params.Category} />
-          </Suspense>
+      <div className="flex w-full justify-center">
+        <div className="mt-4 flex  min-h-[90vh] flex-col justify-between md:w-11/12">
+          <div className="flex">
+            <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
+              <FetchFilterOptions
+                productName={params.Category}
+              ></FetchFilterOptions>
+            </Suspense>
+            <Suspense fallback={<ProductSkeleton></ProductSkeleton>}>
+              <FetchProductData productName={params.Category} />
+            </Suspense>
+          </div>
+          <Credit></Credit>
         </div>
-        <Credit></Credit>
       </div>
     </>
   );
