@@ -36,13 +36,15 @@ export function Carousel({
               return (
                 <Link
                   key={item.title + "carousel"}
-                  className="relative flex h-5/6 flex-[0_0_35%] flex-col items-center justify-center p-4"
+                  className="relative flex flex-col items-center justify-center p-4 md:flex-[0_0_55%] lg:flex-[0_0_45%] xl:flex-[0_0_35%] 2xl:flex-[0_0_25%]"
                   href={`/product/${item.category}/${item.uuid}`}
                 >
                   <p className="absolute left-0 top-0 z-20 rounded-sm bg-black px-2 text-white">
                     New Arrival
                   </p>
-                  <img src={item.img_url} alt={item.title}></img>
+                  <div className="relative min-h-80 w-full">
+                    <Image fill src={item.img_url} alt={item.title}></Image>
+                  </div>
                   <div className="flex w-full justify-between pb-4 pt-2">
                     <div className="flex flex-col ">
                       <p className="text-base font-semibold">{item.brand}</p>
