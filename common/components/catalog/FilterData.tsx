@@ -83,7 +83,7 @@ export default function FilterData({
                 return (
                   <PreviewItem
                     key={product.title}
-                    src={product.img_url || ""}
+                    srcArray={product.img_url_arr || ""}
                     alt={product.title || ""}
                     title={product.title || ""}
                     price={product.price || NaN}
