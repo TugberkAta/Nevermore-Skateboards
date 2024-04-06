@@ -26,7 +26,9 @@ export function Carousel({
 
   return (
     <div className="hidden w-full flex-col items-center justify-center md:flex">
-      <p className={`mb-8 text-3xl ${montserratMedium.className}`}>
+      <p
+        className={`mb-8 border-b-2 border-black text-3xl ${montserratMedium.className}`}
+      >
         LATEST ARRIVALS
       </p>
       <div className="w-4/6">
@@ -36,19 +38,20 @@ export function Carousel({
               return (
                 <Link
                   key={item.title + "carousel"}
-                  className="relative flex flex-col items-center justify-center p-4 md:flex-[0_0_55%] lg:flex-[0_0_45%] xl:flex-[0_0_35%] 2xl:flex-[0_0_25%]"
+                  className="relative flex flex-col items-center justify-center p-4 md:flex-[0_0_55%] lg:flex-[0_0_45%] xl:flex-[0_0_40%] 2xl:flex-[0_0_30%]"
                   href={`/product/${item.category}/${item.uuid}`}
                 >
-                  <p className="absolute left-0 top-0 z-20 rounded-sm bg-black px-2 text-white">
-                    New Arrival
-                  </p>
                   <div className="relative min-h-80 w-full">
+                    <p className="absolute left-2 top-2 z-20 rounded-sm bg-black px-2 font-mono text-white">
+                      New Arrival
+                    </p>
                     <Image
                       className="className=w-full scale-90 object-contain"
                       fill
                       src={item.img_url}
                       alt={item.title}
                     ></Image>
+                    <div className="absolute top-0 z-20 h-full w-full bg-orange-950 opacity-5 transition-opacity"></div>
                   </div>
                   <div className="flex w-full justify-between pb-4 pt-2">
                     <div className="flex flex-col ">
