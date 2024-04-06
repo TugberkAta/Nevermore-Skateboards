@@ -20,7 +20,7 @@ export default async function Home() {
     <>
       <div className="w-screen">
         <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-16">
           <Banner></Banner>
           <Carousel latestItems={latestItems}></Carousel>
           <div className="ml-3 mr-3 lg:ml-16 lg:mr-16">
