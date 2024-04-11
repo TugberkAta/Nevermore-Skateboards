@@ -77,7 +77,7 @@ export default function FilterData({
     <>
       {productData && (
         <motion.div className="flex w-full justify-center" layout>
-          <div className=" grid h-full w-11/12 grid-cols-2 justify-center gap-x-8 md:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-5">
+          <div className=" grid h-full grid-cols-2 justify-center gap-x-8 md:grid-cols-2  lg:grid-cols-3 2xl:grid-cols-5">
             <AnimatePresence>
               {filteredProductData.map((product: Item) => {
                 return (
