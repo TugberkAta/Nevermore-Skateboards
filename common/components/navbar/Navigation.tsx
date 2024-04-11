@@ -1,24 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { inika, montserrat, montserratMedium } from "../../styles/fonts";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { montserratMedium } from "../../styles/fonts";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import ShopCart from "./Shopcart/ShopCart";
 import Link from "next/link";
-import { FaFilter } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { RxCross2 } from "react-icons/rx";
-
-// Array of every tab to be shown in the nav bar
-const tabs = [
-  { id: undefined, text: "Homepage" },
-  { id: "Skateboards", text: "Skateboards" },
-  { id: "Rollerblades", text: "Roller Blades" },
-  { id: "Snowboards", text: "Snowboards" },
-  { id: "Shoes", text: "Shoes" },
-];
+import DesktopNavTabs from "./DesktopNavTabs";
+import { MobileNavTabs } from "./MobileNavTabs";
+import MobileFilterButton from "./MobileFilterButton";
 
 type NavigationProps = {
   stripeApiKey: string | undefined;
@@ -114,109 +105,5 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
         </div>
       </div>
     </nav>
-  );
-}
-
-type MobileNavTabs = { pathCategory: string };
-
-export function MobileFilterButton({ pathCategory }: MobileNavTabs) {
-  const [activeFilter, setActiveFilter] = useState(false);
-
-  useEffect(() => {
-    window.dispatchEvent(new Event("filterMobile"));
-  }, [activeFilter]);
-
-  return (
-    <>
-      {pathCategory === "catalog" ? (
-        <button
-          role="button"
-          aria-label="filter-panel-button"
-          className="block lg:hidden"
-          onClick={() => setActiveFilter(!activeFilter)}
-        >
-          <FaFilter className="size-5"></FaFilter>
-        </button>
-      ) : (
-        <div className="size-5" />
-      )}
-    </>
-  );
-}
-
-type DesktopNavTabs = {
-  activeTab: string | undefined;
-  pathEnd: string;
-  setActiveTab: Dispatch<SetStateAction<string | undefined>>;
-};
-
-export function DesktopNavTabs({
-  activeTab,
-  setActiveTab,
-  pathEnd,
-}: DesktopNavTabs) {
-  return (
-    <div
-      className="ml-20 hidden gap-5 text-sm font-semibold text-black lg:flex"
-      onMouseLeave={() => setActiveTab(pathEnd)}
-    >
-      {tabs.map((tab) => (
-        <Link
-          key={tab.id != undefined ? tab.id : "homepage"}
-          href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
-          onMouseEnter={() => setActiveTab(tab.id)}
-          className="relative"
-        >
-          {tab.text}
-          {activeTab === tab.id && (
-            /*This component uses layoutId to animate between positions*/
-            <motion.div
-              layoutId="underline"
-              className="absolute h-[0.10rem] w-full bg-black"
-              transition={{ duration: 0.7, type: "spring" }}
-            ></motion.div>
-          )}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-type MobileNavTabsProps = {
-  setActiveHamburger: Dispatch<SetStateAction<boolean>>;
-  activeHamburger: boolean;
-};
-
-export function MobileNavTabs({
-  setActiveHamburger,
-  activeHamburger,
-}: MobileNavTabsProps) {
-  return (
-    <div>
-      <motion.div
-        className={`absolute ${montserrat.className} right-0 top-0 z-40 flex h-screen w-60 flex-col gap-4 bg-white pl-8 pt-20 text-2xl lg:hidden`}
-        animate={{ translateX: 0, opacity: 1 }}
-        initial={{ translateX: 80, opacity: 0 }}
-        exit={{ opacity: 0 }}
-      >
-        <button
-          className="absolute right-5 top-7"
-          onClick={() => setActiveHamburger(!activeHamburger)}
-        >
-          <RxCross2></RxCross2>
-        </button>
-        {tabs.map((tab) => (
-          <Link
-            key={tab.id != undefined ? tab.id : "homepage"}
-            href={tab.id != undefined ? "/catalog/" + tab.id : `/`}
-            className="relative"
-            onClick={() => setActiveHamburger(!activeHamburger)}
-          >
-            {tab.text}
-          </Link>
-        ))}
-      </motion.div>
-      <div className="absolute right-0 top-0 z-30 h-full w-full bg-black opacity-40"></div>
-    </div>
   );
 }
