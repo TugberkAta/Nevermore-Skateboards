@@ -23,7 +23,7 @@ export default async function ProductPage({
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="mt-4 flex  min-h-[90vh] flex-col justify-between md:w-11/12">
+        <div className=" mt-16 flex min-h-[90vh] w-11/12 flex-col justify-between">
           <div className="flex">
             <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
               <FetchFilterOptions
@@ -34,9 +34,9 @@ export default async function ProductPage({
               <FetchProductData productName={params.Category} />
             </Suspense>
           </div>
-          <Credit></Credit>
         </div>
       </div>
+      <Credit></Credit>
     </>
   );
 }
