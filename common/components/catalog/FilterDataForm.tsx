@@ -154,6 +154,7 @@ export function SelectFilter({
         <Select
           aria-label={label}
           defaultSelectedKeys={[""]}
+          variant="underlined"
           id={id}
           placeholder="Default"
           className="max-w-xs"
@@ -188,7 +189,7 @@ export function FilterViewWrapper({
   return (
     <>
       {/* View for the bigger screen devices */}
-      <div className=" -mr-10 hidden h-5/6 w-60 justify-center lg:flex">
+      <div className=" hidden h-5/6 w-60 justify-center lg:flex">
         <div className=" w-9/12 items-center gap-4 ">
           <p className={`mb-4 text-3xl ${montserrat.className}`}>FILTER</p>
           <div className="mb-6 flex w-full flex-col  flex-wrap gap-4 md:mb-0 md:flex-nowrap">
