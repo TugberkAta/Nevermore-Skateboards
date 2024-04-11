@@ -62,18 +62,18 @@ export function PreviewCartItem({
             {title}
           </p>
           <p className="mt-1 text-sm">Size: {size}</p>
-          <div className="ml-2 mt-4 flex w-fit items-center gap-4">
-            <IncrementItemButton
-              shopCartArray={shopCartArray}
-              setShopCartArray={setShopCartArray}
-              uuid={uuid}
-            ></IncrementItemButton>
-            <p className="w-8 text-center">{count}</p>
+          <div className="ml-2 mt-4 flex w-fit items-center gap-2">
             <DecrementItemButton
               shopCartArray={shopCartArray}
               setShopCartArray={setShopCartArray}
               uuid={uuid}
             ></DecrementItemButton>
+            <p className="w-8 text-center">{count}</p>
+            <IncrementItemButton
+              shopCartArray={shopCartArray}
+              setShopCartArray={setShopCartArray}
+              uuid={uuid}
+            ></IncrementItemButton>
           </div>
         </div>
         <div className="flex  w-fit  flex-col items-center justify-between gap-8">
