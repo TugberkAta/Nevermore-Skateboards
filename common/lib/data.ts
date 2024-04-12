@@ -120,3 +120,32 @@ export async function fetchItemData(uuid: string) {
     throw new Error("Failed to fetch item data.");
   }
 }
+
+export async function fetchQueryItems(query: string) {
+  noStore();
+
+  try {
+    const searchText = query.replace(/\s+/g, " & ").trim();
+
+    const data = await sql<ItemsWithCategory>`
+     SELECT * FROM (
+        SELECT *, 'Snowboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM snowboards
+        UNION
+        SELECT *, 'Skateboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM skates
+        UNION
+        SELECT *, 'Rollerblades' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM rollerblades
+        UNION
+        SELECT *, 'Shoes' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM shoes
+    ) AS combined
+    WHERE
+      document @@ to_tsquery('english', ${searchText})
+    ORDER BY date_added DESC
+    LIMIT 5
+    `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch search items.");
+  }
+}
