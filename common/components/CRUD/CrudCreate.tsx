@@ -1,6 +1,6 @@
 "use client";
 
-import { Providers } from "@/app/providers";
+import { Providers } from "@/common/components/providers";
 import { createRollerblades } from "@/common/lib/actions/rollerbladeAction";
 import { createShoes } from "@/common/lib/actions/shoesAction";
 import { createSkate } from "@/common/lib/actions/skateActions";
