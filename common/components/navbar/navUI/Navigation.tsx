@@ -10,12 +10,18 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import DesktopNavTabs from "./DesktopNavTabs";
 import { MobileNavTabs } from "./MobileNavTabs";
 import MobileFilterButton from "./MobileFilterButton";
+import Search from "../Search/Search";
+import { Item, ItemsWithCategory } from "@/common/lib/data";
 
 type NavigationProps = {
   stripeApiKey: string | undefined;
+  queryItems: ItemsWithCategory[];
 };
 
-export default function Navigation({ stripeApiKey }: NavigationProps) {
+export default function Navigation({
+  stripeApiKey,
+  queryItems,
+}: NavigationProps) {
   // Get pathnames for conditionally updating active tab
   const pathname = usePathname();
   const pathCategory = pathname.split("/")[1];
@@ -63,7 +69,7 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
   }, []);
 
   return (
-    <nav className={`flex h-14 w-screen items-center `}>
+    <nav className={`flex h-16 w-screen items-center `}>
       <div className="ml-8 mr-8 flex w-screen items-center justify-between">
         {/* This div is for mobile layout of the logo*/}
         <div className="box lg:hidden">
@@ -81,6 +87,7 @@ export default function Navigation({ stripeApiKey }: NavigationProps) {
           />
         </div>
         <div className="flex gap-6 fill-black">
+          <Search queryItems={queryItems}></Search>
           {stripeApiKey && (
             <ShopCart
               shopCartArray={shopCartArray}
