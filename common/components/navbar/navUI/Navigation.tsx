@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { montserratMedium } from "../../styles/fonts";
+import { montserratMedium } from "../../../styles/fonts";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import ShopCart from "./Shopcart/ShopCart";
+import ShopCart from "../Shopcart/ShopCart";
 import Link from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 import DesktopNavTabs from "./DesktopNavTabs";

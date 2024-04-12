@@ -2,7 +2,7 @@ import Credit from "@/common/components/footer/Credit";
 import Banner from "@/common/components/homepage/Banner";
 import { Carousel } from "@/common/components/homepage/Carousel";
 import Previews from "@/common/components/homepage/Previews";
-import Navigation from "@/common/components/navbar/Navigation";
+import Navigation from "@/common/components/navbar/navUI/Navigation";
 import { fetchLatestItems } from "@/common/lib/data";
 import { Metadata } from "next";
 

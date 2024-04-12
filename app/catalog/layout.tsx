@@ -1,5 +1,5 @@
 import Credit from "@/common/components/footer/Credit";
-import Navigation from "@/common/components/navbar/Navigation";
+import Navigation from "@/common/components/navbar/navUI/Navigation";
 
 export default function ProductsLayout({
   children,
