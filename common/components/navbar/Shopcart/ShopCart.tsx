@@ -123,7 +123,7 @@ export default function ShopCart({
         <MdOutlineShoppingCart className="size-5" />
         <NoSSR>
           <h1
-            className={`absolute bottom-3 left-3 size-5 rounded-full bg-black text-center text-sm font-bold text-white`}
+            className={`absolute left-3 top-0 size-5 rounded-full bg-black text-center text-sm font-bold text-white`}
           >
             {0 + (shopCartArray?.length || 0)}
           </h1>
