@@ -3,7 +3,7 @@
 import { Select, SelectItem } from "@nextui-org/select";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Providers } from "@/app/providers";
+import { Providers } from "@/common/components/providers";
 import { motion } from "framer-motion";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import {
@@ -53,6 +53,7 @@ export default function FilterDataForm({
     }));
   };
 
+  // Cleanup for the parameters
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     if (sortParams.sortBrand) {
@@ -85,6 +86,7 @@ export default function FilterDataForm({
     }
   }, []);
 
+  // Make the page unscrollable when filter is active on mobile devices
   useEffect(() => {
     if (activeFilter) {
       document.body.classList.add("overflow-hidden");
