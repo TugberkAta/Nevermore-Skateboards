@@ -1,10 +1,11 @@
-import { fetchItemData } from "@/common/lib/data";
+import { fetchItemData, fetchQueryItems } from "@/common/lib/data";
 import { Item } from "../../../../common/lib/data";
 import ProductDetails from "@/common/components/product/ProductDetails";
 import Credit from "@/common/components/footer/Credit";
 import Breadcrumbs from "@/common/components/breadcrumbs/Breadcrumbs";
 import { Metadata } from "next";
 import { CategorySizeData } from "@/common/utils/categorySpecificData";
+import Navigation from "@/common/components/navbar/navUI/Navigation";
 
 export const metadata: Metadata = {
   title:
@@ -16,10 +17,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductPage({
+  searchParams,
   params,
 }: {
   params: { id: string; Category: string };
+  searchParams: { query: string };
 }) {
+  const queryItems = await fetchQueryItems(searchParams.query || "");
+
   let itemData: Item;
   try {
     const itemDataArray = await fetchItemData(params.id);
@@ -68,6 +73,10 @@ export default async function ProductPage({
 
   return (
     <>
+      <Navigation
+        stripeApiKey={process.env.STRIPE_API_KEY}
+        queryItems={queryItems}
+      ></Navigation>
       {itemData && (
         <>
           <div className="flex h-[93vh] flex-col justify-between">

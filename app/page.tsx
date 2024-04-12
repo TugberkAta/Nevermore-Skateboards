@@ -3,7 +3,7 @@ import Banner from "@/common/components/homepage/Banner";
 import { Carousel } from "@/common/components/homepage/Carousel";
 import Previews from "@/common/components/homepage/Previews";
 import Navigation from "@/common/components/navbar/navUI/Navigation";
-import { fetchLatestItems } from "@/common/lib/data";
+import { fetchLatestItems, fetchQueryItems } from "@/common/lib/data";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,20 +14,26 @@ export const metadata: Metadata = {
     "Welcome to Nevermore Skateboards, where skateboarding is not just a sport, but a lifestyle. Immerse yourself in our world of high-quality skateboards, gear, and apparel designed for enthusiasts who live and breathe skateboarding. Join our vibrant community and elevate your skateboarding experience.",
 };
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { query: string };
+}) {
   const latestItems = await fetchLatestItems();
+  const queryItems = await fetchQueryItems(searchParams.query || "");
   return (
     <>
-      <div className="w-screen">
-        <Navigation stripeApiKey={process.env.STRIPE_API_KEY}></Navigation>
-        <div className="flex flex-col gap-4 md:gap-16">
-          <Banner></Banner>
-          <Carousel latestItems={latestItems}></Carousel>
-          <div className="ml-3 mr-3 lg:ml-16 lg:mr-16">
-            <Previews></Previews>
-          </div>
-          <Credit></Credit>
+      <Navigation
+        stripeApiKey={process.env.STRIPE_API_KEY}
+        queryItems={queryItems}
+      ></Navigation>
+      <div className="flex flex-col gap-4 md:gap-16">
+        <Banner></Banner>
+        <Carousel latestItems={latestItems}></Carousel>
+        <div className="ml-3 mr-3 lg:ml-16 lg:mr-16">
+          <Previews></Previews>
         </div>
+        <Credit></Credit>
       </div>
     </>
   );
