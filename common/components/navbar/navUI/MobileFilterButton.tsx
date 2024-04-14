@@ -14,17 +14,14 @@ export default function MobileFilterButton({
 
   return (
     <>
-      {pathCategory === "catalog" ? (
+      {pathCategory === "catalog" && (
         <button
           role="button"
           aria-label="filter-panel-button"
-          className="block lg:hidden"
           onClick={() => setActiveFilter(!activeFilter)}
         >
           <FaFilter className="size-5"></FaFilter>
         </button>
-      ) : (
-        <div className="size-5" />
       )}
     </>
   );
