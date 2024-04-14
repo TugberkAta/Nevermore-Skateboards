@@ -1,7 +1,12 @@
 "use client";
 
 import { Select, SelectItem } from "@nextui-org/select";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import {
+  useSearchParams,
+  usePathname,
+  useRouter,
+  ReadonlyURLSearchParams,
+} from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Providers } from "@/common/components/providers";
 import { motion } from "framer-motion";
@@ -38,11 +43,11 @@ export default function FilterDataForm({
   const searchParams = useSearchParams();
 
   const [sortParams, setSortParams] = useState({
-    sortGeneral: "",
-    sortSize: "",
-    sortPriceLow: "",
-    sortPriceHigh: "",
-    sortBrand: "",
+    sortGeneral: searchParams.get("sortGeneral") || "",
+    sortSize: searchParams.get("sortSize") || "",
+    sortPriceLow: searchParams.get("sortPriceLow") || "",
+    sortPriceHigh: searchParams.get("sortPriceHigh") || "",
+    sortBrand: searchParams.get("sortBrand") || "",
   });
 
   // Function to update the sortParams state
@@ -106,30 +111,35 @@ export default function FilterDataForm({
           filterOption={filterOptions.GeneralOptions}
           label={"Sort"}
           handleSortChange={handleSortChange}
+          searchParams={searchParams}
         ></SelectFilter>
         <SelectFilter
           id={"sortSize"}
           filterOption={filterOptions.ProductSizeOptions}
           label={"Size"}
           handleSortChange={handleSortChange}
+          searchParams={searchParams}
         ></SelectFilter>
         <SelectFilter
           id={"sortPriceLow"}
           filterOption={filterOptions.PriceRangeOptions}
           label={"Min price"}
           handleSortChange={handleSortChange}
+          searchParams={searchParams}
         ></SelectFilter>
         <SelectFilter
           id={"sortPriceHigh"}
           filterOption={filterOptions.PriceRangeOptions}
           label={"Max price"}
           handleSortChange={handleSortChange}
+          searchParams={searchParams}
         ></SelectFilter>
         <SelectFilter
           id={"sortBrand"}
           filterOption={filterOptions.ProductBrandOptions}
           label={"Brand"}
           handleSortChange={handleSortChange}
+          searchParams={searchParams}
         ></SelectFilter>
       </FilterViewWrapper>
     </>
@@ -139,6 +149,7 @@ export default function FilterDataForm({
 type SelectFilterProps = {
   id: string;
   filterOption: Option[];
+  searchParams: ReadonlyURLSearchParams;
   label: string;
   handleSortChange: (name: any, value: string | number | undefined) => void;
 };
@@ -146,6 +157,7 @@ type SelectFilterProps = {
 export function SelectFilter({
   id,
   label,
+  searchParams,
   filterOption,
   handleSortChange,
 }: SelectFilterProps) {
@@ -155,10 +167,10 @@ export function SelectFilter({
         <label htmlFor={id}>{label}</label>
         <Select
           aria-label={label}
-          defaultSelectedKeys={[""]}
+          defaultSelectedKeys={[searchParams.get(id) || ""]}
           variant="underlined"
           id={id}
-          placeholder="Default"
+          placeholder={"Default"}
           className="max-w-xs"
           onChange={(e) => handleSortChange(id, e?.target.value || "")}
         >
@@ -203,7 +215,7 @@ export function FilterViewWrapper({
       {activeFilter && (
         <div>
           <motion.div
-            className="absolute top-0 z-40 flex h-screen w-60 justify-center bg-white pt-20 lg:hidden"
+            className="absolute left-0 top-0 z-40 flex h-screen w-60 justify-center bg-white pt-20 lg:hidden"
             animate={{ translateX: 0, opacity: 1 }}
             initial={{ translateX: -80, opacity: 0 }}
             exit={{ opacity: 0 }}
