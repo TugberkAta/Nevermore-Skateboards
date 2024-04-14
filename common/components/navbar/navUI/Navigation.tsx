@@ -12,6 +12,8 @@ import { MobileNavTabs } from "./MobileNavTabs";
 import MobileFilterButton from "./MobileFilterButton";
 import Search from "../Search/Search";
 import { Item, ItemsWithCategory } from "@/common/lib/data";
+import { easeInOut, motion } from "framer-motion";
+import MobileSearchButton from "./MobileSearchButton";
 
 type NavigationProps = {
   stripeApiKey: string | undefined;
@@ -30,8 +32,11 @@ export default function Navigation({
   // State for updating the active tab
   const [activeTab, setActiveTab] = useState<string | undefined>(pathEnd);
 
-  // State for updating the active tab
+  // State for updating the state of hamburger for mobile
   const [activeHamburger, setActiveHamburger] = useState<boolean>(false);
+
+  // State for updating the state of search-bar for mobile
+  const [activeSearchBar, setActiveSearchBar] = useState<boolean>(false);
 
   // To disable scrolling when the panel is opened
   useEffect(() => {
@@ -40,7 +45,7 @@ export default function Navigation({
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-  }, [activeHamburger]);
+  }, [activeHamburger, activeSearchBar]);
 
   useEffect(() => {
     setActiveTab(pathEnd);
@@ -71,13 +76,16 @@ export default function Navigation({
   return (
     <nav className={`flex h-16 w-screen items-center `}>
       <div className="ml-8 mr-8 flex w-screen items-center justify-between">
-        {/* This div is for mobile layout of the logo*/}
-        <div className="box lg:hidden">
+        {/* This div is for the mobile layout of the buttons*/}
+        <div className="flex gap-4 lg:hidden">
+          <MobileSearchButton
+            setActiveSearchBar={setActiveSearchBar}
+          ></MobileSearchButton>
           <MobileFilterButton pathCategory={pathCategory}></MobileFilterButton>
         </div>
         <div className="flex items-center">
           <Link href="/" className="flex h-full items-center gap-4 ">
-            <Image width={34} height={34} src="/raven.svg" alt="Raven Icon" />
+            <img width={34} height={34} src="/raven.svg" alt="Raven Icon" />
             <p className={`${montserratMedium.className} `}>Nevermore</p>
           </Link>
           <DesktopNavTabs
@@ -87,7 +95,11 @@ export default function Navigation({
           />
         </div>
         <div className="flex gap-6 fill-black">
-          <Search queryItems={queryItems}></Search>
+          <Search
+            activeSearchBar={activeSearchBar}
+            setActiveSearchBar={setActiveSearchBar}
+            queryItems={queryItems}
+          ></Search>
           {stripeApiKey && (
             <ShopCart
               shopCartArray={shopCartArray}
@@ -96,7 +108,7 @@ export default function Navigation({
             ></ShopCart>
           )}
           <button
-            className="block md:hidden"
+            className="block lg:hidden"
             role="button"
             aria-label="hamburger-menu-button"
             onClick={() => setActiveHamburger(!activeHamburger)}
