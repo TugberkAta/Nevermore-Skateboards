@@ -121,14 +121,37 @@ export async function fetchItemData(uuid: string) {
   }
 }
 
-export async function fetchQueryItems(query: string) {
+type CountResult = {
+  total_count: number;
+};
+
+const ITEMS_PER_PAGE = 4;
+export async function fetchQueryItems(query: string, currentPage: number) {
   noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const searchText = query.replace(/\s+/g, " & ").trim();
 
-    const data = await sql<ItemsWithCategory>`
-     SELECT * FROM (
+    // Query to fetch data with pagination
+    const dataQuery = await sql<ItemsWithCategory>`
+    SELECT * FROM (
+      SELECT *, 'Snowboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM snowboards
+      UNION
+      SELECT *, 'Skateboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM skates
+      UNION
+      SELECT *, 'Rollerblades' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM rollerblades
+      UNION
+      SELECT *, 'Shoes' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM shoes
+    ) AS combined
+    WHERE
+      document @@ to_tsquery('english', ${searchText})
+    ORDER BY date_added DESC
+    LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}`;
+
+    const totalRowCountQuery = await sql<CountResult>`
+    SELECT COUNT(*) AS total_count FROM (
+      SELECT * FROM (
         SELECT *, 'Snowboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM snowboards
         UNION
         SELECT *, 'Skateboards' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM skates
@@ -136,14 +159,14 @@ export async function fetchQueryItems(query: string) {
         SELECT *, 'Rollerblades' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM rollerblades
         UNION
         SELECT *, 'Shoes' AS category, to_tsvector('english', coalesce(title, '') || ' ' || coalesce(brand, '')) as document FROM shoes
-    ) AS combined
-    WHERE
-      document @@ to_tsquery('english', ${searchText})
-    ORDER BY date_added DESC
-    LIMIT 5
-    `;
+      ) AS combined
+      WHERE
+        document @@ to_tsquery('english', ${searchText})
+    ) AS count_subquery`;
 
-    return data.rows;
+    const totalRowCount = totalRowCountQuery.rows[0].total_count;
+
+    return { rows: dataQuery.rows, totalCount: totalRowCount };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch search items.");
