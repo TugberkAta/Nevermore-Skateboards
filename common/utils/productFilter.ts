@@ -57,7 +57,7 @@ export async function createOptions(productName: string) {
 
   const Options: Options = {
     GeneralOptions: [
-      { value: "", label: "Default" },
+      { value: "", label: "Default Sorting" },
       { value: "highToLow", label: "High To Low" },
       { value: "lowToHigh", label: "Low To High" },
     ],
