@@ -9,28 +9,27 @@ import { useDebouncedCallback } from "use-debounce";
 import { ItemsWithCategory } from "@/common/lib/data";
 import PreviewSearchItems from "./PreviewSearchItems";
 import { motion } from "framer-motion";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 type SearchProps = {
   queryItems: ItemsWithCategory[];
   activeSearchBar: boolean;
   setActiveSearchBar: Dispatch<SetStateAction<boolean>>;
+  queryTotalCount: number;
 };
 
 export default function Search({
   queryItems,
   setActiveSearchBar,
   activeSearchBar,
+  queryTotalCount,
 }: SearchProps) {
   const [focused, setFocused] = useState(false);
 
-  /**
-   * Hook that alerts clicks outside of the passed ref
-   */
+  // Hook that alerts clicks outside of the passed ref
   function useOutsideAlerter(ref: any) {
     useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
+      // Alert if clicked on outside of element
       function handleClickOutside(event: { target: any }) {
         if (ref.current && !ref.current.contains(event.target)) {
           setActiveSearchBar(false);
@@ -57,7 +56,30 @@ export default function Search({
 
   const [queryParams, setQueryParams] = useState({
     query: "",
+    pageCount: "1",
   });
+
+  // Resets the pageCount to 1 when query changes
+  useEffect(() => {
+    handleQueryChange("pageCount", "1");
+  }, [queryParams.query]);
+
+  function incrementPageCount() {
+    if (queryTotalCount / 4 >= Number(queryParams.pageCount))
+      handleQueryChange(
+        "pageCount",
+        String(Number(queryParams.pageCount) + 1) || "1",
+      );
+  }
+
+  function decrementPageCount() {
+    if (Number(queryParams.pageCount) > 1) {
+      handleQueryChange(
+        "pageCount",
+        String(Number(queryParams.pageCount) - 1) || "1",
+      );
+    }
+  }
 
   // Function to update the queryParams state
   const handleQueryChange = useDebouncedCallback(
@@ -76,6 +98,9 @@ export default function Search({
     if (queryParams.query) {
       params.set("query", queryParams.query);
     } else params.delete("query");
+    if (queryParams.pageCount) {
+      params.set("pageCount", queryParams.pageCount);
+    } else params.delete("pageCount");
     replace(`${pathname}?${params.toString()}`);
   }, [queryParams]);
 
@@ -127,7 +152,25 @@ export default function Search({
               <div
                 className={`absolute top-11 z-30 flex w-full flex-col items-center gap-4 overflow-scroll rounded-lg bg-white [&>div:first-child]:pt-4 [&>div:last-child]:pb-4`}
               >
-                {queryItems?.map((item) => {
+                {queryItems.length != 0 && (
+                  <div className="flex w-11/12 items-center justify-between text-center text-sm">
+                    <p>{queryTotalCount} match found</p>
+                    <div className="flex items-center justify-end">
+                      <button onClick={decrementPageCount}>
+                        <GrFormPrevious
+                          className={`size-5 ${Number(queryParams.pageCount) === 1 ? "stroke-gray-500" : ""}`}
+                        />
+                      </button>
+                      <p className="w-6">{queryParams.pageCount}</p>
+                      <button onClick={incrementPageCount}>
+                        <GrFormNext
+                          className={`size-5 ${queryTotalCount / 4 <= Number(queryParams.pageCount) ? "stroke-gray-400" : ""}`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {queryItems.map((item) => {
                   return (
                     <PreviewSearchItems
                       key={item.title + " search result"}
