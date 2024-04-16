@@ -1,10 +1,11 @@
-import FetchFilterOptions from "@/common/components/catalog/FetchFilterOptions";
 import FetchProductData from "@/common/components/catalog/FetchProductData";
+import FilterDataForm from "@/common/components/catalog/FilterDataForm";
+import FilterDataSortButton from "@/common/components/catalog/FilterDataSortButton";
 import Credit from "@/common/components/footer/Credit";
 import Navigation from "@/common/components/navbar/navUI/Navigation";
-import FilterSkeleton from "@/common/components/skeletons/filterSkeleton";
 import ProductSkeleton from "@/common/components/skeletons/productSkeleton";
 import { fetchQueryItems } from "@/common/lib/data";
+import { createOptions } from "@/common/utils/productFilter";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -25,20 +26,22 @@ export default async function ProductPage({
   searchParams: { query: string };
 }) {
   const queryItems = await fetchQueryItems(searchParams.query || "");
+  const filterOptions = await createOptions(params.Category);
   return (
     <>
       <Navigation
         stripeApiKey={process.env.STRIPE_API_KEY}
         queryItems={queryItems}
       ></Navigation>
-      <div className="flex w-full justify-center">
-        <div className=" mt-16 flex min-h-[90vh] w-11/12 flex-col justify-between">
-          <div className="flex">
-            <Suspense fallback={<FilterSkeleton></FilterSkeleton>}>
-              <FetchFilterOptions
-                productName={params.Category}
-              ></FetchFilterOptions>
-            </Suspense>
+      <div className="mt-4 flex min-h-[90vh] w-full flex-col items-center">
+        <div className="w-11/12">
+          <div className="flex h-16 w-full justify-end">
+            {filterOptions && (
+              <FilterDataSortButton filterOptions={filterOptions} />
+            )}
+          </div>
+          <div className="flex gap-8">
+            {filterOptions && <FilterDataForm filterOptions={filterOptions} />}
             <Suspense fallback={<ProductSkeleton></ProductSkeleton>}>
               <FetchProductData productName={params.Category} />
             </Suspense>
