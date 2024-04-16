@@ -5,6 +5,7 @@ import Previews from "@/common/components/homepage/Previews";
 import Navigation from "@/common/components/navbar/navUI/Navigation";
 import { fetchLatestItems, fetchQueryItems } from "@/common/lib/data";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Nevermore Skateboards - Premium Skateboarding Gear and Lifestyle",
@@ -27,7 +28,7 @@ export default async function Home({
         stripeApiKey={process.env.STRIPE_API_KEY}
         queryItems={queryItems}
       ></Navigation>
-      <div className="flex flex-col gap-4 md:gap-16">
+      <div className="flex flex-col gap-4 lg:gap-16">
         <Banner></Banner>
         <Carousel latestItems={latestItems}></Carousel>
         <div className="ml-3 mr-3 lg:ml-16 lg:mr-16">

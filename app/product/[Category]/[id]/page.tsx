@@ -80,7 +80,7 @@ export default async function ProductPage({
       {itemData && (
         <>
           <div className="flex h-[93vh] flex-col justify-between">
-            <div>
+            <div className="flex flex-col gap-4">
               <Breadcrumbs
                 category={params.Category}
                 itemTitle={itemData.title}
