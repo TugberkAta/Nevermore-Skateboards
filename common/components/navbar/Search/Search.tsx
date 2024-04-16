@@ -82,7 +82,8 @@ export default function Search({
   // To disable scrolling when the search-bar is focused and opened on mobile
   useEffect(() => {
     if (activeSearchBar) {
-      document.getElementById("query")?.focus();
+      const queryInput = document.getElementById("query") as HTMLInputElement;
+      queryInput?.focus({ preventScroll: true });
     }
     if (focused) {
       document.body.classList.add("overflow-hidden");
