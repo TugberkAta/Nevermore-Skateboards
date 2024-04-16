@@ -43,7 +43,6 @@ export default function FilterDataForm({
   const searchParams = useSearchParams();
 
   const [sortParams, setSortParams] = useState({
-    sortGeneral: searchParams.get("sortGeneral") || "",
     sortSize: searchParams.get("sortSize") || "",
     sortPriceLow: searchParams.get("sortPriceLow") || "",
     sortPriceHigh: searchParams.get("sortPriceHigh") || "",
@@ -64,9 +63,6 @@ export default function FilterDataForm({
     if (sortParams.sortBrand) {
       params.set("sortBrand", sortParams.sortBrand);
     } else params.delete("sortBrand");
-    if (sortParams.sortGeneral) {
-      params.set("sortGeneral", sortParams.sortGeneral);
-    } else params.delete("sortGeneral");
     if (sortParams.sortPriceHigh) {
       params.set("sortPriceHigh", sortParams.sortPriceHigh);
     } else params.delete("sortPriceHigh");
@@ -106,13 +102,6 @@ export default function FilterDataForm({
         setActiveFilter={setActiveFilter}
         activeFilter={activeFilter}
       >
-        <SelectFilter
-          id={"sortGeneral"}
-          filterOption={filterOptions.GeneralOptions}
-          label={"Sort"}
-          handleSortChange={handleSortChange}
-          searchParams={searchParams}
-        ></SelectFilter>
         <SelectFilter
           id={"sortSize"}
           filterOption={filterOptions.ProductSizeOptions}
