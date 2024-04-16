@@ -18,11 +18,13 @@ import MobileSearchButton from "./MobileSearchButton";
 type NavigationProps = {
   stripeApiKey: string | undefined;
   queryItems: ItemsWithCategory[];
+  queryTotalCount: number;
 };
 
 export default function Navigation({
   stripeApiKey,
   queryItems,
+  queryTotalCount,
 }: NavigationProps) {
   // Get pathnames for conditionally updating active tab
   const pathname = usePathname();
@@ -74,7 +76,7 @@ export default function Navigation({
   }, []);
 
   return (
-    <nav className={`flex h-16 w-screen items-center `}>
+    <nav className={`flex h-16 w-screen items-center`}>
       <div className="ml-8 mr-8 flex w-screen items-center justify-between">
         {/* This div is for the mobile layout of the buttons*/}
         <div className="flex gap-4 lg:hidden">
@@ -99,6 +101,7 @@ export default function Navigation({
             activeSearchBar={activeSearchBar}
             setActiveSearchBar={setActiveSearchBar}
             queryItems={queryItems}
+            queryTotalCount={queryTotalCount}
           ></Search>
           {stripeApiKey && (
             <ShopCart
