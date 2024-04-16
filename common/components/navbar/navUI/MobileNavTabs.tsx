@@ -15,7 +15,7 @@ export function MobileNavTabs({
   activeHamburger,
 }: MobileNavTabsProps) {
   return (
-    <div>
+    <>
       <motion.div
         className={`absolute ${montserrat.className} right-0 top-0 z-40 flex h-screen w-60 flex-col bg-white pl-8 pt-20 text-xl lg:hidden`}
         animate={{ translateX: 0, opacity: 1 }}
@@ -40,6 +40,6 @@ export function MobileNavTabs({
         ))}
       </motion.div>
       <div className="absolute right-0 top-0 z-30 h-full w-full bg-black opacity-40"></div>
-    </div>
+    </>
   );
 }
