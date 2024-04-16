@@ -26,7 +26,7 @@ export function Carousel({
   }, [emblaApi]);
 
   return (
-    <div className="hidden w-full flex-col items-center justify-center md:flex">
+    <div className="hidden w-full flex-col items-center justify-center lg:flex">
       <p
         className={`mb-8 border-b-2 border-black text-3xl ${montserratMedium.className}`}
       >
@@ -39,7 +39,7 @@ export function Carousel({
               return (
                 <div
                   key={item.title + "carousel"}
-                  className="relative p-4 md:flex-[0_0_55%] lg:flex-[0_0_45%] xl:flex-[0_0_40%] 2xl:flex-[0_0_30%]"
+                  className="relative p-4 lg:flex-[0_0_45%] xl:flex-[0_0_40%] 2xl:flex-[0_0_30%]"
                 >
                   <PreviewItem
                     alt={item.title}
