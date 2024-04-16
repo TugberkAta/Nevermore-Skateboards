@@ -14,7 +14,7 @@ export default function Breadcrumbs({
   return (
     <>
       <div className="flex w-full justify-center">
-        <div className="mt-4 w-10/12 ">
+        <div className="mt-4 w-11/12 ">
           <div className=" flex gap-1 text-xs text-gray-500 transition-all">
             <Link className="hover:text-black" href={`/catalog/${category}`}>
               {category}
