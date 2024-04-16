@@ -23,15 +23,19 @@ export default async function ProductPage({
   params,
 }: {
   params: { Category: string };
-  searchParams: { query: string };
+  searchParams: { query: string; pageCount: number };
 }) {
-  const queryItems = await fetchQueryItems(searchParams.query || "");
+  const queryItems = await fetchQueryItems(
+    searchParams.query || "",
+    Number(searchParams.pageCount) || 1,
+  );
   const filterOptions = await createOptions(params.Category);
   return (
     <>
       <Navigation
         stripeApiKey={process.env.STRIPE_API_KEY}
-        queryItems={queryItems}
+        queryItems={queryItems.rows}
+        queryTotalCount={queryItems.totalCount}
       ></Navigation>
       <div className="mt-4 flex min-h-[90vh] w-full flex-col items-center">
         <div className="w-11/12">

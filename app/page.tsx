@@ -18,15 +18,19 @@ export const metadata: Metadata = {
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { query: string };
+  searchParams: { query: string; pageCount: number };
 }) {
   const latestItems = await fetchLatestItems();
-  const queryItems = await fetchQueryItems(searchParams.query || "");
+  const queryItems = await fetchQueryItems(
+    searchParams.query || "",
+    Number(searchParams.pageCount) || 1,
+  );
   return (
     <>
       <Navigation
         stripeApiKey={process.env.STRIPE_API_KEY}
-        queryItems={queryItems}
+        queryItems={queryItems.rows}
+        queryTotalCount={queryItems.totalCount}
       ></Navigation>
       <div className="flex flex-col gap-4 lg:gap-16">
         <Banner></Banner>
