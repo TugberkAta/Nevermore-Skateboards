@@ -70,7 +70,7 @@ export function PreviewItem({
         className="flex h-full w-full flex-col items-center justify-center overflow-hidden pb-2 "
       >
         <div
-          className="relative h-[16.5rem] w-full overflow-hidden rounded-2xl shadow-sm md:h-[18.5rem] "
+          className="relative h-[16.5rem] w-full overflow-hidden rounded-md shadow-sm md:h-[18.5rem] "
           onMouseOver={handleMouseEnter}
           onMouseOut={handleMouseLeave}
         >
