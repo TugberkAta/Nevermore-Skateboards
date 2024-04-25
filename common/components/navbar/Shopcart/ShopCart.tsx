@@ -54,9 +54,9 @@ export default function ShopCart({
   // To disable scrolling when the panel is opened
   useEffect(() => {
     if (activateShopCart) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("noscroll");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("noscroll");
     }
   }, [activateShopCart]);
 
@@ -137,7 +137,7 @@ export default function ShopCart({
             initial={{ translateX: 120, opacity: 0 }}
             exit={{ opacity: 0 }}
           >
-            <div className="mt-10 w-10/12 overflow-scroll">
+            <div className="mt-10 w-10/12 overflow-scroll scrollbar-hide">
               <div className="flex justify-between">
                 <h1 className={`text-xl font-bold`}>
                   Cart ( {0 + (shopCartArray?.length || 0)} )
@@ -150,7 +150,7 @@ export default function ShopCart({
                 className="flex h-[90%] flex-col items-center justify-between"
                 layout
               >
-                <div className="mb-6 mt-10 flex w-full flex-col gap-4 overflow-scroll">
+                <div className="mb-6 mt-10 flex w-full flex-col gap-4 overflow-scroll scrollbar-hide">
                   {shopCartArray?.map((item) => {
                     const ShoppingItem: ShoppingItemProps = JSON.parse(item);
                     return (

@@ -42,7 +42,7 @@ export function PreviewCartItem({
       exit={{ opacity: 0 }}
       className="flex w-full items-center justify-center"
     >
-      <div className="flex h-full w-11/12 items-center gap-4 overflow-hidden">
+      <div className="flex h-full w-11/12 items-center gap-4 ">
         <div className="relative hidden h-5/6 flex-col items-center justify-center md:flex">
           <Link href={address} className="w-24">
             <Image
@@ -57,7 +57,7 @@ export function PreviewCartItem({
         <div className="flex w-full flex-col">
           <p className="mb-1 w-2/4 text-sm">{brand}</p>
           <p
-            className={`${montserrat.className} h-5 overflow-scroll text-sm font-extrabold leading-5`}
+            className={`${montserrat.className} h-5 overflow-scroll text-sm font-extrabold leading-5 scrollbar-hide`}
           >
             {title}
           </p>

@@ -76,7 +76,7 @@ export default function Navigation({
   }, []);
 
   return (
-    <nav className={`flex h-16 w-screen items-center`}>
+    <nav className={`flex h-16  items-center`}>
       <div className="ml-8 mr-8 flex w-screen items-center justify-between">
         {/* This div is for the mobile layout of the buttons*/}
         <div className="flex gap-4 lg:hidden">

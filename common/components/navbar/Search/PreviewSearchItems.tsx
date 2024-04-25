@@ -34,9 +34,9 @@ export default function PreviewSearchItems({
     >
       <Link
         href={address}
-        className=" w-full  flex-col items-center justify-center overflow-hidden pb-2 "
+        className="  w-full flex-col items-center justify-center overflow-hidden pb-2 "
       >
-        <div className="grid grid-cols-5 items-center gap-4 overflow-hidden">
+        <div className="grid grid-cols-5 items-center gap-4 overflow-hidden scrollbar-hide">
           <div className="col-span-2 w-full">
             <div className="relative h-20 w-full flex-col items-center justify-center">
               <div>
@@ -53,7 +53,7 @@ export default function PreviewSearchItems({
           <div className="col-span-2  flex w-full flex-col">
             <p className=" w-2/4 text-sm">{brand}</p>
             <p
-              className={`${montserrat.className} h-10 overflow-scroll text-sm font-extrabold leading-5`}
+              className={`${montserrat.className} h-10 overflow-scroll text-sm font-extrabold leading-5 scrollbar-hide`}
             >
               {title}
             </p>

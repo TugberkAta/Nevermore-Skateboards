@@ -111,9 +111,9 @@ export default function Search({
       queryInput?.focus({ preventScroll: true });
     }
     if (focused) {
-      document.body.classList.add("overflow-hidden");
+      document.body.classList.add("noscroll");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.classList.remove("noscroll");
     }
   }, [focused, activeSearchBar]);
 
@@ -150,7 +150,7 @@ export default function Search({
               layout
             >
               <div
-                className={`absolute top-11 z-30 flex w-full flex-col items-center gap-4 overflow-scroll rounded-lg bg-white [&>div:first-child]:pt-4 [&>div:last-child]:pb-4`}
+                className={`absolute top-11 z-30 flex w-full flex-col items-center gap-4 overflow-scroll rounded-lg bg-white scrollbar-hide [&>div:first-child]:pt-4 [&>div:last-child]:pb-4`}
               >
                 {queryItems.length != 0 && (
                   <div className="flex w-11/12 items-center justify-between text-center text-sm">
