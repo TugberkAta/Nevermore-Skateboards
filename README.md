@@ -80,6 +80,7 @@ Lastly I learned how to create a search function that fetches items based on sea
 - ![Next.js](https://img.shields.io/badge/next.js-white.svg?style=for-the-badge&logo=next.js&logoColor=black)
 - ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 - ![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -136,6 +137,6 @@ Don't forget to give the project a star! Thanks again!
 
 Tuğberk Ata - atatugberkwork@gmail.com
 
-Project Link:[https://github.com/TugberkAta/Nevermore-Skateboards](https://github.com/TugberkAta/Nevermore-Skateboards)
+Project Link: [https://github.com/TugberkAta/Nevermore-Skateboards](https://github.com/TugberkAta/Nevermore-Skateboards)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
