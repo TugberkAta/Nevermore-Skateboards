@@ -10,7 +10,6 @@
 <h3 align="center">Nevermore-Skateboards</h3>
 
   <p align="center">
-    project_description
     <br />
     <a href="https://nevermore-skateboards.vercel.app/?pageCount=1">View Demo</a>
   </p>
